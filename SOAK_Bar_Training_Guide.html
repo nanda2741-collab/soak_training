@@ -68,6 +68,48 @@
     .tech-card { grid-template-columns: 1fr; }
     .tech-icon { display: none; }
   }
+
+/* LIGHTBOX */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.92);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+.lightbox-overlay.open { display: flex; }
+.lightbox-overlay img {
+  max-width: 100%;
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.lightbox-caption {
+  color: #F7F4EF;
+  font-size: 14px;
+  margin-top: 12px;
+  text-align: center;
+  font-family: -apple-system, sans-serif;
+}
+.lightbox-close {
+  position: absolute;
+  top: 16px; right: 20px;
+  color: #fff;
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+  background: none;
+  border: none;
+  padding: 0;
+}
+.tappable { cursor: pointer; }
+
 </style>
 </head>
 <body>
@@ -122,10 +164,10 @@
     <p class="card-title">🥃 Whisky</p>
     <p class="card-sub">Made from fermented grain — barley, corn, rye, or wheat. Aged in oak barrels.</p>
     <div class="bottle-grid">
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Johnnie_Walker_Red_and_Black.jpg/200px-Johnnie_Walker_Red_and_Black.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Johnnie Walker"><div class="img-fallback" style="display:none">Johnnie Walker</div><p class="bname">Johnnie Walker Red & Black</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4d/Glenfiddich_12.jpg/200px-Glenfiddich_12.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Glenfiddich"><div class="img-fallback" style="display:none">Glenfiddich 12</div><p class="bname">Glenfiddich 12</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Jack_Daniel%27s_Old_No._7_Brand_Tennessee_Whiskey.jpg/200px-Jack_Daniel%27s_Old_No._7_Brand_Tennessee_Whiskey.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Jack Daniel's"><div class="img-fallback" style="display:none">Jack Daniel's</div><p class="bname">Jack Daniel's</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Jameson_Irish_Whiskey.jpg/200px-Jameson_Irish_Whiskey.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Jameson"><div class="img-fallback" style="display:none">Jameson Irish</div><p class="bname">Jameson Irish</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1CzE79aGpRCsyOOwqgs_1CreTONAtL3Wa&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Johnnie Walker"><div class="img-fallback" style="display:none">Johnnie Walker</div><p class="bname">Johnnie Walker Red & Black</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1t-JyTh__8wjmPy0UVHfpxVhMmFkf0NyQ&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Glenfiddich"><div class="img-fallback" style="display:none">Glenfiddich 12</div><p class="bname">Glenfiddich 12</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1Ag50K66kv4AAYJ6tVtZKKni16gDbmmhu&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Jack Daniel's"><div class="img-fallback" style="display:none">Jack Daniel's</div><p class="bname">Jack Daniel's</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1GcLXrcEBPt7JVDv5S6CBDFFqnljDP1Jh&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Jameson"><div class="img-fallback" style="display:none">Jameson Irish</div><p class="bname">Jameson Irish</p></div>
     </div>
     <p class="label">What does it taste like?</p>
     <p class="value">Warm, rich, and complex. Can be smoky (Scotch), sweet (Bourbon), or smooth (Irish). The longer it ages in oak barrels, the richer and smoother it becomes.</p>
@@ -141,10 +183,10 @@
     <p class="card-title">🌿 Gin</p>
     <p class="card-sub">Made from grain spirit, flavoured with juniper berries and botanicals.</p>
     <div class="bottle-grid">
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Hendrick%27s_Gin.jpg/200px-Hendrick%27s_Gin.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Hendrick's"><div class="img-fallback" style="display:none">Hendrick's Gin</div><p class="bname">Hendrick's</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Bombay_Sapphire_Gin.jpg/200px-Bombay_Sapphire_Gin.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Bombay Sapphire"><div class="img-fallback" style="display:none">Bombay Sapphire</div><p class="bname">Bombay Sapphire</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Tanqueray_gin_bottle.jpg/200px-Tanqueray_gin_bottle.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Tanqueray"><div class="img-fallback" style="display:none">Tanqueray</div><p class="bname">Tanqueray</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Gordon%27s_gin.jpg/200px-Gordon%27s_gin.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Gordon's"><div class="img-fallback" style="display:none">Gordon's Gin</div><p class="bname">Gordon's</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1nYOdod8F_-4jF-FHm2fVq2G5unYYTcGQ&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Hendrick's"><div class="img-fallback" style="display:none">Hendrick's Gin</div><p class="bname">Hendrick's</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1lD9ITgzU3nQ0HRyOWF0ekic_T4OxVOWe&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Bombay Sapphire"><div class="img-fallback" style="display:none">Bombay Sapphire</div><p class="bname">Bombay Sapphire</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1gEflR8wkvTYfwoZszVDEHErX4WVxVZw8&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Tanqueray"><div class="img-fallback" style="display:none">Tanqueray</div><p class="bname">Tanqueray</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1PFoHPXGW0oEMonAjyq3JubTk3zS1zplP&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Gordon's"><div class="img-fallback" style="display:none">Gordon's Gin</div><p class="bname">Gordon's</p></div>
     </div>
     <p class="label">What does it taste like?</p>
     <p class="value">Botanical, herbal, and aromatic. The dominant flavour is juniper — a piney, slightly citrusy note. Some gins are floral (Hendrick's), some are very bold and dry (Tanqueray), some are softer and more approachable (Gordon's).</p>
@@ -158,9 +200,9 @@
     <p class="card-title">💧 Vodka</p>
     <p class="card-sub">Made from grain or potatoes. The most neutral spirit — intentionally flavourless.</p>
     <div class="bottle-grid">
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f4/Absolut_vodka.jpg/200px-Absolut_vodka.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Absolut"><div class="img-fallback" style="display:none">Absolut Vodka</div><p class="bname">Absolut</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/Grey_Goose_Vodka.jpg/200px-Grey_Goose_Vodka.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Grey Goose"><div class="img-fallback" style="display:none">Grey Goose</div><p class="bname">Grey Goose</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/Smirnoff_vodka.jpg/200px-Smirnoff_vodka.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Smirnoff"><div class="img-fallback" style="display:none">Smirnoff</div><p class="bname">Smirnoff</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=10xyxzcVxS09ztmBjwwW6GXEVhrX5WenE&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Absolut"><div class="img-fallback" style="display:none">Absolut Vodka</div><p class="bname">Absolut</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1-1n_8BowKAIeSNmx5PZXhuZZertUv4Pt&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Grey Goose"><div class="img-fallback" style="display:none">Grey Goose</div><p class="bname">Grey Goose</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1b6yMOSriB-oaonDrudeO2RCuSGVofAzQ&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Smirnoff"><div class="img-fallback" style="display:none">Smirnoff</div><p class="bname">Smirnoff</p></div>
     </div>
     <p class="label">What does it taste like?</p>
     <p class="value">Very clean and neutral. Premium vodkas (Grey Goose) are silky and smooth. Standard vodkas (Smirnoff) are sharper and more straightforward. Vodka takes on the flavour of whatever it is mixed with.</p>
@@ -174,9 +216,9 @@
     <p class="card-title">🌴 Rum</p>
     <p class="card-sub">Made from sugarcane juice or molasses. Tropical, sweet, and warm.</p>
     <div class="bottle-grid">
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Bacardi_Superior.jpg/200px-Bacardi_Superior.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Bacardi"><div class="img-fallback" style="display:none">Bacardi Superior</div><p class="bname">Bacardi Superior</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Captain_Morgan_Original_Spiced_Gold.jpg/200px-Captain_Morgan_Original_Spiced_Gold.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Captain Morgan"><div class="img-fallback" style="display:none">Captain Morgan</div><p class="bname">Captain Morgan</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Old_Monk_Rum.jpg/200px-Old_Monk_Rum.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Old Monk"><div class="img-fallback" style="display:none">Old Monk</div><p class="bname">Old Monk</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1owhGibkcTbmwzW83Da7EKGIZjWBTNoZb&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Bacardi"><div class="img-fallback" style="display:none">Bacardi Superior</div><p class="bname">Bacardi Superior</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1kzgsx9xcximma45Lm725QX73TAW3CPUE&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Captain Morgan"><div class="img-fallback" style="display:none">Captain Morgan</div><p class="bname">Captain Morgan</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1mobTY1B_bArnLWQW8XZBy5LYKEX13Fc5&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Old Monk"><div class="img-fallback" style="display:none">Old Monk</div><p class="bname">Old Monk</p></div>
     </div>
     <p class="label">What does it taste like?</p>
     <p class="value">Sweet, warm, and tropical. White rum (Bacardi) is lighter and cleaner. Dark rum (Old Monk) is richer, with molasses and caramel notes. Spiced rum (Captain Morgan) has added spices like cinnamon and vanilla.</p>
@@ -190,9 +232,9 @@
     <p class="card-title">🌵 Tequila</p>
     <p class="card-sub">Made from the blue agave plant, grown in Mexico. Earthy and distinctive.</p>
     <div class="bottle-grid">
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Patron_Silver.jpg/200px-Patron_Silver.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Patron"><div class="img-fallback" style="display:none">Patron Silver</div><p class="bname">Patron Silver</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/Jose_Cuervo_Especial.jpg/200px-Jose_Cuervo_Especial.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Jose Cuervo"><div class="img-fallback" style="display:none">Jose Cuervo</div><p class="bname">Jose Cuervo</p></div>
-      <div class="bottle"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/1800_Tequila_Silver.jpg/200px-1800_Tequila_Silver.jpg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="1800"><div class="img-fallback" style="display:none">1800 Silver</div><p class="bname">1800 Silver</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1v2WMEIuUqw2XKyeSG_sinoYMdwuPVOot&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Patron"><div class="img-fallback" style="display:none">Patron Silver</div><p class="bname">Patron Silver</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=1jeHC9x5X8vKtWQBPdugq3L6iCLk9F2Uu&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="Jose Cuervo"><div class="img-fallback" style="display:none">Jose Cuervo</div><p class="bname">Jose Cuervo</p></div>
+      <div class="bottle"><img src="https://drive.google.com/thumbnail?id=14dwD2HDllPe1mzm__5ZekbMI90GDaTe7&sz=s4000" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" alt="1800"><div class="img-fallback" style="display:none">1800 Silver</div><p class="bname">1800 Silver</p></div>
     </div>
     <p class="label">What does it taste like?</p>
     <p class="value">Earthy, herbal, and slightly sweet with a distinctive agave flavour. Blanco (silver) tequila is cleanest and most common for cocktails. Reposado is aged and slightly smoother. Anejo is aged longer and richer.</p>
@@ -264,47 +306,47 @@
 
   <div class="glass-grid">
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Old_fashioned_glass.jpg/200px-Old_fashioned_glass.jpg" onerror="this.style.display='none'" alt="Rocks glass">
+      <img src="https://drive.google.com/thumbnail?id=1EPWQNIrBN1ya835xgvZNJnBDLNfCw0q1&sz=s4000" onerror="this.style.display='none'" alt="Rocks glass">
       <p class="gname">Rocks glass</p>
       <p class="guse">Old Fashioned, Negroni, Picante, spirits on ice</p>
     </div>
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Highball_Glass_%28Drinking%29.svg/200px-Highball_Glass_%28Drinking%29.svg.png" onerror="this.style.display='none'" alt="Highball">
+      <img src="https://drive.google.com/thumbnail?id=1CBO_2Y5G-kBqipMB6RyD7iUSVuoYK3uw&sz=s4000" onerror="this.style.display='none'" alt="Highball">
       <p class="gname">Highball</p>
       <p class="guse">Gin & Tonic, Moscow Mule, Mojito, Highball, Tom Collins</p>
     </div>
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Cocktail_glass_%28icon%29.svg/200px-Cocktail_glass_%28icon%29.svg.png" onerror="this.style.display='none'" alt="Martini glass">
+      <img src="https://drive.google.com/thumbnail?id=1OFXi2YRLuQu1FmAZhJ517MmqCnxd2TfT&sz=s4000" onerror="this.style.display='none'" alt="Martini glass">
       <p class="gname">Martini glass</p>
       <p class="guse">Classic Martini, Cosmopolitan</p>
     </div>
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/af/Coupe_glass.jpg/200px-Coupe_glass.jpg" onerror="this.style.display='none'" alt="Coupe">
+      <img src="https://drive.google.com/thumbnail?id=1n0IPi2Tuu8kExHxeNWFDj2BEYYCRQY1s&sz=s4000" onerror="this.style.display='none'" alt="Coupe">
       <p class="gname">Coupe glass</p>
       <p class="guse">Daiquiri, Whisky Sour, Bee's Knees, Gimlet, Manhattan</p>
     </div>
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Champagne_Flute_%28Drinking%29.svg/200px-Champagne_Flute_%28Drinking%29.svg.png" onerror="this.style.display='none'" alt="Flute">
+      <img src="https://drive.google.com/thumbnail?id=1I5sZTWlJxGxj9XaIdkvsFfmrgeH_Gyb4&sz=s4000" onerror="this.style.display='none'" alt="Flute">
       <p class="gname">Champagne flute</p>
       <p class="guse">Champagne, Prosecco, Bellini, Cava</p>
     </div>
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Wine_Glass_%28Drinking%29.svg/200px-Wine_Glass_%28Drinking%29.svg.png" onerror="this.style.display='none'" alt="Wine glass">
+      <img src="https://drive.google.com/thumbnail?id=1qVQjq1Cs9T_IlQTK-N4IanVex73bdg19&sz=s4000" onerror="this.style.display='none'" alt="Wine glass">
       <p class="gname">Wine glass</p>
       <p class="guse">Red wine, white wine, rosé, Aperol Spritz</p>
     </div>
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Moscow_Mule_Copper_Mug.jpg/200px-Moscow_Mule_Copper_Mug.jpg" onerror="this.style.display='none'" alt="Copper mug">
+      <img src="https://drive.google.com/thumbnail?id=10oGt4OWNqpPoaXsj7oS1KRpf_rOwEjGl&sz=s4000" onerror="this.style.display='none'" alt="Copper mug">
       <p class="gname">Copper mug</p>
       <p class="guse">Moscow Mule only</p>
     </div>
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Margarita_Glass_%28Drinking%29.svg/200px-Margarita_Glass_%28Drinking%29.svg.png" onerror="this.style.display='none'" alt="Margarita glass">
+      <img src="https://drive.google.com/thumbnail?id=1HubP_a7ZBhaD7QzPFYZGJL-ZAHB_frSZ&sz=s4000" onerror="this.style.display='none'" alt="Margarita glass">
       <p class="gname">Margarita glass</p>
       <p class="guse">Margarita — with or without salt rim</p>
     </div>
     <div class="glass-card">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f2/Hurricane_glass.jpg/200px-Hurricane_glass.jpg" onerror="this.style.display='none'" alt="Hurricane glass">
+      <img src="https://drive.google.com/thumbnail?id=1-ErDagHnBaPdF-HXy08pMvylOJCKO91c&sz=s4000" onerror="this.style.display='none'" alt="Hurricane glass">
       <p class="gname">Hurricane glass</p>
       <p class="guse">Pina Colada, tropical cocktails</p>
     </div>
@@ -410,7 +452,7 @@
   <div class="card">
     <p class="card-title">🍷 Red wine</p>
     <div class="wine-grid">
-      <img class="wine-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/RedWine_Glas.jpg/300px-RedWine_Glas.jpg" onerror="this.style.display='none'" alt="Red wine">
+      <img class="wine-img tappable" onclick="openLightbox(this.src, this.alt)" src="https://drive.google.com/thumbnail?id=117lacz5tnqBE1P-06uT8rKRfXMTXpZsK&sz=s4000" onerror="this.style.display='none'" alt="Red wine">
       <div>
         <p class="label">What it is</p>
         <p class="value">Made from dark-coloured grapes. The skin is included during fermentation, giving red wine its colour and tannins — a slight drying sensation in the mouth, like very strong tea.</p>
@@ -433,7 +475,7 @@
   <div class="card">
     <p class="card-title">🥂 White wine</p>
     <div class="wine-grid">
-      <img class="wine-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/White_wine_glass.jpg/300px-White_wine_glass.jpg" onerror="this.style.display='none'" alt="White wine">
+      <img class="wine-img tappable" onclick="openLightbox(this.src, this.alt)" src="https://drive.google.com/thumbnail?id=1iDp18G5-cQ7VPZ421d43hweS2ue3yVHK&sz=s4000" onerror="this.style.display='none'" alt="White wine">
       <div>
         <p class="label">What it is</p>
         <p class="value">Made from green or yellow grapes, or from dark grapes with the skin removed. Lighter in colour, lower in tannins. Generally crisper and more refreshing than red wine.</p>
@@ -456,7 +498,7 @@
   <div class="card">
     <p class="card-title">🌸 Rosé</p>
     <div class="wine-grid">
-      <img class="wine-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Rose_wine.jpg/300px-Rose_wine.jpg" onerror="this.style.display='none'" alt="Rosé">
+      <img class="wine-img tappable" onclick="openLightbox(this.src, this.alt)" src="https://drive.google.com/thumbnail?id=12XYhnjXs2iD_PZ1GXkV-ZwbO1jLRFj30&sz=s4000" onerror="this.style.display='none'" alt="Rosé">
       <div>
         <p class="label">What it is</p>
         <p class="value">Made from red grapes, but the skin is only in contact with the juice for a short time — giving it a pink colour. It is NOT a mix of red and white wine.</p>
@@ -477,7 +519,7 @@
   <div class="card">
     <p class="card-title">🍾 Champagne</p>
     <div class="wine-grid">
-      <img class="wine-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Champagne_glasses.jpg/300px-Champagne_glasses.jpg" onerror="this.style.display='none'" alt="Champagne">
+      <img class="wine-img tappable" onclick="openLightbox(this.src, this.alt)" src="https://drive.google.com/thumbnail?id=1zUb37-XGeOnZxvaDuBgBsCMj7jxnpkWh&sz=s4000" onerror="this.style.display='none'" alt="Champagne">
       <div>
         <p class="label">What it is</p>
         <p class="value">Sparkling wine made only in the Champagne region of France. True Champagne is expensive — only wine from that specific region can use the name.</p>
@@ -496,7 +538,7 @@
   <div class="card">
     <p class="card-title">🇮🇹 Prosecco</p>
     <div class="wine-grid">
-      <img class="wine-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Prosecco_di_Valdobbiadene_Superiore_di_Cartizze.jpg/300px-Prosecco_di_Valdobbiadene_Superiore_di_Cartizze.jpg" onerror="this.style.display='none'" alt="Prosecco">
+      <img class="wine-img tappable" onclick="openLightbox(this.src, this.alt)" src="https://drive.google.com/thumbnail?id=18l2WkW5Fo_dkVu_gY6Pb07t7AJr33N8Q&sz=s4000" onerror="this.style.display='none'" alt="Prosecco">
       <div>
         <p class="label">What it is</p>
         <p class="value">Italian sparkling wine made from Glera grapes. More affordable than Champagne. The most popular sparkling wine in the world.</p>
@@ -515,7 +557,7 @@
   <div class="card">
     <p class="card-title">🇪🇸 Cava</p>
     <div class="wine-grid">
-      <img class="wine-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Freixenet_Cordon_Negro.jpg/300px-Freixenet_Cordon_Negro.jpg" onerror="this.style.display='none'" alt="Cava">
+      <img class="wine-img tappable" onclick="openLightbox(this.src, this.alt)" src="https://drive.google.com/thumbnail?id=1-IveNX83C3PQ7iyNitimYNX5V4EQYJF-&sz=s4000" onerror="this.style.display='none'" alt="Cava">
       <div>
         <p class="label">What it is</p>
         <p class="value">Spanish sparkling wine made using the same method as Champagne but from Spanish grapes. More affordable than Champagne, with a similar production style.</p>
@@ -538,33 +580,33 @@
 
 <script>
 var cocktails = [
-  { name:"Old Fashioned", spirit:"whisky", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Old_Fashioned_Cocktail.jpg/400px-Old_Fashioned_Cocktail.jpg", glass:"Rocks glass", method:"Stirred", ingredients:"Bourbon or Rye whisky, Sugar syrup, Angostura bitters, Orange peel", taste:"Rich, warming, and slightly sweet with a hint of citrus from the orange peel. The whisky is the star — this drink lets it shine.", guest:"Someone who wants to taste the spirit itself. A classic choice for guests who take their drinks seriously.", rec:"Recommend when a guest says they enjoy whisky or wants something strong and classic. Not for guests who want something sweet or fruity." },
-  { name:"Whisky Sour", spirit:"whisky", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Whiskey_Sour_Cocktail.jpg/400px-Whiskey_Sour_Cocktail.jpg", glass:"Coupe glass", method:"Shaken", ingredients:"Bourbon whisky, Fresh lemon juice, Simple syrup, Egg white (optional), Cherry", taste:"Tart, smooth, and slightly frothy. The lemon cuts through the sweetness of the bourbon. With egg white, it has a creamy foam on top.", guest:"A great entry-point whisky cocktail — someone who thinks they don't like whisky. This often changes their mind.", rec:"When a guest is curious about whisky but wants something lighter and approachable. One of the most crowd-pleasing cocktails on the list." },
-  { name:"Manhattan", spirit:"whisky", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Manhattan_Cocktail.jpg/400px-Manhattan_Cocktail.jpg", glass:"Coupe or martini glass", method:"Stirred", ingredients:"Rye or Bourbon whisky, Sweet vermouth, Angostura bitters, Cherry", taste:"Silky, rich, and slightly sweet with herbal notes from the vermouth. Elegant and sophisticated.", guest:"An experienced drinker who appreciates complexity. Not a beginner cocktail.", rec:"Recommend to guests who enjoy Negronis or Old Fashioneds and want to try something similar." },
-  { name:"Highball", spirit:"whisky", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Whisky_Highball.jpg/400px-Whisky_Highball.jpg", glass:"Highball glass", method:"Built", ingredients:"Scotch or Japanese whisky, Soda water, Ice, Lemon twist (optional)", taste:"Light, fizzy, and refreshing. The whisky flavour is present but diluted by the soda. Very easy drinking.", guest:"Someone who wants whisky in a lighter, more refreshing format. A long drink you can enjoy over a full evening.", rec:"Great for guests new to whisky, or for hot days on the terrace when a heavier cocktail feels like too much." },
-  { name:"Gin & Tonic", spirit:"gin", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Gin_and_tonic.jpg/400px-Gin_and_tonic.jpg", glass:"Highball glass", method:"Built", ingredients:"Gin, Tonic water, Ice, Lime wedge, Cucumber or herbs", taste:"Crisp, botanical, and refreshing with a pleasant bitterness from the tonic. Light and easy to drink.", guest:"One of the most universally enjoyed drinks. Safe recommendation for almost anyone.", rec:"Your most versatile recommendation. If a guest is unsure what they want, this is almost never wrong." },
-  { name:"Negroni", spirit:"gin", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Negroni.jpg/400px-Negroni.jpg", glass:"Rocks glass", method:"Stirred", ingredients:"Gin, Campari, Sweet vermouth, Orange peel, Ice", taste:"Bold, bittersweet, and complex. The Campari gives it a striking red colour and a bitter edge that is unique.", guest:"An adventurous, experienced drinker. Someone who enjoys bitter flavours.", rec:"Do not recommend without checking if the guest likes bitter drinks. Always mention it is bitter before they order." },
-  { name:"Tom Collins", spirit:"gin", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Tom_Collins_Cocktail.jpg/400px-Tom_Collins_Cocktail.jpg", glass:"Highball glass", method:"Built", ingredients:"Gin, Fresh lemon juice, Simple syrup, Soda water, Lemon slice and cherry", taste:"Light, citrusy, fizzy, and refreshing. Like a grown-up lemonade with gin. Very easygoing.", guest:"A great all-rounder — suits guests who want something light and not too boozy-tasting.", rec:"Perfect for a long afternoon drink. For guests who enjoy the G&T but want something with more citrus character." },
-  { name:"Gimlet", spirit:"gin", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/Gimlet_cocktail.jpg/400px-Gimlet_cocktail.jpg", glass:"Coupe glass", method:"Shaken", ingredients:"Gin, Fresh lime juice, Simple syrup", taste:"Sharp, tart, and clean. Very simple — gin and lime do all the work. Crisp and punchy.", guest:"A guest who wants something clean and simple with a real kick. No frills, just well-made.", rec:"For guests who say they like gin and citrus. A simple drink that reveals the quality of the gin." },
-  { name:"Bee's Knees", spirit:"gin", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Bees_Knees_Cocktail.jpg/400px-Bees_Knees_Cocktail.jpg", glass:"Coupe glass", method:"Shaken", ingredients:"Gin, Fresh lemon juice, Honey syrup, Lemon twist", taste:"Bright, floral, and silky. The honey rounds out the sharpness of the lemon and lets the botanical notes of the gin come through.", guest:"Someone who enjoys gin but wants something more interesting than a G&T. Also good for guests who prefer softer flavours.", rec:"A wonderful recommendation for guests who ask for something unique. Not as well known — great for making guests feel like they've discovered something special." },
-  { name:"Cosmopolitan", spirit:"vodka", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Cosmopolitan_cocktail.jpg/400px-Cosmopolitan_cocktail.jpg", glass:"Martini glass", method:"Shaken", ingredients:"Vodka, Triple sec / Cointreau, Fresh lime juice, Cranberry juice, Lime wheel", taste:"Tart, slightly sweet, and fruity with a beautiful pink-red colour. The cranberry gives it tartness, the Cointreau gives it citrus warmth.", guest:"Someone who wants something stylish, not too strong-tasting, and easy to enjoy.", rec:"Popular with guests who want something a little special without being overwhelming." },
-  { name:"Moscow Mule", spirit:"vodka", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Moscow_mule_cocktail.jpg/400px-Moscow_mule_cocktail.jpg", glass:"Copper mug", method:"Built", ingredients:"Vodka, Ginger beer, Fresh lime juice, Lime wedge, Mint (optional)", taste:"Spicy, zingy, and refreshing. The ginger beer gives it a kick and fizz. The lime keeps it sharp.", guest:"Suitable for almost everyone — especially guests who like something cold and refreshing with a bit of spice.", rec:"The copper mug is part of the experience — guests often order it for that reason. Great terrace cocktail." },
-  { name:"Espresso Martini", spirit:"vodka", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Espresso_Martini.jpg/400px-Espresso_Martini.jpg", glass:"Coupe or martini glass", method:"Shaken", ingredients:"Vodka, Kahlua, Fresh espresso shot, Simple syrup, 3 coffee beans", taste:"Rich, strong, and slightly sweet with an intense coffee flavour. The shaking creates a beautiful foam on top.", guest:"Coffee lovers. Also great as a late-evening drink for guests who want to keep the energy going.", rec:"One of the most ordered cocktails today. When a guest asks for something indulgent or says they love coffee — this is the answer." },
-  { name:"Vodka Soda", spirit:"vodka", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/Vodka_soda.jpg/400px-Vodka_soda.jpg", glass:"Highball glass", method:"Built", ingredients:"Vodka, Soda water, Lime wedge, Ice", taste:"Very light and clean with almost no flavour beyond a slight spirit note and bubbles. The simplest cocktail there is.", guest:"Guests who want to drink but do not want a heavy or sweet cocktail.", rec:"The go-to for guests who want something simple. Do not recommend if they are looking for something interesting or flavourful." },
-  { name:"Mojito", spirit:"rum", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Mojito_cocktail.jpg/400px-Mojito_cocktail.jpg", glass:"Highball glass", method:"Built (muddled)", ingredients:"White rum, Fresh mint, Fresh lime juice, Simple syrup, Soda water, Mint sprig and lime", taste:"Fresh, minty, and refreshing with a citrus backbone and light sweetness. The mint aroma is as important as the taste.", guest:"One of the most universally loved cocktails. Great for almost everyone — especially on a warm afternoon on the terrace.", rec:"Safe recommendation for any guest who wants something fresh and easy. Also works perfectly as a non-alcoholic version." },
-  { name:"Daiquiri", spirit:"rum", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Classic_Daiquiri_in_Cocktail_Glass.jpg/400px-Classic_Daiquiri_in_Cocktail_Glass.jpg", glass:"Coupe glass", method:"Shaken", ingredients:"White rum, Fresh lime juice, Simple syrup", taste:"Sharp, citrusy, and clean. Three ingredients working in perfect balance. Bright and punchy.", guest:"A guest who wants something simple, sour, and beautifully made.", rec:"For guests who appreciate simplicity. Worth recommending to guests who know their cocktails." },
-  { name:"Pina Colada", spirit:"rum", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/48/Pina_Colada_with_a_pineapple_wedge.jpg/400px-Pina_Colada_with_a_pineapple_wedge.jpg", glass:"Hurricane glass", method:"Blended", ingredients:"White rum, Coconut cream, Pineapple juice, Pineapple slice and cherry", taste:"Sweet, creamy, tropical, and indulgent. Tastes like a beach holiday in a glass. Rich and filling.", guest:"Someone who wants something fun, sweet, and tropical. Great for guests new to cocktails.", rec:"Perfect for the terrace. When a guest says they want something sweet and tropical — this is it. Note that it is quite filling." },
-  { name:"Dark & Stormy", spirit:"rum", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/64/Dark_and_Stormy.jpg/400px-Dark_and_Stormy.jpg", glass:"Highball glass", method:"Built", ingredients:"Dark rum, Ginger beer, Lime juice, Lime wedge", taste:"Spicy from the ginger beer, rich from the dark rum, and sharp from the lime. Bold and warming.", guest:"Someone who likes the Moscow Mule but wants something richer and darker.", rec:"For guests who like ginger beer drinks but want more depth and warmth." },
-  { name:"Margarita", spirit:"tequila", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/MargaritaReal.jpg/400px-MargaritaReal.jpg", glass:"Margarita glass (salt rim)", method:"Shaken", ingredients:"Tequila, Triple sec / Cointreau, Fresh lime juice, Salt rim, Lime wedge", taste:"Tart, citrusy, and slightly salty. The salt rim enhances all the flavours. One of the most balanced classic cocktails.", guest:"One of the most ordered cocktails in the world. Good for almost everyone.", rec:"Always ask if they want salt on the rim — some guests prefer without. Great for guests who say they don't usually drink tequila." },
-  { name:"Tequila Sunrise", spirit:"tequila", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Tequila_Sunrise_Cocktail.jpg/400px-Tequila_Sunrise_Cocktail.jpg", glass:"Highball glass", method:"Built", ingredients:"Tequila, Orange juice, Grenadine (sinks to bottom), Orange slice and cherry", taste:"Sweet, fruity, and easy drinking. The grenadine creates a beautiful sunrise gradient from red to orange.", guest:"Guests new to cocktails, or those who want something sweet and visually impressive.", rec:"A crowd-pleaser. When a guest is unsure and wants something beautiful and easy — this is it." },
-  { name:"Paloma", spirit:"tequila", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/4/4f/Paloma_cocktail.jpg/400px-Paloma_cocktail.jpg", glass:"Highball glass", method:"Built", ingredients:"Tequila, Grapefruit soda (or juice + soda), Fresh lime juice, Salt rim (optional), Grapefruit wedge", taste:"Bittersweet, citrusy, and refreshing. The grapefruit gives a lovely tartness that is less sharp than a Margarita.", guest:"A slightly more sophisticated tequila drinker who wants something lighter and more refreshing.", rec:"For guests who love tequila but want something more laid-back than a Margarita." },
-  { name:"Picante", spirit:"tequila", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/5d/Picante_de_la_Casa_cocktail.jpg/400px-Picante_de_la_Casa_cocktail.jpg", glass:"Rocks glass", method:"Shaken", ingredients:"Tequila, Fresh lime juice, Agave syrup, Fresh chilli slices, Cucumber slices, Chilli and cucumber garnish", taste:"Spicy, fresh, and citrusy. The chilli gives it heat that builds slowly. The cucumber adds a cool contrast. Bold and exciting.", guest:"An adventurous guest who enjoys spicy food and bold flavours. Not for guests who cannot handle heat.", rec:"Always mention the chilli before recommending. If a guest loves spice — this is the most exciting cocktail on the menu." },
-  { name:"Aperol Spritz", spirit:"other", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Aperol_Spritz.jpg/400px-Aperol_Spritz.jpg", glass:"Wine glass", method:"Built", ingredients:"Aperol, Prosecco, Soda water, Orange slice, Ice", taste:"Light, bittersweet, bubbly, and very refreshing. Low alcohol. Bright orange and beautiful to look at.", guest:"Suitable for almost any guest — especially those who want something light before a meal.", rec:"Perfect as a first drink. Offer an Aperol Spritz while guests look at the menu — it is light enough not to fill them up." },
-  { name:"Sangria", spirit:"other", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Trad_sangria.jpg/400px-Trad_sangria.jpg", glass:"Wine glass", method:"Built (pre-made)", ingredients:"Red wine, Orange juice, Brandy, Simple syrup, Mixed fresh fruit, Soda water", taste:"Fruity, slightly sweet, and warming. Tastes more like fruit punch than wine. Social and shareable.", guest:"Great for groups who want something fun and communal.", rec:"Suggest for larger tables or guests who want something to share. Good in the afternoon and evening." },
-  { name:"Bellini", spirit:"other", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Bellini_cocktail.jpg/400px-Bellini_cocktail.jpg", glass:"Champagne flute", method:"Built", ingredients:"Prosecco, White peach purée or peach juice", taste:"Light, peachy, delicate, and bubbly. Sweet without being heavy. Elegant and simple.", guest:"Someone who wants something light, fruity, and celebratory.", rec:"For guests who want bubbles but with more sweetness than straight Prosecco. A lovely aperitif." },
-  { name:"Virgin Mojito", spirit:"non-alcoholic", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Mojito_cocktail.jpg/400px-Mojito_cocktail.jpg", glass:"Highball glass", method:"Built (muddled)", ingredients:"Fresh mint, Fresh lime juice, Simple syrup, Soda water, Mint sprig and lime", taste:"Fresh, minty, citrusy, and fizzy. Identical in experience to the alcoholic version — just without the rum.", guest:"Non-drinkers, designated drivers, pregnant guests, or guests who want a break between alcoholic drinks.", rec:"Present this with the same enthusiasm as any cocktail. Never make a non-drinking guest feel like they are getting a lesser experience." },
-  { name:"Shirley Temple", spirit:"non-alcoholic", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Shirley_Temple_drink.jpg/400px-Shirley_Temple_drink.jpg", glass:"Highball glass", method:"Built", ingredients:"Ginger ale or lemon-lime soda, Grenadine, Orange juice (optional), Maraschino cherry and orange slice", taste:"Sweet, fruity, and fizzy. The grenadine gives it a beautiful pink-red colour. Fun and colourful.", guest:"Guests who want something sweet and non-alcoholic. Also great for children at the table.", rec:"Offer it confidently — it is a proper drink, not an afterthought." },
-  { name:"Arnold Palmer", spirit:"non-alcoholic", img:"https://upload.wikimedia.org/wikipedia/commons/thumb/d/d9/Arnold_Palmer_drink.jpg/400px-Arnold_Palmer_drink.jpg", glass:"Highball glass", method:"Built", ingredients:"Iced tea, Lemonade, Lemon slice, Ice", taste:"Refreshing, slightly tart, and subtly sweet. The combination of tea and lemon is very easy to drink and satisfying in the heat.", guest:"Guests who want something more interesting than plain water or juice. Perfect for the terrace.", rec:"For guests who want something refreshing that feels grown up but is not sweet like a Shirley Temple." }
+  { name:"Old Fashioned", spirit:"whisky", img:"https://drive.google.com/thumbnail?id=1MlG0PmwAV7cdzufh0--NMJ9ozVHinNQF&sz=s4000", glass:"Rocks glass", method:"Stirred", ingredients:"Bourbon or Rye whisky, Sugar syrup, Angostura bitters, Orange peel", taste:"Rich, warming, and slightly sweet with a hint of citrus from the orange peel. The whisky is the star — this drink lets it shine.", guest:"Someone who wants to taste the spirit itself. A classic choice for guests who take their drinks seriously.", rec:"Recommend when a guest says they enjoy whisky or wants something strong and classic. Not for guests who want something sweet or fruity." },
+  { name:"Whisky Sour", spirit:"whisky", img:"https://drive.google.com/thumbnail?id=1PUxR3Jfb3jqD3KtuZzfKpji0v0nmC98t&sz=s4000", glass:"Coupe glass", method:"Shaken", ingredients:"Bourbon whisky, Fresh lemon juice, Simple syrup, Egg white (optional), Cherry", taste:"Tart, smooth, and slightly frothy. The lemon cuts through the sweetness of the bourbon. With egg white, it has a creamy foam on top.", guest:"A great entry-point whisky cocktail — someone who thinks they don't like whisky. This often changes their mind.", rec:"When a guest is curious about whisky but wants something lighter and approachable. One of the most crowd-pleasing cocktails on the list." },
+  { name:"Manhattan", spirit:"whisky", img:"https://drive.google.com/thumbnail?id=1Z0vXxhTPgsmnfetAQgNtRe8CBVqKh4Hn&sz=s4000", glass:"Coupe or martini glass", method:"Stirred", ingredients:"Rye or Bourbon whisky, Sweet vermouth, Angostura bitters, Cherry", taste:"Silky, rich, and slightly sweet with herbal notes from the vermouth. Elegant and sophisticated.", guest:"An experienced drinker who appreciates complexity. Not a beginner cocktail.", rec:"Recommend to guests who enjoy Negronis or Old Fashioneds and want to try something similar." },
+  { name:"Highball", spirit:"whisky", img:"https://drive.google.com/thumbnail?id=1w-nbUWO2YsHV-ztq-bLreXq80_z1JpB-&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Scotch or Japanese whisky, Soda water, Ice, Lemon twist (optional)", taste:"Light, fizzy, and refreshing. The whisky flavour is present but diluted by the soda. Very easy drinking.", guest:"Someone who wants whisky in a lighter, more refreshing format. A long drink you can enjoy over a full evening.", rec:"Great for guests new to whisky, or for hot days on the terrace when a heavier cocktail feels like too much." },
+  { name:"Gin & Tonic", spirit:"gin", img:"https://drive.google.com/thumbnail?id=17prL6ZRuYTJCuE2ISxIjnI8Gv5jiG8HA&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Gin, Tonic water, Ice, Lime wedge, Cucumber or herbs", taste:"Crisp, botanical, and refreshing with a pleasant bitterness from the tonic. Light and easy to drink.", guest:"One of the most universally enjoyed drinks. Safe recommendation for almost anyone.", rec:"Your most versatile recommendation. If a guest is unsure what they want, this is almost never wrong." },
+  { name:"Negroni", spirit:"gin", img:"https://drive.google.com/thumbnail?id=1XHc70cpw4ZRJc90afqUmhjey8OKp4oYg&sz=s4000", glass:"Rocks glass", method:"Stirred", ingredients:"Gin, Campari, Sweet vermouth, Orange peel, Ice", taste:"Bold, bittersweet, and complex. The Campari gives it a striking red colour and a bitter edge that is unique.", guest:"An adventurous, experienced drinker. Someone who enjoys bitter flavours.", rec:"Do not recommend without checking if the guest likes bitter drinks. Always mention it is bitter before they order." },
+  { name:"Tom Collins", spirit:"gin", img:"https://drive.google.com/thumbnail?id=1hzvWdTc7uqIIZu7fIIQ-LXeaS3FxK9qV&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Gin, Fresh lemon juice, Simple syrup, Soda water, Lemon slice and cherry", taste:"Light, citrusy, fizzy, and refreshing. Like a grown-up lemonade with gin. Very easygoing.", guest:"A great all-rounder — suits guests who want something light and not too boozy-tasting.", rec:"Perfect for a long afternoon drink. For guests who enjoy the G&T but want something with more citrus character." },
+  { name:"Gimlet", spirit:"gin", img:"https://drive.google.com/thumbnail?id=1jJtXS2BhggKc4qDMKW5TFTamLvpy2xlY&sz=s4000", glass:"Coupe glass", method:"Shaken", ingredients:"Gin, Fresh lime juice, Simple syrup", taste:"Sharp, tart, and clean. Very simple — gin and lime do all the work. Crisp and punchy.", guest:"A guest who wants something clean and simple with a real kick. No frills, just well-made.", rec:"For guests who say they like gin and citrus. A simple drink that reveals the quality of the gin." },
+  { name:"Bee's Knees", spirit:"gin", img:"https://drive.google.com/thumbnail?id=15FHct6Rmpu7s59lsaQhng1PkmrdSYQRt&sz=s4000", glass:"Coupe glass", method:"Shaken", ingredients:"Gin, Fresh lemon juice, Honey syrup, Lemon twist", taste:"Bright, floral, and silky. The honey rounds out the sharpness of the lemon and lets the botanical notes of the gin come through.", guest:"Someone who enjoys gin but wants something more interesting than a G&T. Also good for guests who prefer softer flavours.", rec:"A wonderful recommendation for guests who ask for something unique. Not as well known — great for making guests feel like they've discovered something special." },
+  { name:"Cosmopolitan", spirit:"vodka", img:"https://drive.google.com/thumbnail?id=1QsbzggQMlaHp0csVBDwlA_qcP9LDpPVF&sz=s4000", glass:"Martini glass", method:"Shaken", ingredients:"Vodka, Triple sec / Cointreau, Fresh lime juice, Cranberry juice, Lime wheel", taste:"Tart, slightly sweet, and fruity with a beautiful pink-red colour. The cranberry gives it tartness, the Cointreau gives it citrus warmth.", guest:"Someone who wants something stylish, not too strong-tasting, and easy to enjoy.", rec:"Popular with guests who want something a little special without being overwhelming." },
+  { name:"Moscow Mule", spirit:"vodka", img:"https://drive.google.com/thumbnail?id=1vGNjnAeiV7B3kC7HL15pwJ5_UwS12Nzy&sz=s4000", glass:"Copper mug", method:"Built", ingredients:"Vodka, Ginger beer, Fresh lime juice, Lime wedge, Mint (optional)", taste:"Spicy, zingy, and refreshing. The ginger beer gives it a kick and fizz. The lime keeps it sharp.", guest:"Suitable for almost everyone — especially guests who like something cold and refreshing with a bit of spice.", rec:"The copper mug is part of the experience — guests often order it for that reason. Great terrace cocktail." },
+  { name:"Espresso Martini", spirit:"vodka", img:"https://drive.google.com/thumbnail?id=12p3_I1lvBaZJARnUcJIrIV0k8Ch4Co0u&sz=s4000", glass:"Coupe or martini glass", method:"Shaken", ingredients:"Vodka, Kahlua, Fresh espresso shot, Simple syrup, 3 coffee beans", taste:"Rich, strong, and slightly sweet with an intense coffee flavour. The shaking creates a beautiful foam on top.", guest:"Coffee lovers. Also great as a late-evening drink for guests who want to keep the energy going.", rec:"One of the most ordered cocktails today. When a guest asks for something indulgent or says they love coffee — this is the answer." },
+  { name:"Vodka Soda", spirit:"vodka", img:"https://drive.google.com/thumbnail?id=1xYZ-bnsQ5dlc3XmnQvc2xVzDcZPE1YRQ&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Vodka, Soda water, Lime wedge, Ice", taste:"Very light and clean with almost no flavour beyond a slight spirit note and bubbles. The simplest cocktail there is.", guest:"Guests who want to drink but do not want a heavy or sweet cocktail.", rec:"The go-to for guests who want something simple. Do not recommend if they are looking for something interesting or flavourful." },
+  { name:"Mojito", spirit:"rum", img:"https://drive.google.com/thumbnail?id=1DzEoFk9MfE1qcnuexMEbGf1XmOpj5EQ8&sz=s4000", glass:"Highball glass", method:"Built (muddled)", ingredients:"White rum, Fresh mint, Fresh lime juice, Simple syrup, Soda water, Mint sprig and lime", taste:"Fresh, minty, and refreshing with a citrus backbone and light sweetness. The mint aroma is as important as the taste.", guest:"One of the most universally loved cocktails. Great for almost everyone — especially on a warm afternoon on the terrace.", rec:"Safe recommendation for any guest who wants something fresh and easy. Also works perfectly as a non-alcoholic version." },
+  { name:"Daiquiri", spirit:"rum", img:"https://drive.google.com/thumbnail?id=1SiSauUGrzl1L7ThFCov-YETVoF7jEG1l&sz=s4000", glass:"Coupe glass", method:"Shaken", ingredients:"White rum, Fresh lime juice, Simple syrup", taste:"Sharp, citrusy, and clean. Three ingredients working in perfect balance. Bright and punchy.", guest:"A guest who wants something simple, sour, and beautifully made.", rec:"For guests who appreciate simplicity. Worth recommending to guests who know their cocktails." },
+  { name:"Pina Colada", spirit:"rum", img:"https://drive.google.com/thumbnail?id=1b6gDqprP4Y7oleoSMphpXqP_eb9kMwcI&sz=s4000", glass:"Hurricane glass", method:"Blended", ingredients:"White rum, Coconut cream, Pineapple juice, Pineapple slice and cherry", taste:"Sweet, creamy, tropical, and indulgent. Tastes like a beach holiday in a glass. Rich and filling.", guest:"Someone who wants something fun, sweet, and tropical. Great for guests new to cocktails.", rec:"Perfect for the terrace. When a guest says they want something sweet and tropical — this is it. Note that it is quite filling." },
+  { name:"Dark & Stormy", spirit:"rum", img:"https://drive.google.com/thumbnail?id=1V81I-g191sn1gVXXyltxJwe5kONuS6Ga&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Dark rum, Ginger beer, Lime juice, Lime wedge", taste:"Spicy from the ginger beer, rich from the dark rum, and sharp from the lime. Bold and warming.", guest:"Someone who likes the Moscow Mule but wants something richer and darker.", rec:"For guests who like ginger beer drinks but want more depth and warmth." },
+  { name:"Margarita", spirit:"tequila", img:"https://drive.google.com/thumbnail?id=1BlDz8nJTondGgsdLe4FL-l4o9Sm9VGk_&sz=s4000", glass:"Margarita glass (salt rim)", method:"Shaken", ingredients:"Tequila, Triple sec / Cointreau, Fresh lime juice, Salt rim, Lime wedge", taste:"Tart, citrusy, and slightly salty. The salt rim enhances all the flavours. One of the most balanced classic cocktails.", guest:"One of the most ordered cocktails in the world. Good for almost everyone.", rec:"Always ask if they want salt on the rim — some guests prefer without. Great for guests who say they don't usually drink tequila." },
+  { name:"Tequila Sunrise", spirit:"tequila", img:"https://drive.google.com/thumbnail?id=15KsInVexHebPWh5Se2qlOE5QX_TQT90f&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Tequila, Orange juice, Grenadine (sinks to bottom), Orange slice and cherry", taste:"Sweet, fruity, and easy drinking. The grenadine creates a beautiful sunrise gradient from red to orange.", guest:"Guests new to cocktails, or those who want something sweet and visually impressive.", rec:"A crowd-pleaser. When a guest is unsure and wants something beautiful and easy — this is it." },
+  { name:"Paloma", spirit:"tequila", img:"https://drive.google.com/thumbnail?id=14P5B5k7ZdWCy2lmA5_WWMKoTrpkm-zp7&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Tequila, Grapefruit soda (or juice + soda), Fresh lime juice, Salt rim (optional), Grapefruit wedge", taste:"Bittersweet, citrusy, and refreshing. The grapefruit gives a lovely tartness that is less sharp than a Margarita.", guest:"A slightly more sophisticated tequila drinker who wants something lighter and more refreshing.", rec:"For guests who love tequila but want something more laid-back than a Margarita." },
+  { name:"Picante", spirit:"tequila", img:"https://drive.google.com/thumbnail?id=1_5QTgNp9hwupG39V9syy42m3UBZOLPxm&sz=s4000", glass:"Rocks glass", method:"Shaken", ingredients:"Tequila, Fresh lime juice, Agave syrup, Fresh chilli slices, Cucumber slices, Chilli and cucumber garnish", taste:"Spicy, fresh, and citrusy. The chilli gives it heat that builds slowly. The cucumber adds a cool contrast. Bold and exciting.", guest:"An adventurous guest who enjoys spicy food and bold flavours. Not for guests who cannot handle heat.", rec:"Always mention the chilli before recommending. If a guest loves spice — this is the most exciting cocktail on the menu." },
+  { name:"Aperol Spritz", spirit:"other", img:"https://drive.google.com/thumbnail?id=1_SsA42U3pUOWK9XaY_q5M4ybaQA9xrqT&sz=s4000", glass:"Wine glass", method:"Built", ingredients:"Aperol, Prosecco, Soda water, Orange slice, Ice", taste:"Light, bittersweet, bubbly, and very refreshing. Low alcohol. Bright orange and beautiful to look at.", guest:"Suitable for almost any guest — especially those who want something light before a meal.", rec:"Perfect as a first drink. Offer an Aperol Spritz while guests look at the menu — it is light enough not to fill them up." },
+  { name:"Sangria", spirit:"other", img:"https://drive.google.com/thumbnail?id=1dfFZj5jAsLYmUuM0SqMqZ0Th8wU1ZdhW&sz=s4000", glass:"Wine glass", method:"Built (pre-made)", ingredients:"Red wine, Orange juice, Brandy, Simple syrup, Mixed fresh fruit, Soda water", taste:"Fruity, slightly sweet, and warming. Tastes more like fruit punch than wine. Social and shareable.", guest:"Great for groups who want something fun and communal.", rec:"Suggest for larger tables or guests who want something to share. Good in the afternoon and evening." },
+  { name:"Bellini", spirit:"other", img:"https://drive.google.com/thumbnail?id=17PLgBdyjUgZMX8hAdNE-rr_XgTTLM78l&sz=s4000", glass:"Champagne flute", method:"Built", ingredients:"Prosecco, White peach purée or peach juice", taste:"Light, peachy, delicate, and bubbly. Sweet without being heavy. Elegant and simple.", guest:"Someone who wants something light, fruity, and celebratory.", rec:"For guests who want bubbles but with more sweetness than straight Prosecco. A lovely aperitif." },
+  { name:"Virgin Mojito", spirit:"non-alcoholic", img:"https://drive.google.com/thumbnail?id=1DzEoFk9MfE1qcnuexMEbGf1XmOpj5EQ8&sz=s4000", glass:"Highball glass", method:"Built (muddled)", ingredients:"Fresh mint, Fresh lime juice, Simple syrup, Soda water, Mint sprig and lime", taste:"Fresh, minty, citrusy, and fizzy. Identical in experience to the alcoholic version — just without the rum.", guest:"Non-drinkers, designated drivers, pregnant guests, or guests who want a break between alcoholic drinks.", rec:"Present this with the same enthusiasm as any cocktail. Never make a non-drinking guest feel like they are getting a lesser experience." },
+  { name:"Shirley Temple", spirit:"non-alcoholic", img:"https://drive.google.com/thumbnail?id=1_1U5nio56JRb_rbWQsE5oY_8aOgf4g_Y&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Ginger ale or lemon-lime soda, Grenadine, Orange juice (optional), Maraschino cherry and orange slice", taste:"Sweet, fruity, and fizzy. The grenadine gives it a beautiful pink-red colour. Fun and colourful.", guest:"Guests who want something sweet and non-alcoholic. Also great for children at the table.", rec:"Offer it confidently — it is a proper drink, not an afterthought." },
+  { name:"Arnold Palmer", spirit:"non-alcoholic", img:"https://drive.google.com/thumbnail?id=1UUlA4J5gqG6wRhQczsguNTK0dD1Li5iB&sz=s4000", glass:"Highball glass", method:"Built", ingredients:"Iced tea, Lemonade, Lemon slice, Ice", taste:"Refreshing, slightly tart, and subtly sweet. The combination of tea and lemon is very easy to drink and satisfying in the heat.", guest:"Guests who want something more interesting than plain water or juice. Perfect for the terrace.", rec:"For guests who want something refreshing that feels grown up but is not sweet like a Shirley Temple." }
 ];
 
 function renderCocktails(filter) {
@@ -603,6 +645,42 @@ function showSection(id, btn) {
   btn.classList.add('active');
   window.scrollTo(0, 0);
 }
+
+function openLightbox(src, caption) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-caption').textContent = caption || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+// Make all drive thumbnail images tappable
+document.querySelectorAll('img[src*="drive.google.com/thumbnail"]').forEach(function(img) {
+  img.classList.add('tappable');
+  img.addEventListener('click', function(e) {
+    e.stopPropagation();
+    openLightbox(this.src, this.alt);
+  });
+});
+
+// Make cocktail images tappable (loaded dynamically)
+var origFilter = window.filterC;
+
 </script>
+
+<!-- LIGHTBOX OVERLAY -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#215;</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
 </body>
 </html>
