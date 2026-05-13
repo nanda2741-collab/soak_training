@@ -6,12 +6,11 @@
 <title>SOAK — Cooking Techniques Training Guide</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-.sticky-top { position: sticky; top: 0; z-index: 100; }
 body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F7F4EF; color: #2C2416; font-size: 15px; line-height: 1.6; }
 .header { background: #2C2416; padding: 1.5rem 1.25rem 1.25rem; text-align: center; }
 .header h1 { font-size: 28px; font-weight: 600; letter-spacing: 6px; color: #C4A882; margin-bottom: 4px; }
 .header p { font-size: 12px; color: #9E8A72; letter-spacing: 2px; text-transform: uppercase; }
-.nav { display: flex; overflow-x: auto; background: #3a3226; padding: 0 0.5rem; scrollbar-width: none; position: sticky; top: 0; z-index: 99; }
+.nav { display: flex; overflow-x: auto; background: #3a3226; padding: 0 0.5rem; gap: 0; scrollbar-width: none; }
 .nav::-webkit-scrollbar { display: none; }
 .nav-btn { flex-shrink: 0; padding: 12px 18px; background: none; border: none; color: #9E8A72; font-size: 13px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; font-family: inherit; }
 .nav-btn.active, .nav-btn:hover { color: #C4A882; border-bottom-color: #C4A882; }
@@ -79,23 +78,23 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 </head>
 <body>
 
-<div class="sticky-top"><div class="header">
+<div class="header" style="position:sticky;top:0;z-index:100">
   <h1>SOAK</h1>
   <p>Cooking Techniques Training Guide</p>
 </div>
 
 <div class="nav">
-  <button class="nav-btn active" onclick="show('intro',this)">Introduction</button>
-  <button class="nav-btn" onclick="show('heat',this)">Cooking Methods</button>
-  <button class="nav-btn" onclick="show('tandoor',this)">The Tandoor</button>
-  <button class="nav-btn" onclick="show('sauces',this)">Stocks & Sauces</button>
-  <button class="nav-btn" onclick="show('pasta',this)">Pasta</button>
-  <button class="nav-btn" onclick="show('bread',this)">Bread</button>
-  <button class="nav-btn" onclick="show('flavour',this)">Flavour</button>
-  <button class="nav-btn" onclick="show('allergens',this)">Allergens</button>
-  <button class="nav-btn" onclick="show('describe',this)">Describing Dishes</button>
-  <button class="nav-btn" onclick="show('scenarios',this)">Scenarios</button>
-</div></div>
+  <button class="nav-btn active" onclick="showSection('intro', this)">Introduction</button>
+  <button class="nav-btn" onclick="showSection('heat', this)">Cooking Methods</button>
+  <button class="nav-btn" onclick="showSection('tandoor', this)">The Tandoor</button>
+  <button class="nav-btn" onclick="showSection('sauces', this)">Stocks & Sauces</button>
+  <button class="nav-btn" onclick="showSection('pasta', this)">Pasta</button>
+  <button class="nav-btn" onclick="showSection('bread', this)">Bread</button>
+  <button class="nav-btn" onclick="showSection('flavour', this)">Flavour</button>
+  <button class="nav-btn" onclick="showSection('allergens', this)">Allergens</button>
+  <button class="nav-btn" onclick="showSection('describe', this)">Describing Dishes</button>
+  <button class="nav-btn" onclick="showSection('scenarios', this)">Scenarios</button>
+</div>
 
 <!-- INTRO -->
 <div id="intro" class="section active">
@@ -738,12 +737,936 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 </div>
 
 <script>
-function show(id, btn) {
+function showSection(id, btn) {
   document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
   document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
   document.getElementById(id).classList.add('active');
   btn.classList.add('active');
-  window.scrollTo(0,0);
+  window.scrollTo(0, 0);
+}
+
+function openLightbox(src, cap) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-cap').textContent = cap || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lightbox-img').src = '';
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) { if(e.key==='Escape') closeLightbox(); });
+
+var scenarios = [
+  { type:"question", q:"A guest asks: What does tandoor mean?", steps:[
+    "Explain simply: A tandoor is a traditional clay oven that reaches extremely high temperatures — much hotter than a normal oven.",
+    "Add what makes it special: The intense heat gives the food a slightly charred exterior and smoky flavour while keeping the inside juicy and moist.",
+    "If they want more: Bread is slapped directly onto the inside wall and cooks in about 90 seconds. Meats are lowered in on long skewers."
+  ]},
+  { type:"question", q:"A guest asks: Is this fried or baked?", steps:[
+    "If you know, answer clearly: This is deep fried — it goes into hot oil until the outside is golden and crispy.",
+    "If you are not certain, do not guess. Say: Let me confirm that for you right away — and check with the kitchen.",
+    "Come back with the real answer within two minutes."
+  ]},
+  { type:"question", q:"A guest asks: What is the sauce made of?", steps:[
+    "Refer to the Menu Training Reference for the specific dish.",
+    "Describe the sauce type and main flavour components: It is a tomato-based sauce slow-cooked with garlic and basil — bright and slightly tangy. Or: It is a cream sauce — rich and smooth, made with cream and a touch of butter.",
+    "If the guest has an allergen concern about the sauce, add a note on the KOT and inform the MOD."
+  ]},
+  { type:"question", q:"A guest asks: Why is there char on my food — is it burnt?", steps:[
+    "Reassure them warmly and confidently — do not be defensive.",
+    "That slight char is completely intentional — it is the signature of tandoor cooking or high-heat grilling. The extreme heat caramelises the outside and creates a smoky layer while the inside stays perfectly cooked.",
+    "If the guest is still concerned or the char seems genuinely excessive, do not argue. Apologise, remove the dish, and inform the MOD immediately."
+  ]},
+  { type:"question", q:"A guest asks: What does al dente mean?", steps:[
+    "Al dente is Italian for to the tooth — it means the pasta is cooked so it still has a very slight firmness when you bite it. Not hard, but not soft either.",
+    "It is the traditional Italian way — the texture holds up much better with the sauce.",
+    "If the guest says their pasta feels undercooked or raw — listen carefully. If they are genuinely unhappy, apologise and escalate to the MOD. Do not explain al dente as a justification for a complaint."
+  ]},
+  { type:"question", q:"A guest asks: What is a jus?", steps:[
+    "A jus is the natural juice from the meat as it cooked — collected and reduced into a light, intensely flavoured sauce.",
+    "It is much lighter than a gravy — no flour or cream — but very intense in flavour.",
+    "If the guest wants more: It is made by collecting the cooking juices and reducing them down over heat until they become glossy and rich."
+  ]},
+  { type:"question", q:"A guest asks: What is the difference between naan and roti?", steps:[
+    "Naan is made from refined flour with yoghurt — it is leavened, so it is softer and slightly richer. Cooked in the tandoor.",
+    "Roti is made from whole wheat flour without any leavening — lighter and simpler, cooked on a flat griddle.",
+    "Naan is richer and softer, roti is lighter and earthier. Both are delicious but very different in texture."
+  ]},
+  { type:"question", q:"A guest asks: Why is there lemon on my fish?", steps:[
+    "The lemon is there to brighten the flavour — acid cuts through the richness of the fish and makes the whole dish taste fresher.",
+    "If the guest does not want it: Of course — shall I take that off, or would you like it on the side?",
+    "Accommodate the preference without making it a big deal."
+  ]},
+  { type:"question", q:"A guest asks: What is the difference between focaccia and ciabatta?", steps:[
+    "Focaccia is thick and soft, baked with lots of olive oil — rich, slightly crispy on the outside, and very airy inside. Often topped with herbs or olives.",
+    "Ciabatta is flatter and longer, with a thin crispy crust and a very open, holey crumb inside. Lighter and works beautifully for dipping or with bruschetta toppings.",
+    "Both are Italian, but focaccia is richer and more substantial. Ciabatta is more neutral and versatile."
+  ]},
+  { type:"question", q:"A guest asks: What makes sourdough different from regular bread?", steps:[
+    "Sourdough is made using a natural fermentation process — wild yeast and bacteria rather than commercial yeast. This takes much longer to make.",
+    "The natural fermentation gives it a distinctive tangy, slightly sour flavour. It also gives it that thick, crackling crust and chewy, open crumb inside.",
+    "It is also more digestible than regular bread for many people because the fermentation breaks down some of the gluten."
+  ]},
+  { type:"question", q:"A guest asks: What is the difference between tagliatelle, fettuccine, and pappardelle?", steps:[
+    "All three are long, flat ribbon pastas — the only difference is width.",
+    "Tagliatelle and fettuccine are nearly identical — about 6 to 8mm wide. Tagliatelle is from Bologna, fettuccine is the Roman version. Slightly different in thickness but very similar.",
+    "Pappardelle is much wider — about 16 to 20mm. That extra width means it pairs with much heavier, chunkier sauces like slow-braised meat."
+  ]},
+  { type:"complaint", q:"A guest says: This is too oily.", steps:[
+    "Listen fully. Do not interrupt or become defensive.",
+    "Apologise sincerely: I am so sorry to hear that — that is not the experience we want you to have.",
+    "Remove the dish if the guest no longer wants it.",
+    "Inform the MOD via walkie talkie immediately. The MOD and kitchen will decide how to respond.",
+    "Do not explain or justify the preparation.",
+    "A complimentary bill is raised by the MOD for any removed or comped item."
+  ]},
+  { type:"complaint", q:"A guest says: This does not taste the same as last time.", steps:[
+    "Acknowledge the concern warmly: I am sorry to hear that — thank you for telling us.",
+    "Do not argue or explain kitchen SOPs. Simply escalate.",
+    "Inform a senior or the MOD immediately via walkie talkie.",
+    "The senior or MOD comes to the table, has a warm conversation with the guest, and asks genuinely what felt different — not in an interrogatory way.",
+    "The MOD will subtly reassure the guest about the kitchen consistency standards without being defensive.",
+    "The dish is comped regardless of the outcome of the conversation.",
+    "A complimentary bill is raised by the MOD with the reason stated."
+  ]},
+  { type:"complaint", q:"A guest says: This is too spicy — I did not expect it.", steps:[
+    "Apologise immediately and sincerely.",
+    "Remove the dish if the guest no longer wants it.",
+    "Inform the MOD via walkie talkie.",
+    "The MOD will decide whether to offer a replacement, a milder alternative, or a comp.",
+    "Going forward: if a dish is notably spicy, mention it proactively when taking the order. Prevention is always better than a complaint."
+  ]},
+  { type:"complaint", q:"A guest says: The portion size is too small.", steps:[
+    "Acknowledge without becoming defensive: I understand — thank you for letting me know.",
+    "Inform the MOD via walkie talkie. Do not promise additional food on your own authority.",
+    "The MOD will decide whether to offer an additional side, a supplementary dish, or another resolution.",
+    "Do not argue about portion sizes or compare to other dishes."
+  ]},
+  { type:"complaint", q:"A guest says: My food arrived cold.", steps:[
+    "Apologise immediately.",
+    "Remove the dish and inform the MOD and kitchen via walkie talkie right away — the kitchen will reheat or remake.",
+    "Offer the guest something while they wait — a drink refresh, a small bite.",
+    "A complimentary bill is raised by the MOD for the inconvenience.",
+    "Check the remaining dishes at the table to ensure nothing else has gone cold."
+  ]},
+  { type:"complaint", q:"A guest says: This does not look like the menu description.", steps:[
+    "Listen to the guest and understand specifically what they expected vs what arrived.",
+    "Apologise sincerely: I am sorry this was not what you were expecting.",
+    "Do not argue about the menu description or justify the dish.",
+    "Inform the MOD via walkie talkie. The MOD will assess whether the dish was prepared correctly or whether there was a miscommunication.",
+    "If the guest is unhappy, the dish is removed and comped. A complimentary bill is raised by the MOD."
+  ]},
+  { type:"complaint", q:"A guest says their pasta is overcooked or undercooked.", steps:[
+    "Listen fully without becoming defensive.",
+    "Apologise sincerely and remove the dish.",
+    "Inform the MOD and kitchen via walkie talkie immediately.",
+    "The kitchen will assess and remake or adjust. The MOD decides whether to comp.",
+    "A complimentary bill is raised for any removed item.",
+    "Check back with the guest once the replacement arrives."
+  ]},
+  { type:"safety", q:"A guest finds a hair in their food.", steps:[
+    "Stay calm. Do not react in a way that draws attention from other tables.",
+    "Apologise sincerely and remove the dish immediately.",
+    "Inform the MOD via walkie talkie immediately — do not handle this alone.",
+    "The MOD comes to the table, apologises personally, and takes full ownership.",
+    "The MOD retains the dish, takes it to the kitchen manager, and documents everything with photos — shared with higher management immediately.",
+    "The dish is removed from the bill. A complimentary bill is raised.",
+    "The MOD decides on any additional gesture based on the guest response.",
+    "No staff member speculates about the source — not to the guest, not to other guests, not to colleagues."
+  ]},
+  { type:"safety", q:"A guest says their chicken looks or seems undercooked.", steps:[
+    "Take this seriously immediately. Undercooked chicken is a food safety concern — not a preference issue.",
+    "Do not assess the chicken yourself at the table. Do not reassure the guest it looks fine.",
+    "Apologise immediately and remove the dish without question.",
+    "Inform the MOD and kitchen via walkie talkie right away.",
+    "The kitchen will assess and the MOD will decide on the response — a fully cooked replacement or a comp.",
+    "A complimentary bill is raised. The guest is not charged for this dish under any circumstances.",
+    "The MOD checks in with the guest to ensure they are comfortable."
+  ]},
+  { type:"safety", q:"A guest mentions an allergy when ordering.", steps:[
+    "Acknowledge it immediately and take it seriously.",
+    "Be honest: I want to make sure we handle this carefully for you — let me check with the kitchen.",
+    "Add a clear allergen note on every KOT for that guest: GUEST ALLERGY: NUTS — NO NUTS IN ANY FORM.",
+    "Inform the MOD via walkie talkie immediately.",
+    "If there is a high chance of allergen traces in a dish, tell the guest frankly: I want to be honest — this dish is prepared in a kitchen where that allergen is present, and there is a real risk of traces. I would not recommend this dish for you.",
+    "Suggest a safer alternative if one exists.",
+    "If the guest has further questions or you are uncertain — call a senior or the MOD immediately. Do not guess."
+  ]}
+];
+
+function renderScenarios(filter) {
+  var typeClass = { question:"stype-q", complaint:"stype-c", safety:"stype-s" };
+  var typeLabel = { question:"Guest question", complaint:"Food complaint — escalate to MOD", safety:"Food safety — escalate immediately" };
+  var html = "";
+  scenarios.forEach(function(s) {
+    if (filter === "all" || s.type === filter) {
+      html += "<div class=\"scenario-card\"><div class=\"scenario-q\">" + s.q + "</div><div class=\"scenario-body\">";
+      html += "<span class=\"stype " + typeClass[s.type] + "\">" + typeLabel[s.type] + "</span>";
+      s.steps.forEach(function(st, i) {
+        html += "<div class=\"step\"><div class=\"step-num\">" + (i+1) + "</div><div class=\"step-text\">" + st + "</div></div>";
+      });
+      html += "</div></div>";
+    }
+  });
+  document.getElementById("slist").innerHTML = html;
+}
+
+function filterS(type, btn) {
+  document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
+  btn.classList.add("active");
+  renderScenarios(type);
+}
+
+renderScenarios("all");
+</script>
+</body>
+</htmlPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOAK — Cooking Techniques Training Guide</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F7F4EF; color: #2C2416; font-size: 15px; line-height: 1.6; }
+.header { background: #2C2416; padding: 1.5rem 1.25rem 1.25rem; text-align: center; }
+.header h1 { font-size: 28px; font-weight: 600; letter-spacing: 6px; color: #C4A882; margin-bottom: 4px; }
+.header p { font-size: 12px; color: #9E8A72; letter-spacing: 2px; text-transform: uppercase; }
+.nav { display: flex; overflow-x: auto; background: #3a3226; padding: 0 0.5rem; gap: 0; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+.nav-btn { flex-shrink: 0; padding: 12px 18px; background: none; border: none; color: #9E8A72; font-size: 13px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; font-family: inherit; }
+.nav-btn.active, .nav-btn:hover { color: #C4A882; border-bottom-color: #C4A882; }
+.section { display: none; padding: 1.25rem; max-width: 800px; margin: 0 auto; }
+.section.active { display: block; }
+.section-title { font-size: 22px; font-weight: 600; color: #8B6B4A; margin-bottom: 6px; }
+.section-intro { font-size: 14px; color: #6B5840; line-height: 1.7; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid #E0D5C5; }
+.card { background: #fff; border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.card-title { font-size: 17px; font-weight: 600; color: #2C2416; margin-bottom: 3px; }
+.card-sub { font-size: 13px; color: #9E8A72; margin-bottom: 1rem; font-style: italic; }
+.label { font-size: 11px; font-weight: 600; color: #8B6B4A; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 12px; margin-bottom: 4px; }
+.value { font-size: 14px; color: #3a3226; line-height: 1.65; }
+.divider { border: none; border-top: 1px solid #EDE8DF; margin: 1rem 0; }
+.tip-box { background: #FDF8F2; border-left: 3px solid #C4A882; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; }
+.tip-box p { font-size: 13px; color: #6B5840; line-height: 1.65; }
+.warning-box { background: #FFF4F4; border-left: 3px solid #C0392B; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; }
+.warning-box p { font-size: 13px; color: #7A0A0A; line-height: 1.65; font-weight: 500; }
+.tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; margin: 2px; }
+.tag-amber { background: #FDF0DC; color: #7A4F0A; }
+.tag-teal { background: #DFF2EC; color: #0A5C44; }
+.tag-coral { background: #FDEAE4; color: #7A2A10; }
+.tag-blue { background: #E0EEFA; color: #0A3D6B; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 1rem 0; }
+.grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin: 1rem 0; }
+.mini-card { background: #F7F4EF; border-radius: 10px; padding: 1rem; }
+.mini-title { font-size: 14px; font-weight: 600; color: #2C2416; margin-bottom: 4px; }
+.mini-desc { font-size: 12px; color: #6B5840; line-height: 1.5; }
+.method-img { width: 100%; height: 160px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; cursor: pointer; display: block; }
+.sauce-img { width: 100%; height: 140px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; cursor: pointer; display: block; }
+.pasta-card { background: #F7F4EF; border-radius: 10px; overflow: hidden; }
+.pasta-img { width: 100%; height: 120px; object-fit: cover; cursor: pointer; display: block; }
+.pasta-body { padding: 0.75rem; }
+.pasta-name { font-size: 13px; font-weight: 600; color: #2C2416; margin-bottom: 3px; }
+.pasta-desc { font-size: 11px; color: #6B5840; line-height: 1.4; }
+.bread-card { background: #F7F4EF; border-radius: 10px; overflow: hidden; }
+.bread-img { width: 100%; height: 130px; object-fit: cover; cursor: pointer; display: block; }
+.bread-body { padding: 0.875rem; }
+.bread-name { font-size: 14px; font-weight: 600; color: #2C2416; margin-bottom: 4px; }
+.bread-desc { font-size: 12px; color: #6B5840; line-height: 1.5; }
+.flavour-card { background: #F7F4EF; border-radius: 10px; overflow: hidden; }
+.flavour-img { width: 100%; height: 140px; object-fit: cover; cursor: pointer; display: block; }
+.flavour-body { padding: 0.875rem; }
+.scenario-card { background: #fff; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow: hidden; }
+.scenario-q { background: #2C2416; color: #F7F4EF; padding: 1rem 1.25rem; font-size: 15px; font-weight: 500; border-left: 4px solid #C4A882; }
+.scenario-body { padding: 1.25rem; }
+.stype { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-bottom: 12px; }
+.stype-q { background: #DFF2EC; color: #0A5C44; }
+.stype-c { background: #FDEAE4; color: #7A2A10; }
+.stype-s { background: #FDEAEA; color: #7A0A0A; }
+.step { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+.step-num { flex-shrink: 0; width: 22px; height: 22px; background: #C4A882; color: #fff; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+.step-text { font-size: 14px; color: #3a3226; line-height: 1.6; }
+.filter-bar { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+.filter-btn { padding: 5px 14px; border-radius: 20px; border: 1px solid #C4A882; background: transparent; color: #8B6B4A; font-size: 12px; cursor: pointer; font-family: inherit; transition: all 0.15s; }
+.filter-btn.active, .filter-btn:hover { background: #C4A882; color: #fff; }
+.allergen-pill { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 3px; background: #FDEAEA; color: #7A0A0A; border: 1px solid #F5C6C6; }
+.ribbon-note { background: #FDF8F2; border: 1px solid #E0D5C5; border-radius: 8px; padding: 0.75rem 1rem; margin-bottom: 10px; font-size: 12px; color: #6B5840; line-height: 1.5; }
+/* LIGHTBOX */
+.lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; padding: 1rem; }
+.lightbox-overlay.open { display: flex; }
+.lightbox-overlay img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px; }
+.lightbox-caption { color: #F7F4EF; font-size: 14px; margin-top: 12px; text-align: center; }
+.lightbox-close { position: absolute; top: 16px; right: 20px; color: #fff; font-size: 32px; cursor: pointer; background: none; border: none; padding: 0; line-height: 1; }
+</style>
+</head>
+<body>
+
+<div class="header" style="position:sticky;top:0;z-index:100">
+  <h1>SOAK</h1>
+  <p>Cooking Techniques Training Guide</p>
+</div>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="showSection('intro', this)">Introduction</button>
+  <button class="nav-btn" onclick="showSection('heat', this)">Cooking Methods</button>
+  <button class="nav-btn" onclick="showSection('tandoor', this)">The Tandoor</button>
+  <button class="nav-btn" onclick="showSection('sauces', this)">Stocks & Sauces</button>
+  <button class="nav-btn" onclick="showSection('pasta', this)">Pasta</button>
+  <button class="nav-btn" onclick="showSection('bread', this)">Bread</button>
+  <button class="nav-btn" onclick="showSection('flavour', this)">Flavour</button>
+  <button class="nav-btn" onclick="showSection('allergens', this)">Allergens</button>
+  <button class="nav-btn" onclick="showSection('describe', this)">Describing Dishes</button>
+  <button class="nav-btn" onclick="showSection('scenarios', this)">Scenarios</button>
+</div>
+
+<!-- INTRO -->
+<div id="intro" class="section active">
+  <p class="section-title">Welcome to this guide</p>
+  <p class="section-intro">This guide is for front of house staff who want to understand the basics of how food is cooked. You do not need to cook anything yourself. But knowing what happens in the kitchen means you can describe dishes confidently, answer guest questions accurately, and handle food-related situations the right way. Read through each section, then use the Scenarios tab as your on-the-floor reference.</p>
+  <div class="card">
+    <p class="card-title">Why does this matter?</p>
+    <p class="value">A guest who asks "is this grilled or fried?" deserves a real answer, not a guess. A guest who says "this looks undercooked" needs you to know what to do immediately. A guest who asks "what is the sauce made of?" should feel like they are talking to someone who genuinely knows the food.</p>
+    <hr class="divider">
+    <p class="label">The two types of situation you will face</p>
+    <p class="value" style="margin-bottom:8px"><strong>Guest questions</strong> — someone curious about how a dish is made, what an ingredient is, or why something looks a certain way. You answer confidently and helpfully.</p>
+    <p class="value"><strong>Food complaints</strong> — something is wrong with the food. You apologise sincerely and escalate to the MOD and kitchen immediately. The only exceptions are missed items, delayed orders, and wrong orders — these you fix on the spot and then inform the MOD.</p>
+  </div>
+  <div class="warning-box">
+    <p>ESCALATION RULE: Missed items, delayed orders, wrong orders — fix immediately, inform MOD after. All food quality complaints, food safety concerns, and consistency issues — apologise and escalate to MOD and kitchen immediately. Never attempt to fix food yourself.</p>
+  </div>
+  <div class="tip-box">
+    <p><strong>How to use this guide:</strong> Tap the tabs above to move between sections. Work through them in order the first time. After that, use the Scenarios tab as your quick reference during shifts.</p>
+  </div>
+</div>
+
+<!-- COOKING METHODS -->
+<div id="heat" class="section">
+  <p class="section-title">Heat and Cooking Methods</p>
+  <p class="section-intro">Every dish on the SOAK menu is cooked using one of these methods — or a combination. Knowing what each method does helps you describe a dish accurately and answer "how is this cooked?" with confidence.</p>
+
+  <div class="card">
+    <p class="card-title">🔥 Dry Heat Methods</p>
+    <p class="card-sub">No liquid involved — heat is applied directly to the food</p>
+    <div class="grid2">
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1IvBCOFHrKnZQmzTkzw_orWKAleyyJ9CW&sz=s4000" alt="Grilling" class="method-img" onclick="openLightbox(this.src,'Grilling')">
+        <p class="mini-title">Grilling</p>
+        <p class="mini-desc">Food cooked over or under direct high heat. Creates char marks, a smoky flavour, and a crisp exterior. The inside stays juicy if cooked correctly.</p>
+        <p class="label">At the table it looks like</p>
+        <p class="mini-desc">Visible grill marks, slight char on the edges, sometimes a smoky aroma.</p>
+        <p class="label">Used for</p>
+        <p class="mini-desc">Grilled meats, fish, paneer, vegetables</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1luNpJeAEv1xIY9G-3GyVQygKKiHp59hy&sz=s4000" alt="Roasting" class="method-img" onclick="openLightbox(this.src,'Roasting')">
+        <p class="mini-title">Roasting</p>
+        <p class="mini-desc">Food cooked uncovered in a hot oven. The dry heat creates a golden, caramelised exterior while the inside cooks through slowly.</p>
+        <p class="label">At the table it looks like</p>
+        <p class="mini-desc">Golden brown exterior, sometimes crispy edges. Often served with pan juices.</p>
+        <p class="label">Used for</p>
+        <p class="mini-desc">Whole chicken, lamb, root vegetables, potatoes</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=14i_Pl9GtwTXq63a4giy8qfh96zX849dS&sz=s4000" alt="Frying" class="method-img" onclick="openLightbox(this.src,'Frying')">
+        <p class="mini-title">Frying</p>
+        <p class="mini-desc">Food cooked in hot oil. Deep frying submerges the food completely — crispy exterior, cooked through. Shallow frying uses less oil and cooks one side at a time.</p>
+        <p class="label">At the table it looks like</p>
+        <p class="mini-desc">Golden, crispy, uniformly coloured on the outside. Served hot.</p>
+        <p class="label">Used for</p>
+        <p class="mini-desc">Fritters, cutlets, spring rolls, certain breads</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1pW12HxilaTGzCAAZsyacZcjrgsjyFo7V&sz=s4000" alt="Sautéing" class="method-img" onclick="openLightbox(this.src,'Sautéing')">
+        <p class="mini-title">Sautéing</p>
+        <p class="mini-desc">Food cooked quickly in a small amount of hot oil or butter in a pan. Fast, high heat — preserves colour and texture.</p>
+        <p class="label">At the table it looks like</p>
+        <p class="mini-desc">Bright, slightly glossy, tender but not soft.</p>
+        <p class="label">Used for</p>
+        <p class="mini-desc">Vegetables, mushrooms, quick-cooked proteins</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=19cnQNmoYjmuvPhJSMeSfyssi8ndTCBeX&sz=s4000" alt="Baking" class="method-img" onclick="openLightbox(this.src,'Baking')">
+        <p class="mini-title">Baking</p>
+        <p class="mini-desc">Food cooked in an enclosed oven. Used for bread, pastry, and dishes in a mould or dish.</p>
+        <p class="label">At the table it looks like</p>
+        <p class="mini-desc">Set, structured, often with a golden crust. Consistent texture throughout.</p>
+        <p class="label">Used for</p>
+        <p class="mini-desc">Bread, pasta bakes, gratins, pastry</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">💧 Wet Heat Methods</p>
+    <p class="card-sub">Liquid is involved — water, stock, or steam does the cooking</p>
+    <div class="grid2">
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1tGmoHI5fm8eh0V2_B0_qvM3kxey-Uq-T&sz=s4000" alt="Steaming" class="method-img" onclick="openLightbox(this.src,'Steaming')">
+        <p class="mini-title">Steaming</p>
+        <p class="mini-desc">Food cooked above boiling water — steam does the cooking without the food touching water. Preserves nutrients, colour, and delicate textures.</p>
+        <p class="label">At the table it looks like</p>
+        <p class="mini-desc">Moist, tender, bright in colour. No browning or char.</p>
+        <p class="label">Used for</p>
+        <p class="mini-desc">Dim sum, momos, fish, delicate vegetables</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=195PMeaV_hzMG9e5qLjnF_U-Sp8UovB7R&sz=s4000" alt="Poaching" class="method-img" onclick="openLightbox(this.src,'Poaching')">
+        <p class="mini-title">Poaching</p>
+        <p class="mini-desc">Food gently cooked in liquid kept just below boiling point. Very gentle — produces a soft, delicate texture without any colour.</p>
+        <p class="label">At the table it looks like</p>
+        <p class="mini-desc">Pale, very soft, moist. No crust or char.</p>
+        <p class="label">Used for</p>
+        <p class="mini-desc">Eggs, fish, chicken, fruit</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1VbFQferZbBYfHDlUszufTU7_5f-TpLLq&sz=s4000" alt="Braising" class="method-img" onclick="openLightbox(this.src,'Braising')">
+        <p class="mini-title">Braising</p>
+        <p class="mini-desc">Food first seared in a pan then slow-cooked in a small amount of liquid in a covered pot. Makes tough cuts of meat incredibly tender.</p>
+        <p class="label">At the table it looks like</p>
+        <p class="mini-desc">Very tender, falling apart, rich deep colour. Usually served with the cooking liquid as a sauce.</p>
+        <p class="label">Used for</p>
+        <p class="mini-desc">Slow-cooked meats, lamb shanks, short ribs</p>
+      </div>
+    </div>
+  </div>
+  <div class="tip-box">
+    <p><strong>On the floor:</strong> When a guest asks "how is this cooked?", use these methods. For example: "The fish is pan-sauteed — golden crust on the outside, moist inside." You do not need the exact recipe. Just the method is enough.</p>
+  </div>
+</div>
+
+<!-- TANDOOR -->
+<div id="tandoor" class="section">
+  <p class="section-title">The Tandoor</p>
+  <p class="section-intro">The tandoor is one of the most distinctive elements of the SOAK kitchen. Guests who are unfamiliar with it will ask what it is. You should be able to explain it simply and confidently.</p>
+
+  <div class="card">
+    <p class="card-title">What is a tandoor?</p>
+    <img src="https://drive.google.com/thumbnail?id=1nOUmu-DAMiURsMZl5WQxaaJtQfKLGmOR&sz=s4000" alt="Tandoor oven" class="method-img" onclick="openLightbox(this.src,'Tandoor oven')">
+    <p class="value">A tandoor is a traditional clay oven, cylindrical in shape, heated from the inside using charcoal or wood fire. Temperatures inside a tandoor can reach 400 to 500 degrees Celsius — far hotter than a conventional oven. This extreme heat is what makes tandoor cooking unique.</p>
+    <hr class="divider">
+    <p class="label">How food is cooked in it</p>
+    <p class="value" style="margin-bottom:8px">Meats and vegetables are threaded onto long metal skewers and lowered into the tandoor vertically. Breads like naan are slapped directly onto the inside walls of the oven, where they stick and cook in about 90 seconds.</p>
+    <p class="label">What makes tandoor food distinctive</p>
+    <div style="margin-top:6px">
+      <span class="tag tag-amber">Slight char on the exterior</span>
+      <span class="tag tag-amber">Smoky, earthy aroma</span>
+      <span class="tag tag-amber">Juicy interior from fast, intense cooking</span>
+      <span class="tag tag-amber">Slightly crisp edges</span>
+      <span class="tag tag-amber">Distinctive flavour from the clay and charcoal</span>
+    </div>
+    <hr class="divider">
+    <p class="label">How to explain it to a guest</p>
+    <p class="value">"The tandoor is a traditional clay oven that reaches extremely high temperatures — much hotter than a normal oven. The food cooks very quickly in the intense heat, which gives it that slightly charred exterior and smoky flavour while keeping the inside moist and juicy."</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Common tandoor dishes</p>
+    <div class="grid2">
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1zvzOZB2bWZf-T-1L8m5CjYZldT1LKy4v&sz=s4000" alt="Tandoori chicken" class="method-img" onclick="openLightbox(this.src,'Tandoori chicken')">
+        <p class="mini-title">Tandoori chicken and meats</p>
+        <p class="mini-desc">Marinated in spiced yoghurt then cooked on skewers in the tandoor. Juicy inside, slightly charred outside.</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1_gtH7HkF-hElILUbGB0rnIVWzxYzDZ5g&sz=s4000" alt="Seekh kebab" class="method-img" onclick="openLightbox(this.src,'Seekh kebab')">
+        <p class="mini-title">Seekh kebab</p>
+        <p class="mini-desc">Minced meat mixed with spices, shaped around a flat skewer, and cooked in the tandoor. Soft, smoky, slightly crispy on the outside.</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1CmpprRw9n08UhXIjukYd0WHMRa_ueMWh&sz=s4000" alt="Paneer tikka" class="method-img" onclick="openLightbox(this.src,'Paneer tikka')">
+        <p class="mini-title">Paneer tikka</p>
+        <p class="mini-desc">Cubes of fresh cottage cheese marinated in spiced yoghurt and cooked in the tandoor. Slightly charred outside, soft and warm inside.</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1iJybv79gbCQ6W_26KGFCTe1QMda2gp7_&sz=s4000" alt="Naan in tandoor" class="method-img" onclick="openLightbox(this.src,'Naan in tandoor')">
+        <p class="mini-title">Naan and tandoori roti</p>
+        <p class="mini-desc">Dough slapped directly onto the inside wall of the tandoor. Cooks in about 90 seconds. Comes out with characteristic bubbles and slight char marks.</p>
+      </div>
+    </div>
+  </div>
+  <div class="tip-box">
+    <p><strong>Guest asks: "Why is there char on my food — is it burnt?"</strong> Say: "That slight char is completely intentional — it is the signature of tandoor cooking. The extreme heat creates that smoky, slightly charred exterior while the inside stays perfectly cooked."</p>
+  </div>
+</div>
+
+<!-- STOCKS AND SAUCES -->
+<div id="sauces" class="section">
+  <p class="section-title">Stocks, Sauces and Bases</p>
+  <p class="section-intro">Stocks and sauces are the foundation of most dishes at SOAK. You do not need to know exact recipes — but you should know what these terms mean and how to describe them simply when a guest asks.</p>
+
+  <div class="card">
+    <p class="card-title">What is a stock?</p>
+    <img src="https://drive.google.com/thumbnail?id=1ULNGeMpT0IIv7Z-FxOANt3kQiUSS0iwO&sz=s4000" alt="Stock simmering" class="method-img" onclick="openLightbox(this.src,'Stock simmering')">
+    <p class="value">A stock is a flavoured liquid made by simmering bones, vegetables, and aromatics in water for several hours. It is the base of most soups, sauces, and braises — it adds depth that plain water cannot.</p>
+    <div class="grid2" style="margin-top:1rem">
+      <div class="mini-card"><p class="mini-title">Chicken stock</p><p class="mini-desc">Light, mild, and versatile. Used in soups, risottos, and light sauces.</p></div>
+      <div class="mini-card"><p class="mini-title">Beef stock</p><p class="mini-desc">Richer and darker. Used in hearty meat dishes, gravies, and reductions.</p></div>
+      <div class="mini-card"><p class="mini-title">Fish stock</p><p class="mini-desc">Light and delicate. Used in seafood dishes and light cream sauces.</p></div>
+      <div class="mini-card"><p class="mini-title">Vegetable stock</p><p class="mini-desc">Made from vegetables only. Used in vegetarian dishes.</p></div>
+    </div>
+    <div class="tip-box" style="margin-top:1rem">
+      <p><strong>How to explain to a guest:</strong> "The base of that soup is a slow-cooked stock — bones and vegetables simmered for hours to build a deep, rich flavour."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">What is a reduction?</p>
+    <p class="value">A reduction is made by simmering a liquid — stock, wine, or sauce — uncovered over heat until some of the water evaporates. As it reduces, the liquid becomes thicker and the flavours become more concentrated and intense.</p>
+    <div class="tip-box" style="margin-top:0.75rem">
+      <p><strong>How to explain to a guest:</strong> "That sauce is a reduction — it starts as a liquid and is slowly cooked down until it becomes thick and concentrated. The flavour gets much more intense as it reduces."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">What is a jus?</p>
+    <p class="value">A jus (pronounced "zhoo") is the natural cooking juices from a roasted or braised meat, often reduced and refined into a light, intensely flavoured sauce. It is not thickened with flour or cream. Much lighter than a gravy but far more flavourful.</p>
+    <div class="tip-box" style="margin-top:0.75rem">
+      <p><strong>How to explain to a guest:</strong> "The jus is the natural juice from the meat as it cooked — collected and reduced into a light sauce. Much lighter than a gravy, but very intense in flavour."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Common sauce types</p>
+    <div class="grid2">
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1GzDUMSVQgy-RrVFVhi_VKgktnWUEqOVe&sz=s4000" alt="Cream sauce" class="method-img" onclick="openLightbox(this.src,'Cream sauce')">
+        <p class="mini-title">Cream sauce</p>
+        <p class="mini-desc">Made from cream reduced with butter. Rich, smooth, and coating. Pale in colour. Used in pasta, fish, and chicken dishes.</p>
+        <p class="label">Taste</p>
+        <p class="mini-desc">Rich, slightly sweet, smooth.</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1rJUJRT9e3eTIy18f1cXZ7-CBtBrKrg6T&sz=s4000" alt="Tomato sauce" class="method-img" onclick="openLightbox(this.src,'Tomato sauce')">
+        <p class="mini-title">Tomato-based sauce</p>
+        <p class="mini-desc">Made from tomatoes cooked down with oil, garlic, and aromatics. Bright red. Used in pasta, pizzas, and braises.</p>
+        <p class="label">Taste</p>
+        <p class="mini-desc">Bright, slightly acidic, fresh.</p>
+      </div>
+      <div class="mini-card">
+        <img src="https://drive.google.com/thumbnail?id=1vk0v71o0MscVUUECbFPqe1mUIg3fWCIa&sz=s4000" alt="Indian gravy" class="method-img" onclick="openLightbox(this.src,'Indian gravy')">
+        <p class="mini-title">Indian gravies</p>
+        <p class="mini-desc">Built from a base of onion, tomato, ginger, and garlic cooked down with spices. Cream or yoghurt is sometimes added to finish.</p>
+        <p class="label">Taste</p>
+        <p class="mini-desc">Complex, spiced, and layered.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PASTA -->
+<div id="pasta" class="section">
+  <p class="section-title">Pasta</p>
+  <p class="section-intro">SOAK's menu includes Italian-influenced pasta dishes. Guests will ask about shapes, what al dente means, and the difference between fresh and dried pasta.</p>
+
+  <div class="card">
+    <p class="card-title">Fresh pasta vs dried pasta</p>
+    <div class="grid2">
+      <div class="mini-card"><p class="mini-title">Fresh pasta</p><p class="mini-desc">Made in-house from flour and eggs. Softer, silkier. Cooks in 2-3 minutes. Best with light, creamy sauces. Richer, eggy flavour.</p><p class="label">How to explain</p><p class="mini-desc">"This is freshly made pasta — softer and silkier, with a richer flavour from the eggs."</p></div>
+      <div class="mini-card"><p class="mini-title">Dried pasta</p><p class="mini-desc">Made from semolina and water. Firmer texture. Takes 8-12 minutes. Holds up better with bold, chunky sauces.</p><p class="label">How to explain</p><p class="mini-desc">"This is dried pasta — it has a firmer bite and works beautifully with a bold sauce like this."</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">What does al dente mean?</p>
+    <p class="value">Al dente is Italian for "to the tooth." It describes pasta that is cooked through but still has a very slight firmness when you bite it — not hard, not soft, but with just a little resistance. This is the correct way to cook pasta in Italian cuisine.</p>
+    <div class="tip-box" style="margin-top:0.75rem">
+      <p><strong>How to explain to a guest:</strong> "Al dente means the pasta is cooked so it still has a very slight bite — not hard, but not soft either. It is the traditional Italian way and the texture holds up much better with the sauce."</p>
+    </div>
+    <div class="warning-box" style="margin-top:0.75rem">
+      <p>If a guest says their pasta feels undercooked or raw — listen carefully. If they are genuinely unhappy, apologise and escalate to the MOD. Do not explain al dente as a justification for a complaint.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Pasta shapes</p>
+    <div class="ribbon-note">Tagliatelle, Fettuccine, and Pappardelle are all long, flat ribbon pastas — the only difference is width. Tagliatelle and Fettuccine are nearly identical at 6-8mm wide. Pappardelle is much wider at 16-20mm and suited to heavier, chunkier sauces.</div>
+    <div class="grid3">
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1l9gu5H41HgO2DMuXL3aAPAgB-UXzglnE&sz=s4000" alt="Spaghetti" class="pasta-img" onclick="openLightbox(this.src,'Spaghetti')">
+        <div class="pasta-body"><p class="pasta-name">Spaghetti</p><p class="pasta-desc">Long, thin, round strands. Classic with tomato, aglio e olio, or carbonara.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1ja-yCUk1ltwHubqDCzQF93tjzKRzvqCg&sz=s4000" alt="Tagliatelle" class="pasta-img" onclick="openLightbox(this.src,'Tagliatelle')">
+        <div class="pasta-body"><p class="pasta-name">Tagliatelle</p><p class="pasta-desc">Long flat ribbons, 6-8mm wide. Usually fresh. Best with meat sauces or cream.</p></div>
+      </div>
+      <div class="pasta-card">
+        <div class="pasta-body" style="padding-top:0.875rem"><p class="pasta-name">Fettuccine</p><p class="pasta-desc">Almost identical to tagliatelle — 6-7mm wide, slightly thicker and denser. The Roman version. Famous for fettuccine alfredo.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1Ont-yULB4ozHtjRofXJKBRebjqUcb466&sz=s4000" alt="Pappardelle" class="pasta-img" onclick="openLightbox(this.src,'Pappardelle')">
+        <div class="pasta-body"><p class="pasta-name">Pappardelle</p><p class="pasta-desc">Very wide flat ribbons, 16-20mm. Usually fresh. Pairs with rich, chunky meat sauces — bold enough to match the wide surface.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=14DeGEtRzKSgHQ76xbJnSd4oA_MhufIJE&sz=s4000" alt="Penne" class="pasta-img" onclick="openLightbox(this.src,'Penne')">
+        <div class="pasta-body"><p class="pasta-name">Penne</p><p class="pasta-desc">Short tubes with diagonal cut ends. Hollow centre holds sauce inside. Works with almost any sauce.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1dOZjvNDbB2rdhT6DETDBgzlyU9hCvZiJ&sz=s4000" alt="Rigatoni" class="pasta-img" onclick="openLightbox(this.src,'Rigatoni')">
+        <div class="pasta-body"><p class="pasta-name">Rigatoni</p><p class="pasta-desc">Larger ridged tubes. Ridges and hollow centre catch chunky, hearty sauces well.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1rmEOO8JgUaABmnbGx-ga-JYR6nBu2TcL&sz=s4000" alt="Fusilli" class="pasta-img" onclick="openLightbox(this.src,'Fusilli')">
+        <div class="pasta-body"><p class="pasta-name">Fusilli</p><p class="pasta-desc">Short spirals. The twists trap sauce. Works well with pesto or tomato.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1bpLxTrj2OdAh-hNhSRT2ydhWnKEfIrFY&sz=s4000" alt="Farfalle" class="pasta-img" onclick="openLightbox(this.src,'Farfalle')">
+        <div class="pasta-body"><p class="pasta-name">Farfalle</p><p class="pasta-desc">Bow-tie shape. Light and fun. Good with cream sauces and light vegetables.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1-pA8dZ-gyQskClD-Ae3XVmdyV29vGSml&sz=s4000" alt="Orecchiette" class="pasta-img" onclick="openLightbox(this.src,'Orecchiette')">
+        <div class="pasta-body"><p class="pasta-name">Orecchiette</p><p class="pasta-desc">Small ear-shaped pasta. The cup holds chunky or vegetable-based sauces perfectly.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1URkuHAV7W8eqQs8KK3LToiA6BUCDA_8o&sz=s4000" alt="Ravioli" class="pasta-img" onclick="openLightbox(this.src,'Ravioli')">
+        <div class="pasta-body"><p class="pasta-name">Ravioli</p><p class="pasta-desc">Filled pasta parcels — cheese, meat, or vegetables. Usually fresh. Best with butter or light sauces.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1hfjek6jXW4Y6DHZSPkalpCKG975rhkRM&sz=s4000" alt="Linguine" class="pasta-img" onclick="openLightbox(this.src,'Linguine')">
+        <div class="pasta-body"><p class="pasta-name">Linguine</p><p class="pasta-desc">Like spaghetti but flatter. Works well with seafood — classic with clams or prawns.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=16xJjNdwjLSxCX9vIa-RKnzQf5B50y78z&sz=s4000" alt="Gnocchi" class="pasta-img" onclick="openLightbox(this.src,'Gnocchi')">
+        <div class="pasta-body"><p class="pasta-name">Gnocchi</p><p class="pasta-desc">Soft potato and flour dumplings. Very pillowy. Works with butter, tomato, or cream sauces.</p></div>
+      </div>
+      <div class="pasta-card">
+        <img src="https://drive.google.com/thumbnail?id=1ygUaI5GdHsMOtR4aNzIDIRyQzBjwPbWS&sz=s4000" alt="Conchiglie" class="pasta-img" onclick="openLightbox(this.src,'Conchiglie')">
+        <div class="pasta-body"><p class="pasta-name">Conchiglie</p><p class="pasta-desc">Shell-shaped pasta. The concave shape scoops up chunky sauces beautifully.</p></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BREAD -->
+<div id="bread" class="section">
+  <p class="section-title">Bread</p>
+  <p class="section-intro">SOAK's menu spans Indian and international bread traditions. Guests will ask about the difference between naan and roti, or what sourdough is. These are easy questions to answer if you know the basics.</p>
+
+  <div class="card">
+    <p class="card-title">Indian breads</p>
+    <div class="grid2">
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1jwWFiUDvI7ydgNGG1xZHxtXyzYrvCqj9&sz=s4000" alt="Naan" class="bread-img" onclick="openLightbox(this.src,'Naan')">
+        <div class="bread-body">
+          <p class="bread-name">Naan</p>
+          <p class="mini-desc">A leavened flatbread made from refined flour with yoghurt and sometimes egg. Cooked by being slapped onto the inner wall of a tandoor. Soft, slightly charred, and puffy with characteristic bubbles. Can be plain, buttered, or stuffed.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Soft, slightly chewy, mild tangy flavour from the yoghurt. Slight char on the surface.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1eeWNr5XJV1jlHp-clWYI1Ajog37-1OCF&sz=s4000" alt="Tandoori roti" class="bread-img" onclick="openLightbox(this.src,'Tandoori roti')">
+        <div class="bread-body">
+          <p class="bread-name">Tandoori Roti</p>
+          <p class="mini-desc">Similar to naan but made from whole wheat flour without yeast — so it is not leavened. Also cooked in the tandoor. Healthier and slightly denser than naan.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Slightly denser and earthier than naan. Nutty flavour from the whole wheat.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1W5Po1SeTymhTd2QRGZXzxT4SHQHmUfnr&sz=s4000" alt="Roti" class="bread-img" onclick="openLightbox(this.src,'Roti')">
+        <div class="bread-body">
+          <p class="bread-name">Roti / Chapati</p>
+          <p class="mini-desc">A thin, unleavened whole wheat flatbread cooked on a flat griddle. Simple and light. The most everyday bread in Indian cooking.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Very thin, soft, and mild. Slightly smoky if finished directly on the flame.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1XFGM-tc2vy3Q6U5oP4ayBySf6nx9hniu&sz=s4000" alt="Paratha" class="bread-img" onclick="openLightbox(this.src,'Paratha')">
+        <div class="bread-body">
+          <p class="bread-name">Paratha</p>
+          <p class="mini-desc">A layered, flaky flatbread made from whole wheat flour, cooked on a griddle with butter or ghee. Can be plain or stuffed. Richer and more substantial than a roti.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Flaky layers, buttery, and rich. More filling than a roti.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=18OknaUnhiFZXb8EIKJaBwdIG2KfWZcId&sz=s4000" alt="Kulcha" class="bread-img" onclick="openLightbox(this.src,'Kulcha')">
+        <div class="bread-body">
+          <p class="bread-name">Kulcha</p>
+          <p class="mini-desc">Similar to naan but softer and slightly thicker. Made from refined flour and often stuffed with onion, potato, or paneer. Cooked in the tandoor.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Soft, pillowy, mild in flavour. The stuffing is the star.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1_DwLqytcLOUJJliOXzH7HPhsi-tyaoMO&sz=s4000" alt="Puri" class="bread-img" onclick="openLightbox(this.src,'Puri')">
+        <div class="bread-body">
+          <p class="bread-name">Puri</p>
+          <p class="mini-desc">A small, round, unleavened whole wheat bread that is deep fried. It puffs up into a hollow ball when it hits the hot oil. Must be eaten straight away.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Crispy on the outside, soft inside. Light and airy.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1SsLnXYm0TfNxlzICnCSzUhK7Om-siQa_&sz=s4000" alt="South Indian Parotta" class="bread-img" onclick="openLightbox(this.src,'South Indian Parotta')">
+        <div class="bread-body">
+          <p class="bread-name">South Indian Parotta</p>
+          <p class="mini-desc">A layered, flaky flatbread made from maida (refined flour), cooked on a griddle with oil. Unlike the North Indian paratha which uses whole wheat flour, the South Indian parotta uses refined flour — giving it a distinctly lighter, more delicate layered texture. The layers are created by repeatedly folding and coiling the dough before cooking.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Rich, slightly crispy on the outside, soft and flaky inside. More delicate than a paratha.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tip-box" style="margin-top:1rem">
+      <p><strong>Guest asks: "What is the difference between naan and roti?"</strong> Say: "Naan is made from refined flour with yoghurt and cooked in the tandoor — softer and slightly richer. Roti is made from whole wheat flour on a flat griddle — lighter and simpler. Both are delicious but very different in texture and flavour."</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Breads</p>
+    <div class="grid2">
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1iZRMU_l6vrlc0Tlk7AXSfiaQvOLIdSMC&sz=s4000" alt="Focaccia" class="bread-img" onclick="openLightbox(this.src,'Focaccia')">
+        <div class="bread-body">
+          <p class="bread-name">Focaccia</p>
+          <p class="mini-desc">A thick, flat Italian bread baked with olive oil and sea salt. Dimpled on top. Crispy on the outside, airy and soft inside. Can be topped with rosemary, olives, or tomatoes.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Rich and savoury from the olive oil. Slightly crispy crust, soft open crumb inside.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=166zVwB1Q9tj_eAY2AyjwoqEuuDqhWpbZ&sz=s4000" alt="Ciabatta" class="bread-img" onclick="openLightbox(this.src,'Ciabatta')">
+        <div class="bread-body">
+          <p class="bread-name">Ciabatta</p>
+          <p class="mini-desc">An Italian white bread with a very open, holey crumb and a thin, crispy crust. Long and flat. The holes make it excellent for dipping in oil or soaking up sauces.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Mild, slightly chewy, crisp crust. Very versatile.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1RYc6FnuA35rJtshGJnHOyQkSY_ky6cIw&sz=s4000" alt="White bread" class="bread-img" onclick="openLightbox(this.src,'White bread')">
+        <div class="bread-body">
+          <p class="bread-name">White bread</p>
+          <p class="mini-desc">Made from refined white flour. Soft, light, and mild in flavour. A universally familiar bread with a fine, even crumb and a thin soft crust.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Soft, mild, slightly sweet. Very approachable.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1PiXrk_ISf1zEuyKpHJk3YlBVDiyumM2g&sz=s4000" alt="Multigrain bread" class="bread-img" onclick="openLightbox(this.src,'Multigrain bread')">
+        <div class="bread-body">
+          <p class="bread-name">Multigrain bread</p>
+          <p class="mini-desc">Made with a mix of grains and seeds — wheat, oats, flax, sunflower, and others. Denser and more nutritious than white bread. Visible seeds and grains throughout.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Nutty, slightly earthy, hearty. More texture and flavour than white bread.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=195-yrugYlvSP0xGZon6xEGEcHWdaOEZ5&sz=s4000" alt="Sourdough" class="bread-img" onclick="openLightbox(this.src,'Sourdough')">
+        <div class="bread-body">
+          <p class="bread-name">Sourdough</p>
+          <p class="mini-desc">Made using a natural fermentation process — a "starter" of wild yeast and bacteria rather than commercial yeast. Takes much longer to make. Distinctive tangy flavour. Thick, crackling crust and an open, chewy crumb.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Tangy, complex, slightly sour. Thick crust, chewy inside. Very satisfying.</p>
+        </div>
+      </div>
+      <div class="bread-card">
+        <img src="https://drive.google.com/thumbnail?id=1lM9N64_hiXiEyRekbASxdQRNUKj4fZ-A&sz=s4000" alt="Japanese milk bread" class="bread-img" onclick="openLightbox(this.src,'Japanese milk bread')">
+        <div class="bread-body">
+          <p class="bread-name">Japanese milk bread</p>
+          <p class="mini-desc">An extremely soft, pillowy white bread made using a technique called tangzhong — cooking a portion of the flour with water or milk into a paste before adding it to the dough. This creates an exceptionally soft, moist texture that stays fresh for longer.</p>
+          <p class="label">Taste and texture</p>
+          <p class="mini-desc">Very soft, slightly sweet, incredibly pillowy. Melts in the mouth. Unlike any other bread.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FLAVOUR -->
+<div id="flavour" class="section">
+  <p class="section-title">Flavour Principles</p>
+  <p class="section-intro">Understanding why food tastes the way it does makes you a much better communicator on the floor. There are four elements that create balanced, delicious food — salt, acid, fat, and heat.</p>
+
+  <div class="card">
+    <p class="card-title">The four elements of flavour</p>
+    <div class="grid2">
+      <div class="flavour-card">
+        <img src="https://drive.google.com/thumbnail?id=14__QyZ__WKqepHj3ZniIykZ5DDop1MFv&sz=s4000" alt="Salt" class="flavour-img" onclick="openLightbox(this.src,'Salt')">
+        <div class="flavour-body">
+          <p class="mini-title">Salt</p>
+          <p class="mini-desc">Salt does not just make food taste salty. It amplifies all other flavours and suppresses bitterness. A dish that tastes flat is often under-seasoned. Salt is used at every stage of cooking, not just at the end.</p>
+          <p class="label">How to explain to a guest</p>
+          <p class="mini-desc">"The seasoning is there to bring out all the other flavours — not to make it taste salty."</p>
+        </div>
+      </div>
+      <div class="flavour-card">
+        <img src="https://drive.google.com/thumbnail?id=1mSbUtexphZ6zp6ykT7twyMF5L5bWw-Q6&sz=s4000" alt="Lemon acid" class="flavour-img" onclick="openLightbox(this.src,'Lemon acid')">
+        <div class="flavour-body">
+          <p class="mini-title">Acid</p>
+          <p class="mini-desc">Acid — from lemon, lime, vinegar, or wine — adds brightness and contrast. It cuts through richness and makes a dish taste fresh. This is why lemon goes on fish, why vinegar goes in a dressing, why lime finishes a curry.</p>
+          <p class="label">How to explain to a guest</p>
+          <p class="mini-desc">"The lime in that dish balances the richness — it adds brightness that keeps the flavours fresh."</p>
+        </div>
+      </div>
+      <div class="flavour-card">
+        <img src="https://drive.google.com/thumbnail?id=1j7jQXQVoaUVWLr8BVMH32ov8Gs6w1dHM&sz=s4000" alt="Butter fat" class="flavour-img" onclick="openLightbox(this.src,'Butter fat')">
+        <div class="flavour-body">
+          <p class="mini-title">Fat</p>
+          <p class="mini-desc">Fat — butter, oil, cream, ghee — carries flavour and adds richness. It coats the tongue and allows flavours to linger. Dishes without fat often taste thin and flat.</p>
+          <p class="label">How to explain to a guest</p>
+          <p class="mini-desc">"That richness comes from the butter — fat carries flavour and makes it feel smooth and full."</p>
+        </div>
+      </div>
+      <div class="flavour-card">
+        <img src="https://drive.google.com/thumbnail?id=1T0niEJSRVNxLPEt931GxLd6Jvoh-7a7O&sz=s4000" alt="Heat" class="flavour-img" onclick="openLightbox(this.src,'Heat')">
+        <div class="flavour-body">
+          <p class="mini-title">Heat</p>
+          <p class="mini-desc">Heat transforms ingredients. It creates caramelisation (browning of sugars) and the Maillard reaction (browning of proteins — what gives grilled meat its flavour). The way heat is applied determines the entire character of a dish.</p>
+          <p class="label">How to explain to a guest</p>
+          <p class="mini-desc">"That golden crust is from caramelisation — when heat browns the surface, it creates a whole new layer of flavour."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Taste profile words — use these when describing food</p>
+    <div style="margin-top:0.5rem">
+      <span class="tag tag-amber">Umami — deep, savoury, meaty richness</span>
+      <span class="tag tag-coral">Spicy — heat from chilli or pepper</span>
+      <span class="tag tag-teal">Bright — fresh, light, acidic</span>
+      <span class="tag tag-blue">Rich — heavy, full, coating</span>
+      <span class="tag tag-amber">Earthy — deep, grounding, slightly mineral</span>
+      <span class="tag tag-teal">Fresh — clean, light, not heavy</span>
+      <span class="tag tag-coral">Bitter — sharp, slightly astringent</span>
+      <span class="tag tag-blue">Sweet — naturally or added sugar</span>
+      <span class="tag tag-amber">Nutty — warm, toasted flavour</span>
+      <span class="tag tag-teal">Tangy — sour with brightness</span>
+      <span class="tag tag-coral">Smoky — charred, wood-fire flavour</span>
+      <span class="tag tag-blue">Creamy — smooth, rich, dairy-forward</span>
+    </div>
+    <div class="tip-box" style="margin-top:1rem">
+      <p>Use two or three words when describing a dish. For example: "It is rich and slightly smoky with a bright citrus finish." That tells the guest exactly what to expect — in one sentence.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ALLERGENS -->
+<div id="allergens" class="section">
+  <p class="section-title">Allergen Awareness</p>
+  <p class="section-intro">Allergen handling is one of your most important responsibilities on the floor. Getting this wrong can cause serious harm to a guest. Treat every allergy with the utmost care, be completely honest, and always involve the MOD and kitchen when there is any doubt.</p>
+
+  <div class="warning-box">
+    <p>SOAK does not operate a fully certified allergen-free kitchen. Cross-contamination is possible. You must never make promises you cannot keep. When in doubt, protect the guest — not the sale.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">The most common allergens to know</p>
+    <div style="margin-top:0.5rem">
+      <span class="allergen-pill">Gluten (wheat, barley, rye)</span>
+      <span class="allergen-pill">Dairy (milk, cream, butter, cheese)</span>
+      <span class="allergen-pill">Eggs</span>
+      <span class="allergen-pill">Nuts (peanuts, tree nuts)</span>
+      <span class="allergen-pill">Shellfish</span>
+      <span class="allergen-pill">Fish</span>
+      <span class="allergen-pill">Soy</span>
+      <span class="allergen-pill">Sesame</span>
+      <span class="allergen-pill">Sulphites (in wine and some sauces)</span>
+    </div>
+    <hr class="divider">
+    <p class="label">Where allergens commonly hide</p>
+    <div class="grid2">
+      <div class="mini-card"><p class="mini-title">Gluten</p><p class="mini-desc">Soy sauce, marinades, gravies thickened with flour, certain spice mixes, fried foods (shared fryer oil)</p></div>
+      <div class="mini-card"><p class="mini-title">Dairy</p><p class="mini-desc">Marinades with yoghurt, sauces, butter finishing, naan, certain curries, desserts</p></div>
+      <div class="mini-card"><p class="mini-title">Nuts</p><p class="mini-desc">Chutneys, korma-style gravies, desserts, pesto, certain spice pastes</p></div>
+      <div class="mini-card"><p class="mini-title">Eggs</p><p class="mini-desc">Fresh pasta, mayonnaise, certain batters, some breads and pastries</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">The SOAK allergen protocol — step by step</p>
+    <div class="step"><div class="step-num">1</div><div class="step-text">When a guest mentions an allergy, acknowledge it immediately and take it seriously — every single time.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Be completely honest: "I want to make sure we handle this carefully for you — let me check with the kitchen."</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Add a clear allergen note on every KOT for that guest. Write it prominently — for example: "GUEST ALLERGY: NUTS — NO NUTS IN ANY FORM."</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text">Inform the MOD immediately via walkie talkie.</div></div>
+    <div class="step"><div class="step-num">5</div><div class="step-text">If there is a high chance of allergen traces in the dish, tell the guest frankly: "I want to be honest with you — this dish is prepared in a kitchen where [allergen] is used, and there is a real risk of traces. I would not recommend this dish for you." Do not soften this to make a sale.</div></div>
+    <div class="step"><div class="step-num">6</div><div class="step-text">Suggest a safer alternative if one exists.</div></div>
+    <div class="step"><div class="step-num">7</div><div class="step-text">If the guest has further questions or you are uncertain — call a senior or the MOD immediately. Do not guess.</div></div>
+    <div class="warning-box" style="margin-top:1rem">
+      <p>Never tell a guest a dish is safe unless you are completely certain. If there is any doubt — say so. A guest with a serious allergy is trusting you with their health.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">What cross-contamination means</p>
+    <p class="value">Cross-contamination happens when an allergen from one food transfers to another — through shared equipment, shared oil, or shared surfaces. A guest with a severe nut allergy could react to even tiny traces from shared cooking equipment.</p>
+    <hr class="divider">
+    <p class="label">What to tell a guest if they ask</p>
+    <p class="value">"Our kitchen handles a range of ingredients including [allergen]. While we take great care, I cannot guarantee there is zero risk of cross-contamination. If your allergy is severe, I would strongly advise caution and suggest something safer for you."</p>
+  </div>
+</div>
+
+<!-- DESCRIBING DISHES -->
+<div id="describe" class="section">
+  <p class="section-title">How to Describe a Dish You Haven't Tasted</p>
+  <p class="section-intro">You will not have tasted every dish on the menu. But you should be able to describe any dish confidently when a guest asks. Use four pieces of information from the Menu Training Reference.</p>
+
+  <div class="card">
+    <p class="card-title">The four-part description framework</p>
+    <div class="step"><div class="step-num">1</div><div class="step-text"><strong>What it is</strong> — the main ingredient and the broad category. "It is a grilled sea bass..." / "It is a slow-braised lamb shank..."</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text"><strong>How it is cooked</strong> — the method. "...cooked in the tandoor..." / "...pan-seared and finished in the oven..."</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text"><strong>What it tastes like</strong> — two or three taste profile words. "...smoky and slightly charred on the outside, juicy inside..."</div></div>
+    <div class="step"><div class="step-num">4</div><div class="step-text"><strong>What it comes with</strong> — the accompaniments. "...served with a mint chutney and sliced onion."</div></div>
+    <div class="tip-box" style="margin-top:1rem">
+      <p><strong>Example:</strong> "The paneer tikka is fresh cottage cheese marinated in a spiced yoghurt mix and cooked in the tandoor. It comes out slightly charred on the outside with a smoky flavour, soft and warm inside. It is served with a mint chutney." Two to three sentences. Confident, accurate, and helpful.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">When you genuinely don't know something</p>
+    <p class="value">Do not guess. Say: "That is a great question — let me check with the kitchen and come straight back to you." Come back with a real answer within two minutes.</p>
+    <hr class="divider">
+    <p class="label">Never say</p>
+    <p class="value">"I think it has..." / "It might be..." / "I am pretty sure..." — these are guesses. A confident wrong answer damages trust far more than an honest "let me check."</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Useful phrases for describing food</p>
+    <div class="grid2">
+      <div class="mini-card"><p class="mini-title">For texture</p><p class="mini-desc">"Very tender" / "Falls apart" / "Crispy outside, soft inside" / "Smooth and creamy" / "Light and airy" / "Firm and satisfying"</p></div>
+      <div class="mini-card"><p class="mini-title">For flavour</p><p class="mini-desc">"Rich and earthy" / "Bright and citrusy" / "Smoky with a slight char" / "Mild and delicate" / "Bold and spiced" / "Sweet with a slight tang"</p></div>
+      <div class="mini-card"><p class="mini-title">For cooking method</p><p class="mini-desc">"Slow-cooked" / "Flash-grilled" / "Roasted until golden" / "Gently poached" / "Cooked in the tandoor" / "Pan-seared and finished in the oven"</p></div>
+      <div class="mini-card"><p class="mini-title">For portion and format</p><p class="mini-desc">"Great for sharing" / "A substantial main" / "Light enough as a starter" / "Comes in a warm bowl" / "Served on a wooden board"</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- SCENARIOS -->
+<div id="scenarios" class="section">
+  <p class="section-title">Scenarios</p>
+  <p class="section-intro">These are the situations you will face on the floor. Each one has a clear step-by-step response. Know the difference between what you fix yourself and what you escalate immediately.</p>
+
+  <div class="warning-box">
+    <p>ESCALATION RULE: Missed items, delayed orders, wrong orders — fix immediately, inform MOD after. All food quality complaints, food safety concerns, and consistency issues — apologise sincerely and escalate to MOD and kitchen immediately. Do not attempt to fix food yourself.</p>
+  </div>
+
+  <div class="filter-bar" style="margin-top:1rem">
+    <button class="filter-btn active" onclick="filterS('all',this)">All</button>
+    <button class="filter-btn" onclick="filterS('question',this)">Guest questions</button>
+    <button class="filter-btn" onclick="filterS('complaint',this)">Food complaints</button>
+    <button class="filter-btn" onclick="filterS('safety',this)">Food safety</button>
+  </div>
+
+  <div id="slist"></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#215;</button>
+  <img id="lightbox-img" src="" alt="">
+  <p class="lightbox-caption" id="lightbox-cap"></p>
+</div>
+
+<script>
+function showSection(id, btn) {
+  document.querySelectorAll('.section').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo(0, 0);
 }
 function openLightbox(src, cap) {
   document.getElementById('lightbox-img').src = src;
@@ -780,7 +1703,7 @@ var scenarios = [
     'If the guest is still concerned or the char seems genuinely excessive, do not argue. Apologise, remove the dish, and inform the MOD immediately.'
   ]},
   { type:'question', q:'A guest asks: "What does al dente mean?"', steps:[
-    '"Al dente is Italian for 'to the tooth' — it means the pasta is cooked so it still has a very slight firmness when you bite it. Not hard, but not soft either."',
+    '"Al dente is Italian for \"to the tooth\" — it means the pasta is cooked so it still has a very slight firmness when you bite it. Not hard, but not soft either."',
     '"It is the traditional Italian way — the texture holds up much better with the sauce."',
     'If the guest says their pasta feels undercooked or raw — listen carefully. If they are genuinely unhappy, apologise and escalate to the MOD. Do not explain al dente as a justification for a complaint.'
   ]},
@@ -822,16 +1745,16 @@ var scenarios = [
     'Do not explain or justify the preparation.',
     'A complimentary bill is raised by the MOD for any removed or comped item.'
   ]},
-  { type:'complaint', q:'A guest says: "This doesn't taste the same as last time."', steps:[
+  { type:'complaint', q:'A guest says: "This doesn\'t taste the same as last time."', steps:[
     'Acknowledge the concern warmly: "I am sorry to hear that — thank you for telling us."',
     'Do not argue or explain kitchen SOPs. Simply escalate.',
     'Inform a senior or the MOD immediately via walkie talkie.',
     'The senior or MOD comes to the table, has a warm conversation with the guest, and asks genuinely what felt different — not in an interrogatory way.',
-    'The MOD will subtly reassure the guest about the kitchen's consistency standards without being defensive.',
+    'The MOD will subtly reassure the guest about the kitchen consistency standards without being defensive.',
     'The dish is comped regardless of the outcome of the conversation.',
     'A complimentary bill is raised by the MOD with the reason stated.'
   ]},
-  { type:'complaint', q:'A guest says: "This is too spicy — I didn't expect it."', steps:[
+  { type:'complaint', q:'A guest says: "This is too spicy — I didn\'t expect it."', steps:[
     'Apologise immediately and sincerely.',
     'Remove the dish if the guest no longer wants it.',
     'Inform the MOD via walkie talkie.',
@@ -851,7 +1774,7 @@ var scenarios = [
     'A complimentary bill is raised by the MOD for the inconvenience.',
     'Check the remaining dishes at the table to ensure nothing else has gone cold.'
   ]},
-  { type:'complaint', q:'A guest says: "This doesn't look like the menu description."', steps:[
+  { type:'complaint', q:'A guest says: "This doesn\'t look like the menu description."', steps:[
     'Listen to the guest and understand specifically what they expected vs what arrived.',
     'Apologise sincerely: "I am sorry this was not what you were expecting."',
     'Do not argue about the menu description or justify the dish.',
@@ -873,7 +1796,7 @@ var scenarios = [
     'The MOD comes to the table, apologises personally, and takes full ownership.',
     'The MOD retains the dish, takes it to the kitchen manager, and documents everything with photos — shared with higher management immediately.',
     'The dish is removed from the bill. A complimentary bill is raised.',
-    'The MOD decides on any additional gesture based on the guest's response.',
+    'The MOD decides on any additional gesture based on the guest response.',
     'No staff member speculates about the source — not to the guest, not to other guests, not to colleagues.'
   ]},
   { type:'safety', q:'A guest says their chicken looks or seems undercooked.', steps:[
