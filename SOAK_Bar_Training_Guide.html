@@ -110,6 +110,37 @@
 }
 .tappable { cursor: pointer; }
 
+
+  .rank-table { width: 100%; border-collapse: collapse; margin: 0.75rem 0; font-size: 13px; }
+  .rank-table th { background: #C4A882; color: #fff; padding: 8px 10px; text-align: left; font-weight: 600; }
+  .rank-table td { padding: 8px 10px; border-bottom: 1px solid #EDE8DF; color: #3a3226; vertical-align: top; }
+  .rank-table tr:last-child td { border-bottom: none; }
+  .rank-table tr:nth-child(even) td { background: #F7F4EF; }
+  .rank-num { font-weight: 700; color: #C4A882; }
+  .imported-tag { background: #E0EEFA; color: #0A3D6B; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; display: inline-block; }
+  .domestic-tag { background: #EAF3DE; color: #173404; padding: 2px 8px; border-radius: 10px; font-size: 10px; font-weight: 600; display: inline-block; }
+  .phrase-card { background: #F7F4EF; border-radius: 10px; padding: 0.875rem 1rem; margin-bottom: 8px; display: grid; grid-template-columns: 140px 1fr; gap: 10px; align-items: start; }
+  .phrase-term { font-size: 14px; font-weight: 700; color: #8B6B4A; }
+  .phrase-desc { font-size: 13px; color: #3a3226; line-height: 1.5; }
+  .sign-card { background: #FFF4F4; border-radius: 10px; padding: 0.875rem 1rem; margin-bottom: 8px; border-left: 3px solid #C0392B; }
+  .sign-title { font-size: 13px; font-weight: 700; color: #7A0A0A; margin-bottom: 3px; }
+  .sign-desc { font-size: 12px; color: #3a3226; line-height: 1.5; }
+  .size-card { background: #F7F4EF; border-radius: 10px; padding: 1rem; text-align: center; }
+  .size-ml { font-size: 28px; font-weight: 700; color: #C4A882; }
+  .size-name { font-size: 13px; font-weight: 600; color: #2C2416; margin: 4px 0; }
+  .size-desc { font-size: 11px; color: #6B5840; }
+  .scenario-card { background: #fff; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow: hidden; }
+  .scenario-q { background: #2C2416; color: #F7F4EF; padding: 1rem 1.25rem; font-size: 15px; font-weight: 500; border-left: 4px solid #C4A882; }
+  .scenario-body { padding: 1.25rem; }
+  .stype { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; margin-bottom: 12px; }
+  .stype-q { background: #DFF2EC; color: #0A5C44; }
+  .stype-c { background: #FDEAE4; color: #7A2A10; }
+  .stype-s { background: #FDEAEA; color: #7A0A0A; }
+  .step { display: flex; gap: 10px; margin-bottom: 8px; align-items: flex-start; }
+  .step-num { flex-shrink: 0; width: 22px; height: 22px; background: #C4A882; color: #fff; border-radius: 50%; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .step-text { font-size: 14px; color: #3a3226; line-height: 1.6; }
+  .warning-box { background: #FFF4F4; border-left: 3px solid #C0392B; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .warning-box p { font-size: 13px; color: #7A0A0A; line-height: 1.65; font-weight: 500; }
 </style>
 </head>
 <body>
@@ -127,6 +158,16 @@
   <button class="nav-btn" onclick="showSection('techniques', this)">Techniques</button>
   <button class="nav-btn" onclick="showSection('cocktails', this)">Cocktails</button>
   <button class="nav-btn" onclick="showSection('wine', this)">Wine</button>
+  <button class="nav-btn" onclick="showSection('whisky', this)">Whisky in Depth</button>
+  <button class="nav-btn" onclick="showSection('rankings', this)">Brand Rankings</button>
+  <button class="nav-btn" onclick="showSection('imfl', this)">IMFL vs FMFL</button>
+  <button class="nav-btn" onclick="showSection('serving', this)">Serving Sizes</button>
+  <button class="nav-btn" onclick="showSection('phrases', this)">Bar Phrases</button>
+  <button class="nav-btn" onclick="showSection('beer', this)">Beer</button>
+  <button class="nav-btn" onclick="showSection('pitchers', this)">Pitchers</button>
+  <button class="nav-btn" onclick="showSection('aperitifs', this)">Aperitifs &amp; Digestifs</button>
+  <button class="nav-btn" onclick="showSection('responsible', this)">Responsible Service</button>
+  <button class="nav-btn" onclick="showSection('scenarios', this)">Scenarios</button>
 </div>
 
 <!-- INTRODUCTION -->
@@ -578,6 +619,578 @@
   </div>
 </div>
 
+<!-- WHISKY IN DEPTH SECTION -->
+<div id="whisky" class="section">
+  <p class="section-title">Whisky in Depth</p>
+  <p class="section-intro">Whisky is one of the most complex and varied spirits categories. Understanding age statements, regional differences, and production styles will help you guide guests through whisky choices with confidence.</p>
+
+  <div class="card">
+    <p class="card-title">🥃 Age statements — what they mean</p>
+    <p class="label">The number on the bottle</p>
+    <p class="value">When a whisky says 12 Year, 18 Year, or 25 Year, that number tells you the youngest whisky in the bottle. If a blend contains whisky aged 12, 15, and 18 years, it is called a 12 Year because that is the minimum age.</p>
+    <p class="label">Why older = more expensive</p>
+    <p class="value">Whisky ages in wooden barrels. The longer it ages, the more flavour it picks up from the wood — but also the more liquid evaporates (called the "angel's share"). A 25-year-old whisky has lost significantly more volume than a 12-year-old, and it has been sitting in a warehouse taking up space for over two decades. That is why older whiskies cost more.</p>
+    <p class="label">Flavour and age</p>
+    <p class="value">Older whiskies are generally smoother, more complex, and more refined. Younger whiskies (no age statement, or 8-10 years) are bolder, sharper, and more vibrant. Neither is better — it depends on the guest's preference.</p>
+    <p class="label">What to tell a guest</p>
+    <p class="value">If a guest asks about age: "The number tells you how long the whisky was aged. Older whiskies are smoother and more complex, younger whiskies are bolder and more intense. It comes down to what you prefer."</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Single Malt vs Blended Scotch vs Bourbon</p>
+    <hr class="divider">
+    <p class="label">Single Malt Scotch</p>
+    <p class="value">Made at a single distillery in Scotland, using only malted barley. Single malts are prized for their distinctive character — each distillery's whisky tastes different based on water source, barrel type, and local conditions. Examples: Glenfiddich, Glenlivet, Macallan, Laphroaig.</p>
+    <hr class="divider">
+    <p class="label">Taste</p>
+    <p class="value">Varies widely. Can be smooth and fruity (Speyside), rich and sherried (Highlands), or intensely smoky and peaty (Islay). More complex than blended Scotch.</p>
+    <p class="label">Price</p>
+    <p class="value">Generally more expensive than blended Scotch because it comes from one distillery and has a unique character.</p>
+    <p class="label">How to recommend</p>
+    <p class="value">For whisky enthusiasts who want to taste the distillery's signature style. If a guest says they enjoy whisky and want to explore, single malts are the place to start.</p>
+    <hr class="divider">
+    <p class="label">Blended Scotch</p>
+    <p class="value">A mix of malt whiskies and grain whiskies from multiple distilleries, blended together by a master blender to create a consistent flavour profile. Examples: Johnnie Walker, Chivas Regal, Dewar's, Black & White.</p>
+    <hr class="divider">
+    <p class="label">Taste</p>
+    <p class="value">Smooth, balanced, and consistent. Less complex than single malts but very approachable. The goal of a blend is to taste the same every time.</p>
+    <p class="label">Price</p>
+    <p class="value">Ranges from affordable (Johnnie Walker Red) to premium (Johnnie Walker Blue, Chivas Regal 18). Blends are generally more accessible than single malts of the same age.</p>
+    <p class="label">How to recommend</p>
+    <p class="value">For guests who want a smooth, reliable whisky without the intensity or variability of a single malt. Great for guests new to Scotch or who drink whisky with mixers.</p>
+    <hr class="divider">
+    <p class="label">Bourbon</p>
+    <p class="value">American whiskey made primarily in Kentucky. It must be made from at least 51% corn and aged in brand new charred oak barrels. The charred wood gives Bourbon its characteristic vanilla, caramel, and sweet flavour. Unlike Scotch which can reuse barrels, Bourbon barrels are only used once — which is why Bourbon tends to be sweeter and richer.</p>
+    <hr class="divider">
+    <p class="label">Taste</p>
+    <p class="value">Sweet, rich, and warm. Strong notes of vanilla, caramel, honey, and sometimes oak spice. Much sweeter than Scotch.</p>
+    <p class="label">Price</p>
+    <p class="value">Ranges widely. Jack Daniel's and Jim Beam are everyday Bourbons. Maker's Mark, Buffalo Trace, and Woodford Reserve are premium.</p>
+    <p class="label">Common brands</p>
+    <p class="value">Jack Daniel's (technically Tennessee Whiskey, not Bourbon but very similar), Jim Beam, Maker's Mark, Buffalo Trace, Woodford Reserve, Bulleit, Wild Turkey</p>
+    <p class="label">How to recommend</p>
+    <p class="value">For guests who find Scotch too smoky or harsh, or who prefer sweeter flavour profiles. Bourbon works very well in an Old Fashioned or Whisky Sour.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Other whisky styles to know</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin-top: 1rem;">
+      <div style="background: #F7F4EF; border-radius: 8px; padding: 1rem;">
+        <p style="font-size: 14px; font-weight: 600; color: #2C2416; margin-bottom: 6px;">Irish Whiskey</p>
+        <p style="font-size: 13px; color: #6B5840; line-height: 1.6;">Triple distilled, which makes it exceptionally smooth and light. No peat smoke. Very approachable. Example: Jameson. Best for guests who find Scotch too heavy.</p>
+      </div>
+      <div style="background: #F7F4EF; border-radius: 8px; padding: 1rem;">
+        <p style="font-size: 14px; font-weight: 600; color: #2C2416; margin-bottom: 6px;">Japanese Whisky</p>
+        <p style="font-size: 13px; color: #6B5840; line-height: 1.6;">Inspired by Scotch traditions but with a distinctly delicate, precise Japanese style. Very smooth, subtle, and refined. Examples: Suntory Toki, Nikka, Hibiki. Premium and increasingly sought after.</p>
+      </div>
+      <div style="background: #F7F4EF; border-radius: 8px; padding: 1rem;">
+        <p style="font-size: 14px; font-weight: 600; color: #2C2416; margin-bottom: 6px;">Rye Whiskey</p>
+        <p style="font-size: 13px; color: #6B5840; line-height: 1.6;">Made primarily from rye grain. Spicier and drier than Bourbon. Used in classic cocktails like the Manhattan and Whisky Sour. Examples: Bulleit Rye, Rittenhouse.</p>
+      </div>
+      <div style="background: #F7F4EF; border-radius: 8px; padding: 1rem;">
+        <p style="font-size: 14px; font-weight: 600; color: #2C2416; margin-bottom: 6px;">Indian Whisky</p>
+        <p style="font-size: 13px; color: #6B5840; line-height: 1.6;">Most Indian whisky is technically a spirit made from molasses, not grain — which means it does not qualify as whisky by international standards. Paul John and Amrut are exceptions — genuine Indian single malts made from barley, winning international awards.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BRAND RANKINGS -->
+<div id="rankings" class="section">
+  <p class="section-title">Brand Rankings — Premium to Affordable</p>
+  <p class="section-intro">These rankings go from most premium at the top to most affordable at the bottom. This helps you understand the value of what you are serving and guide guests who ask for something specific or who have a preference for quality.</p>
+
+  <div class="card">
+    <p class="card-title">🥃 Whisky / Scotch</p>
+    <p class="value" style="margin-bottom: 1rem;">Listed from premium to affordable. Domestic brands are marked (D), imported brands are marked (I).</p>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Royal Salute 21 Year</strong> (I) — Ultra-premium blended Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Macallan 12 Year</strong> (I) — Premium single malt Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Glenfiddich 18 Year</strong> (I) — Premium single malt Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Chivas Regal 18 Year</strong> (I) — Premium blended Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Johnnie Walker Blue Label</strong> (I) — Ultra-premium blended Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Glenfiddich 12 Year</strong> (I) — Mid-premium single malt Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Glenlivet 12 Year</strong> (I) — Mid-premium single malt Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Chivas Regal 12 Year</strong> (I) — Mid-range blended Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Johnnie Walker Black Label</strong> (I) — Mid-range blended Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Jack Daniel's</strong> (I) — Mid-range Tennessee Whiskey</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Jameson</strong> (I) — Mid-range Irish Whiskey</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Johnnie Walker Red Label</strong> (I) — Entry-level blended Scotch</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Old Monk</strong> (D) — Indian dark rum often drunk like whisky</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">🍸 Gin</p>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Hendrick's</strong> (I) — Premium gin with cucumber and rose</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Tanqueray No. Ten</strong> (I) — Premium citrus-forward gin</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Bombay Sapphire</strong> (I) — Mid-premium gin</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Tanqueray</strong> (I) — Mid-range classic London Dry gin</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Gordon's</strong> (I) — Entry-level London Dry gin</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Greater Than</strong> (D) — Indian craft gin</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">🍾 Vodka</p>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Grey Goose</strong> (I) — Premium French vodka</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Belvedere</strong> (I) — Premium Polish vodka</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Absolut</strong> (I) — Mid-range Swedish vodka</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Smirnoff</strong> (I) — Entry-level vodka</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Romanov</strong> (D) — Affordable Indian vodka</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">🥃 Rum</p>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Diplomatico Reserva Exclusiva</strong> (I) — Premium Venezuelan rum</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Bacardi 8 Year</strong> (I) — Premium aged rum</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Captain Morgan Spiced</strong> (I) — Mid-range spiced rum</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Bacardi White</strong> (I) — Entry-level white rum</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Old Monk</strong> (D) — Indian dark rum, cult classic</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">🌵 Tequila</p>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Patrón Silver</strong> (I) — Premium tequila</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Don Julio Blanco</strong> (I) — Premium tequila</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>1800 Silver</strong> (I) — Mid-premium tequila</p>
+    </div>
+    <div style="background: #F7F4EF; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+      <p style="font-size: 14px; color: #2C2416; margin: 0;"><strong>Jose Cuervo Especial</strong> (I) — Entry-level tequila</p>
+    </div>
+  </div>
+</div>
+
+<!-- IMFL vs FMFL -->
+<div id="imfl" class="section">
+  <p class="section-title">IMFL vs FMFL</p>
+  <p class="section-intro">IMFL and FMFL are terms unique to India's alcohol industry. Understanding the difference helps you explain pricing to guests and understand why some bottles cost significantly more than others.</p>
+
+  <div class="card">
+    <p class="card-title">What do these terms mean?</p>
+    <p class="label">IMFL — Indian Made Foreign Liquor</p>
+    <p class="value">Spirits that are manufactured in India but follow foreign production styles. Examples: Johnnie Walker Red Label bottled in India, Smirnoff bottled in India, or Indian brands like Old Monk and Greater Than gin. These bottles are made locally under license or are Indian brands styled after international spirits.</p>
+    <hr class="divider">
+    <p class="label">FMFL — Foreign Made Foreign Liquor</p>
+    <p class="value">Spirits that are made outside India and imported in sealed bottles. Examples: Johnnie Walker Blue Label imported from Scotland, Patrón imported from Mexico, Hendrick's imported from Scotland. These are fully produced and bottled abroad.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Why it matters — price and tax</p>
+    <p class="value">FMFL bottles are significantly more expensive than IMFL bottles because:</p>
+    <p class="label">Import duties</p>
+    <p class="value">India charges very high import taxes on alcohol — sometimes 150% or more of the bottle's value. This is why a bottle of Johnnie Walker Blue Label costs so much more than Johnnie Walker Red Label even though both are from the same company.</p>
+    <p class="label">Shipping and logistics</p>
+    <p class="value">Imported bottles have to be shipped internationally, cleared through customs, and handled carefully to avoid breakage. This all adds to the cost.</p>
+    <p class="label">Perceived quality</p>
+    <p class="value">Many guests believe FMFL is higher quality because it is imported and costs more. While imported bottles are often premium, some IMFL bottles are excellent quality — it is not a rule that foreign = better.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">How to talk about it with guests</p>
+    <p class="value">Most guests will not ask about IMFL vs FMFL directly. But if a guest questions why a particular bottle costs more:</p>
+    <p class="label">What to say</p>
+    <p class="value">"That bottle is imported, so the price includes heavy import duties and shipping costs. We also have excellent locally-made options that offer great value if you'd like a recommendation."</p>
+    <p class="label">What NOT to say</p>
+    <p class="value">Never say "this is IMFL so it is cheaper" or "this is FMFL so it is better quality" — these terms sound technical and confusing to most guests. Stick to imported vs locally-made if you need to explain.</p>
+  </div>
+</div>
+
+<!-- SERVING SIZES -->
+<div id="serving" class="section">
+  <p class="section-title">Serving Sizes</p>
+  <p class="section-intro">Understanding pour sizes is essential. Guests will order using terms like "small", "large", "peg", and "double" — you need to know exactly what they mean and what you are pouring.</p>
+
+  <div class="card">
+    <p class="card-title">Standard spirit pour sizes</p>
+    <p class="label">30ml — Small / Single peg</p>
+    <p class="value">This is the standard single serving of spirits in India. When a guest orders "a whisky" or "a small", this is what they get. It is enough for one drink, neat or on the rocks, or as the base for a simple mixed drink like a whisky and soda.</p>
+    <hr class="divider">
+    <p class="label">60ml — Large / Peg</p>
+    <p class="value">Double the small. When a guest says "large whisky" or just "a peg", this is what they mean. This is a generous serving — enough for a strong drink or to be enjoyed slowly over ice.</p>
+    <hr class="divider">
+    <p class="label">120ml — Double large</p>
+    <p class="value">Rare but occasionally requested, especially by guests who want to settle in for a long evening. This is a very large serving and should be clarified with the guest before pouring to make sure they understand what they are ordering.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">How cocktails are poured</p>
+    <p class="value">Cocktails follow recipes, not peg sizes. A Mojito contains a specific measured amount of rum based on the recipe — usually 45ml or 60ml depending on the bar's standard. Guests cannot order a "small Mojito" or "large Negroni" in the same way they can order small or large neat spirits.</p>
+    <p class="label">If a guest asks for a stronger cocktail</p>
+    <p class="value">Offer to add an extra shot (30ml) to the drink for an additional charge. For example: "Would you like an extra shot of rum in the Mojito? That would be [price]."</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Beer sizes</p>
+    <p class="label">Mug — approximately 300ml</p>
+    <p class="value">A standard beer mug. Smaller, quicker to finish, good for guests who want a cold beer but not a full pint.</p>
+    <hr class="divider">
+    <p class="label">Pint — approximately 475ml</p>
+    <p class="value">A proper pint glass. The standard serving size in most bars. Good for guests who want a full, satisfying beer.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Common mistakes to avoid</p>
+    <span class="tag tag-coral">Never assume</span>
+    <p class="value" style="margin-top: 0.5rem;">If a guest orders "a whisky", clarify whether they want small or large before pouring. A guest who expected small and got charged for large will be unhappy.</p>
+    <span class="tag tag-coral">Never over-pour</span>
+    <p class="value" style="margin-top: 0.5rem;">Use a measured pour every time. Free-pouring spirits leads to inconsistent drinks, unhappy guests, and lost revenue.</p>
+    <span class="tag tag-coral">Never under-pour</span>
+    <p class="value" style="margin-top: 0.5rem;">If a guest ordered a large and it looks small in the glass, they will notice. Measure correctly and serve confidently.</p>
+  </div>
+</div>
+
+<!-- BAR PHRASES -->
+<div id="phrases" class="section">
+  <p class="section-title">Common Bar Phrases</p>
+  <p class="section-intro">Guests use specific language when ordering drinks. Knowing these terms helps you take orders accurately and sound confident and professional.</p>
+
+  <div class="card">
+    <p class="card-title">How spirits are served</p>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Neat</p>
+      <p style="font-size: 14px; color: #3a3226;">Served at room temperature in a glass with no ice, no water, nothing else. Pure spirit only. Example: "Whisky neat."</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">On the rocks</p>
+      <p style="font-size: 14px; color: #3a3226;">Served over ice. No mixers, no water — just spirit and ice. Example: "Whisky on the rocks."</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">With water</p>
+      <p style="font-size: 14px; color: #3a3226;">Served neat or on the rocks, with a separate small glass or carafe of still water on the side so the guest can dilute the spirit themselves. Example: "Whisky with water."</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Chilled</p>
+      <p style="font-size: 14px; color: #3a3226;">The bottle or spirit has been stored cold, but served without ice. Rare for whisky, more common for vodka.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Straight up</p>
+      <p style="font-size: 14px; color: #3a3226;">Shaken or stirred with ice to chill it, then strained into a glass without ice. Used for cocktails like Martinis. Example: "Martini straight up."</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Back</p>
+      <p style="font-size: 14px; color: #3a3226;">A separate small drink served alongside the main drink, usually water or soda. Example: "Whisky neat with a soda back" means serve a whisky neat and a small glass of soda on the side.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Cocktail terms</p>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Dirty</p>
+      <p style="font-size: 14px; color: #3a3226;">Usually refers to a Dirty Martini — a Martini with olive brine added, giving it a cloudy, salty flavour. Example: "Vodka Martini, dirty."</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Dry</p>
+      <p style="font-size: 14px; color: #3a3226;">Refers to the amount of vermouth in a Martini. A dry Martini has very little vermouth — mostly gin or vodka. The drier it is, the less vermouth.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Virgin / Mocktail</p>
+      <p style="font-size: 14px; color: #3a3226;">A non-alcoholic version of a cocktail. Example: "Virgin Mojito" means a Mojito with no rum.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Highball</p>
+      <p style="font-size: 14px; color: #3a3226;">A family of drinks made with a spirit and a larger amount of a non-alcoholic mixer, served in a tall glass. Examples: Whisky Highball (whisky and soda), Gin & Tonic, Vodka Soda.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Float</p>
+      <p style="font-size: 14px; color: #3a3226;">A small amount of liquid poured gently on top of a drink so it sits on the surface rather than mixing in. Example: "Float Baileys on top of the coffee."</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Top up</p>
+      <p style="font-size: 14px; color: #3a3226;">To add more of a mixer or ingredient to finish the drink. Example: "Top up with soda" means fill the rest of the glass with soda.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Guest behaviour terms</p>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Nightcap</p>
+      <p style="font-size: 14px; color: #3a3226;">A final drink at the end of the evening before leaving. Usually something smooth and warming — whisky, brandy, or a digestif.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Aperitif</p>
+      <p style="font-size: 14px; color: #3a3226;">A drink served before a meal to stimulate the appetite. Usually light, dry, and refreshing — Aperol Spritz, Prosecco, dry Martini, Campari.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: 120px 1fr; gap: 0.75rem; align-items: start; margin-bottom: 1rem;">
+      <p style="font-weight: 600; color: #8B6B4A; font-size: 13px;">Digestif</p>
+      <p style="font-size: 14px; color: #3a3226;">A drink served after a meal to aid digestion. Usually something strong, warming, and smooth — whisky, brandy, Fernet, Amaro.</p>
+    </div>
+  </div>
+</div>
+
+<!-- BEER -->
+<div id="beer" class="section">
+  <p class="section-title">Beer</p>
+  <p class="section-intro">Beer is fermented from grains — usually barley — and flavoured with hops. Unlike spirits, beer is not distilled, so it has a much lower alcohol content, typically 4–6%. Staff need to know the difference between draught and bottled beer, when to recommend each, and how to talk about beer confidently.</p>
+
+  <div class="card">
+    <p class="card-title">🍺 Draught vs Bottled / Canned beer</p>
+    <p class="label">What is draught beer?</p>
+    <p class="value">Beer served from a keg through a tap. The keg is stored cold and pressurised, and the beer is poured fresh into a glass every time. Draught beer is never exposed to light and is kept at a consistent temperature, which keeps it fresh and flavourful.</p>
+    <hr class="divider">
+    <p class="label">What is bottled or canned beer?</p>
+    <p class="value">Beer that has been packaged in bottles or cans at the brewery and sealed. Bottled beer can be affected by light and temperature changes during storage and transport, which can sometimes alter the flavour slightly over time.</p>
+    <hr class="divider">
+    <p class="label">Which tastes better?</p>
+    <p class="value">Draught beer is generally considered fresher and better-tasting because it is never exposed to light, stays cold consistently, and the pouring process creates a natural foam head that releases aroma and makes the beer taste smoother and creamier. Bottled beer is still excellent quality, but it does not have the same freshness or presentation as draught.</p>
+    <hr class="divider">
+    <p class="label">When to recommend draught</p>
+    <p class="value">If a guest wants the freshest beer experience and does not care about a specific brand, draught is always the best recommendation. It also looks better — a properly poured draught beer with a thick foam head is more visually impressive than a bottle on the table.</p>
+    <hr class="divider">
+    <p class="label">When to recommend bottled</p>
+    <p class="value">If a guest asks for a specific brand that is only available in bottles, or if they specifically prefer drinking from the bottle rather than a glass.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Pint vs Mug</p>
+    <p class="label">Mug — approximately 300ml</p>
+    <p class="value">A smaller serving. Good for guests who want a quick cold beer but do not want to commit to a full pint. Also good for guests who want to try a beer before ordering a larger size.</p>
+    <hr class="divider">
+    <p class="label">Pint — approximately 475ml</p>
+    <p class="value">The standard beer serving size. A full, satisfying glass. Most guests will order a pint unless they want something smaller.</p>
+    <hr class="divider">
+    <p class="label">How to recommend</p>
+    <p class="value">If a guest orders "a beer" without specifying, ask: "Would you like a pint or a mug?" Do not assume — some guests prefer smaller servings.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">How to talk about beer</p>
+    <p class="label">A guest asks for a beer recommendation</p>
+    <p class="value">Ask one question first: "Do you prefer something light and easy-drinking, or something with more flavour and body?" Then recommend accordingly. If unsure, draught beer is always a safe recommendation.</p>
+    <hr class="divider">
+    <p class="label">A guest asks what the difference is between draught and bottled</p>
+    <p class="value">"Draught comes fresh from the keg through the tap — it is never exposed to light, stays at a perfect temperature, and the pour creates a natural foam head that makes it taste smoother. Bottled is great too, especially if you want a specific brand. But if you want the freshest experience, draught is what I would recommend."</p>
+  </div>
+</div>
+
+<!-- PITCHERS -->
+<div id="pitchers" class="section">
+  <p class="section-title">Pitchers</p>
+  <p class="section-intro">Pitchers are available for select cocktails and draught beer at SOAK. They are designed for groups and offer better value than ordering individual drinks. Staff should know when to recommend pitchers and how to make the suggestion feel natural and helpful.</p>
+
+  <div class="card">
+    <p class="card-title">What are pitchers?</p>
+    <p class="value">A pitcher is a large jug containing multiple servings of a cocktail or beer, served with individual glasses for the table to share. Typically contains 4–6 servings depending on the drink.</p>
+    <p class="label">Which drinks are available as pitchers?</p>
+    <p class="value">Pitchers are available for select cocktails and draught beer. Check with the bar team or refer to the menu for the current list, as availability may change based on what is being served.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">When to recommend pitchers</p>
+    <p class="label">Groups of 3 or more ordering the same drink</p>
+    <p class="value">If multiple people at a table order the same cocktail or beer, suggest a pitcher: "Would you like to get a pitcher instead? It works out to about [number] drinks and is better value."</p>
+    <hr class="divider">
+    <p class="label">Tables settling in for a long evening</p>
+    <p class="value">If a table seems relaxed and in no rush, pitchers make sense — they do not have to keep reordering and the drinks stay cold in the jug.</p>
+    <hr class="divider">
+    <p class="label">Hot days on the terrace</p>
+    <p class="value">Pitchers work especially well on warm afternoons when guests want something refreshing they can share without individual glasses warming up quickly.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">How to offer a pitcher</p>
+    <p class="value">Never push. Present it as an option that might work better for the table, not as something they must do.</p>
+    <p class="label">Good approach</p>
+    <p class="value">"You are all having Mojitos — would you like a pitcher for the table instead? It is about [X] glasses and works out better value-wise."</p>
+    <p class="label">What NOT to say</p>
+    <p class="value">Never say "It is cheaper" — this makes it sound low-quality. Say "better value" instead.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Common pitcher questions</p>
+    <p class="label">How many drinks are in a pitcher?</p>
+    <p class="value">Typically 4–6 servings depending on the cocktail or beer. Check with the bar if unsure, but you should know this before offering it to a guest.</p>
+    <hr class="divider">
+    <p class="label">Can we get half the pitcher one cocktail and half another?</p>
+    <p class="value">No. Pitchers are a single drink only. If the table wants variety, individual servings are better.</p>
+    <hr class="divider">
+    <p class="label">Can we take the pitcher home if we do not finish?</p>
+    <p class="value">No — alcohol cannot leave the premises. If the table is concerned about finishing it, suggest starting with individual drinks and ordering a pitcher later if they are still drinking.</p>
+  </div>
+</div>
+
+<!-- APERITIFS & DIGESTIFS -->
+<div id="aperitifs" class="section">
+  <p class="section-title">Aperitifs & Digestifs</p>
+  <p class="section-intro">An aperitif is a drink you have before a meal to open up your appetite. A digestif is a drink you have after a meal to aid digestion and close the evening. Understanding these helps you guide guests through the full dining experience, not just serve drinks.</p>
+
+  <div class="card">
+    <p class="card-title">🍹 Aperitifs — before the meal</p>
+    <p class="label">What is an aperitif?</p>
+    <p class="value">A light, dry, refreshing drink designed to stimulate your appetite before eating. Aperitifs are usually low in alcohol, crisp, and not too sweet — they prepare your palate for food rather than filling you up.</p>
+    <p class="label">Common aperitifs</p>
+    <p class="value">Aperol Spritz, Prosecco, Champagne, dry Martini, Negroni, Campari and soda, dry white wine, Bellini.</p>
+    <p class="label">Flavour profile</p>
+    <p class="value">Light, crisp, dry, slightly bitter, refreshing. Nothing heavy, creamy, or overly sweet.</p>
+    <p class="label">When to recommend</p>
+    <p class="value">If a guest arrives and is looking at the menu, suggest an aperitif while they decide what to eat: "Would you like something light to start? An Aperol Spritz or a glass of Prosecco?" This sets the tone for a relaxed, thoughtful dining experience.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">🥃 Digestifs — after the meal</p>
+    <p class="label">What is a digestif?</p>
+    <p class="value">A drink served at the end of a meal to aid digestion and signal the close of the evening. Digestifs are usually stronger, richer, and more warming than aperitifs — they are meant to be sipped slowly.</p>
+    <p class="label">Common digestifs</p>
+    <p class="value">Whisky (especially aged whisky), brandy, cognac, Amaro, Fernet-Branca, Espresso Martini, Old Monk neat, port wine, grappa.</p>
+    <p class="label">Flavour profile</p>
+    <p class="value">Rich, warming, smooth, sometimes herbal or bitter. Higher in alcohol. Meant to be enjoyed slowly.</p>
+    <p class="label">When to recommend</p>
+    <p class="value">After a guest finishes their meal and seems settled in for the evening, offer a digestif: "Would you like something to finish — perhaps a whisky or an Espresso Martini?" This is especially effective if the guest has had a good meal and is relaxed at the table.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">How to talk about aperitifs and digestifs</p>
+    <p class="label">A guest asks what an aperitif is</p>
+    <p class="value">"An aperitif is a drink you have before your meal — usually something light and refreshing that opens up your appetite. At SOAK, the Aperol Spritz and Prosecco are perfect aperitifs."</p>
+    <hr class="divider">
+    <p class="label">A guest asks what a digestif is</p>
+    <p class="value">"A digestif is something you have after the meal to help with digestion and close out the evening. It is usually something smooth and warming — whisky, brandy, or an Espresso Martini if you want coffee."</p>
+    <hr class="divider">
+    <p class="label">A guest does not know these terms but seems interested in pre- or post-meal drinks</p>
+    <p class="value">You do not need to use the words aperitif or digestif unless the guest uses them first. Simply say: "Would you like something light and refreshing to start?" or "Can I get you something to finish — perhaps a whisky or a coffee-based cocktail?"</p>
+  </div>
+</div>
+
+<!-- RESPONSIBLE SERVICE -->
+<div id="responsible" class="section">
+  <p class="section-title">Responsible Service of Alcohol</p>
+  <p class="section-intro">Serving alcohol responsibly is a legal obligation and a core part of SOAK's reputation. Staff must know how to identify guests who have had too much to drink or who appear underage, and most importantly, know that they never handle these situations alone — they inform the MOD immediately and let the MOD take action.</p>
+
+  <div class="card">
+    <p class="card-title">⚠️ Legal drinking age in Tamil Nadu: 21</p>
+    <p class="value">Anyone who appears to be under 21 cannot be served alcohol without valid government-issued ID proving they are of legal age. If there is any doubt, ID must be checked before serving.</p>
+    <p class="label">What counts as valid ID?</p>
+    <p class="value">Passport, driver's license, Aadhaar card (with date of birth), voter ID, or any other government-issued photo ID showing date of birth.</p>
+    <p class="label">What if a guest does not have ID?</p>
+    <p class="value">No ID = no alcohol. No exceptions, no matter how insistent the guest is. The MOD will handle the conversation.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">How to identify a guest who has had too much</p>
+    <p class="value">Look for these signs. If you see any combination of them, inform the MOD immediately via walkie talkie:</p>
+    <span class="tag tag-coral">Slurred speech</span>
+    <span class="tag tag-coral">Unsteady movement or difficulty walking</span>
+    <span class="tag tag-coral">Glassy or unfocused eyes</span>
+    <span class="tag tag-coral">Loud, aggressive, or inappropriate behaviour</span>
+    <span class="tag tag-coral">Repeatedly ordering drinks very quickly</span>
+    <span class="tag tag-coral">Spilling drinks or knocking things over</span>
+    <span class="tag tag-coral">Falling asleep at the table</span>
+    <span class="tag tag-coral">Becoming argumentative with staff or other guests</span>
+    <p class="value" style="margin-top: 1rem;">If you see any of these signs, do NOT serve another alcoholic drink. Pause and inform the MOD discreetly via walkie talkie before returning to the table.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">What staff should NEVER do</p>
+    <span class="tag tag-coral">Never cut off a guest yourself</span>
+    <p class="value" style="margin-top: 0.5rem;">You are not authorised to refuse service or tell a guest they cannot drink more. Only the MOD makes that decision.</p>
+    <span class="tag tag-coral">Never argue with an intoxicated guest</span>
+    <p class="value" style="margin-top: 0.5rem;">If a guest becomes difficult, step back and get the MOD. Do not engage in a back-and-forth.</p>
+    <span class="tag tag-coral">Never assume a guest is fine because they seem friendly</span>
+    <p class="value" style="margin-top: 0.5rem;">A guest can be polite and still dangerously intoxicated. Look for the physical signs, not the personality.</p>
+    <span class="tag tag-coral">Never serve someone who is clearly underage just because they are with older people</span>
+    <p class="value" style="margin-top: 0.5rem;">Even if the rest of the table is of legal age, every person being served alcohol must be 21 or older with valid ID.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">What to do if you spot a problem</p>
+    <p class="label">Step 1 — Pause</p>
+    <p class="value">Do not take any more drink orders from that guest or table until you have informed the MOD.</p>
+    <p class="label">Step 2 — Inform the MOD via walkie talkie</p>
+    <p class="value">Be discreet and factual. For example: "MOD, I have a situation at table 12 — guest appears very intoxicated, slurred speech, ordering rapidly. Can you come assess?"</p>
+    <p class="label">Step 3 — Let the MOD handle it</p>
+    <p class="value">The MOD will come to the table, assess the guest, and decide whether to stop service, offer food and water, or ask the guest to leave. Your job is to flag the situation — the MOD's job is to resolve it.</p>
+    <p class="label">Step 4 — Continue normal service for the rest of the table</p>
+    <p class="value">Unless the MOD instructs otherwise, continue serving the other guests at the table normally. Do not make the situation obvious to nearby tables.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">Difficult guest scenarios</p>
+    <p class="label">A guest insists they are fine and demands another drink</p>
+    <p class="value">Say calmly: "I understand — let me just check with my manager to confirm we can get that for you." Then inform the MOD. Do not argue or refuse directly.</p>
+    <hr class="divider">
+    <p class="label">A guest becomes aggressive when you pause service</p>
+    <p class="value">Step back, stay calm, and get the MOD immediately. Do not escalate. Your safety is more important than any drink order.</p>
+    <hr class="divider">
+    <p class="label">A guest asks why their friend is not being served</p>
+    <p class="value">Say: "The manager is handling it — they will come speak to you in just a moment." Do not explain house policy yourself. Let the MOD manage the conversation.</p>
+  </div>
+</div>
+
+<!-- SCENARIOS SECTION -->
+<div id="scenarios" class="section">
+  <p class="section-title">Guest Scenarios & Service Situations</p>
+  <p class="section-intro">Real-world scenarios staff will face — how to respond to guest questions, service challenges, and unusual requests.</p>
+  
+  <div class="filter-bar">
+    <button class="filter-btn active" onclick="filterScenarios('all', this)">All scenarios</button>
+    <button class="filter-btn" onclick="filterScenarios('question', this)">Guest questions</button>
+    <button class="filter-btn" onclick="filterScenarios('service', this)">Service situations</button>
+    <button class="filter-btn" onclick="filterScenarios('responsible', this)">Responsible service</button>
+  </div>
+  
+  <div id="scenario-list"></div>
+</div>
+
 <script>
 var cocktails = [
   { name:"Old Fashioned", spirit:"whisky", img:"https://drive.google.com/thumbnail?id=1MlG0PmwAV7cdzufh0--NMJ9ozVHinNQF&sz=s4000", glass:"Rocks glass", method:"Stirred", ingredients:"Bourbon or Rye whisky, Sugar syrup, Angostura bitters, Orange peel", taste:"Rich, warming, and slightly sweet with a hint of citrus from the orange peel. The whisky is the star — this drink lets it shine.", guest:"Someone who wants to taste the spirit itself. A classic choice for guests who take their drinks seriously.", rec:"Recommend when a guest says they enjoy whisky or wants something strong and classic. Not for guests who want something sweet or fruity." },
@@ -673,6 +1286,50 @@ document.querySelectorAll('img[src*="drive.google.com/thumbnail"]').forEach(func
 // Make cocktail images tappable (loaded dynamically)
 var origFilter = window.filterC;
 
+
+var scenarios = [
+  { type: "question", q: "A guest asks what the difference is between single malt and blended Scotch.", steps: ["Explain simply: A single malt comes from one specific distillery — it is the purest expression of that place and that recipe.", "A blended Scotch is made by combining whiskies from many different distilleries — consistent, approachable, and usually more affordable.", "Single malts are not necessarily better than blends — they are just different. Johnnie Walker Black is a world-class blended Scotch. Glenfiddich 12 is a world-class single malt.", "For a guest who wants to explore: suggest a single malt. For a guest who wants something reliable for mixing or easy drinking: suggest a blend."] },
+  { type: "question", q: "A guest asks why an 18 year old whisky costs so much more than a 12 year old.", steps: ["The number on the bottle tells you how long the whisky was aged in oak barrels before being bottled.", "Older whisky costs more for two reasons — the distillery stores the barrels for longer, which costs money. And every year, some whisky evaporates from the barrel — called the angel's share — so there is less of it to sell.", "The extra time in the barrel also adds complexity and richness to the flavour.", "Keep it simple: The older the whisky, the longer it waited, the less of it there is, and the more complex it tastes. That is what you are paying for."] },
+  { type: "question", q: "A guest asks what IMFL means or why the local rum is so much cheaper.", steps: ["IMFL stands for Indian Made Foreign Liquor — spirits produced in India rather than imported.", "Because they are made locally, they do not carry the heavy import duties that foreign spirits do. That is the main reason for the price difference.", "Old Monk, for example, is a genuinely excellent domestic rum with a strong following — it is not cheap because it is low quality, it is affordable because it is made here.", "If a guest asks about a specific brand, answer honestly. If you are not sure, say so and check with the bar team."] },
+  { type: "question", q: "A guest asks for a recommendation but does not know what they want.", steps: ["Ask one question to narrow it down: Do you prefer something light and refreshing, something strong and spirit-forward, or something sweet and fruity?", "Light and refreshing: Gin and Tonic, Aperol Spritz, Mojito, Paloma.", "Strong and spirit-forward: Old Fashioned, Negroni, Manhattan, a neat or on-the-rocks whisky.", "Sweet and fruity: Tequila Sunrise, Pina Colada, Cosmopolitan, Bellini.", "No preference at all: the Mojito and the Aperol Spritz are safe recommendations for almost anyone. The Espresso Martini is great for coffee lovers."] },
+  { type: "question", q: "A guest asks what the difference is between draught and bottled beer.", steps: ["Draught beer comes from a keg through a tap — never exposed to light, kept at a consistent temperature, and poured fresh every time.", "Bottled beer is packaged and stored — it can be affected by light and age over time.", "The pour also creates a natural foam head on draught beer which enhances the aroma and makes it taste smoother and creamier.", "If the guest wants the freshest experience: recommend draught. If they prefer a specific brand only available in bottles: point them to the bottle list."] },
+  { type: "question", q: "A guest asks for something before their meal or what an aperitif is.", steps: ["An aperitif is a drink you have before the meal — usually something light, dry, and refreshing designed to open up your appetite.", "At SOAK, the classic before-dinner options are the Aperol Spritz — light, bubbly, and bittersweet — or a Bellini, which is Prosecco with peach puree.", "A glass of Prosecco or a dry Martini also work very well.", "Recommend based on what the guest seems to want: If very light, Aperol Spritz. If more serious, a Negroni or a dry Martini."] },
+  { type: "question", q: "A guest asks for a nightcap or something to finish the evening.", steps: ["A nightcap is a final drink at the end of the evening — usually something smooth, warming, and satisfying.", "The most natural nightcap recommendations: a neat or on-the-rocks aged whisky, a brandy, an Espresso Martini if they want a coffee hit, or Old Monk served neat.", "Ask the guest one question first: Do you want something smooth and warming, or something with a bit more kick?", "Keep the recommendation simple. A nightcap should feel like a reward, not a decision."] },
+  { type: "service", q: "A guest orders a brand that SOAK does not stock.", steps: ["Do not say we do not have it and leave it there. Immediately offer an alternative.", "Think about what the guest is actually looking for — the spirit category, the style, the price tier — and suggest the closest thing on the menu.", "For example: if a guest asks for Johnnie Walker Blue and we do not have it, suggest the next closest premium Scotch we carry. If they ask for a specific gin we do not stock, suggest a gin with a similar flavour profile.", "Never ask the guest why they want that specific brand. Simply offer the alternative warmly: We do not have that one in, but I can suggest something very similar."] },
+  { type: "service", q: "A guest sends a drink back claiming it is wrong, but the bar made it correctly.", steps: ["Do not argue. Do not tell the guest the bar made it correctly.", "Apologise and take the drink back without question.", "Check with the bar team quietly — confirm what was ordered and how it was made.", "If the drink was made correctly, the MOD decides the next step — whether to offer a replacement, an alternative, or have a conversation with the guest.", "Never go back to the guest and tell them the drink was correct. The MOD handles that conversation if needed.", "Offer an alternative warmly: I am sorry that did not work for you — can I get you something different?"] },
+  { type: "service", q: "A group orders shots.", steps: ["Shots are available at SOAK. Take the order normally.", "Confirm the spirit and the number of shots. Common requests: tequila shots, vodka shots.", "If the group has already been drinking heavily, note the situation and inform the MOD quietly. The MOD will assess and decide whether to serve.", "Bring the shots promptly with any requested chasers. Serve with the same standard as any other drink."] },
+  { type: "service", q: "A guest claims they were overcharged for their drinks.", steps: ["Do not argue with the guest or try to resolve the bill yourself.", "Apologise calmly: I am sorry about the confusion — let me get someone to help you right away.", "Inform the MOD via walkie talkie immediately. The MOD will review the bill and handle the conversation.", "Stay calm and courteous while the MOD addresses it. Do not speculate about whether the bill is correct."] },
+  { type: "service", q: "A guest is mixing their own alcohol brought from outside.", steps: ["Do not engage with the guest about it. Do not ask them to stop yourself.", "Inform the MOD via walkie talkie immediately.", "The MOD will handle the situation — this is a house policy issue and may also have licensing implications.", "Continue serving the rest of the table normally while the MOD addresses it.", "Do not discuss the situation with other staff within earshot of guests."] },
+  { type: "responsible", q: "A guest appears to have had too much to drink.", steps: ["Do not serve another alcoholic drink. Simply pause and do not go back to the table until you have spoken to the MOD.", "Inform the MOD via walkie talkie immediately and discreetly. Describe what you are seeing: This guest at table X seems very intoxicated — slurred speech, unsteady, ordering very quickly.", "Do not tell the guest you are not going to serve them. Do not cut off their service yourself.", "The MOD will come to the table and assess. They will decide whether to stop service, offer food and water, or ask the guest to leave.", "Continue serving the rest of the table normally. Do not make the situation obvious to other guests."] },
+  { type: "responsible", q: "A guest appears to be under 21.", steps: ["Do not serve the drink. Do not accuse the guest of being underage.", "Inform the MOD via walkie talkie immediately and discreetly.", "The MOD will approach the guest, politely request identification, verify their age, and either clear them to be served or decline to serve alcohol.", "If the guest asks why their drink has not arrived, say politely: Just one moment — someone will be with you shortly.", "The MOD handles all communication with the guest. Your role is to flag and step back."] },
+  { type: "responsible", q: "A guest is mixing their own alcohol brought from outside.", steps: ["Do not engage with the guest about it. Do not ask them to stop yourself.", "Inform the MOD via walkie talkie immediately.", "The MOD will handle the situation.", "Continue serving the rest of the table normally while the MOD addresses it."] }
+];
+
+function renderScenarios(filter) {
+  var typeClass = { question: "tag-teal", service: "tag-amber", responsible: "tag-coral" };
+  var typeLabel = { question: "Guest question", service: "Service situation", responsible: "Responsible service" };
+  var html = "";
+  scenarios.forEach(function(s) {
+    if (filter === "all" || s.type === filter) {
+      html += "<div class='scenario-card'><div class='scenario-q'>" + s.q + "</div><div class='scenario-body'>";
+      html += "<span class='tag " + typeClass[s.type] + "' style='margin-bottom:12px;display:inline-block'>" + typeLabel[s.type] + "</span>";
+      s.steps.forEach(function(st, i) {
+        html += "<div class='step'><div class='step-num'>" + (i+1) + "</div><div class='step-text'>" + st + "</div></div>";
+      });
+      html += "</div></div>";
+    }
+  });
+  document.getElementById("scenario-list").innerHTML = html;
+}
+
+function filterScenarios(filter, btn) {
+  document.querySelectorAll(".filter-btn").forEach(function(b) { b.classList.remove("active"); });
+  btn.classList.add("active");
+  renderScenarios(filter);
+}
+
+renderScenarios("all");
+
 </script>
 
 <!-- LIGHTBOX OVERLAY -->
@@ -680,6 +1337,529 @@ var origFilter = window.filterC;
   <button class="lightbox-close" onclick="closeLightbox()">&#215;</button>
   <img id="lightbox-img" src="" alt="">
   <p class="lightbox-caption" id="lightbox-caption"></p>
+</div>
+
+
+<!-- Whisky in Depth Section -->
+<div id="whisky" class="section">
+  <h2 class="section-title">Whisky in Depth</h2>
+  <p class="section-intro">Understanding the world of whisky — Scotch, Bourbon, Irish, Japanese, and Indian malts.</p>
+
+  <div class="card">
+    <div class="card-title">Scotch Whisky</div>
+    <div class="card-sub">Scotland</div>
+    <div class="label">Regions</div>
+    <div class="value">
+      <strong>Speyside:</strong> Smooth, fruity, elegant (Glenfiddich, Macallan, Glenlivet)<br>
+      <strong>Islay:</strong> Peaty, smoky, medicinal (Laphroaig, Lagavulin, Ardbeg)<br>
+      <strong>Highland:</strong> Diverse — from light to robust (Glenmorangie, Oban)<br>
+      <strong>Lowland:</strong> Light, floral, gentle (Auchentoshan)<br>
+      <strong>Campbeltown:</strong> Briny, maritime (Springbank)<br>
+      <strong>Islands:</strong> Coastal character (Talisker, Highland Park)
+    </div>
+    <div class="label">Types</div>
+    <div class="value">
+      <strong>Single Malt:</strong> From one distillery, 100% malted barley<br>
+      <strong>Blended:</strong> Mix of malt and grain whiskies (Johnnie Walker, Chivas)
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Bourbon</div>
+    <div class="card-sub">America (Kentucky)</div>
+    <div class="label">Key Facts</div>
+    <div class="value">
+      • Must be at least 51% corn<br>
+      • Aged in new charred oak barrels<br>
+      • Sweet, vanilla, caramel notes<br>
+      • Popular: Maker's Mark, Buffalo Trace, Woodford Reserve
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Irish Whiskey</div>
+    <div class="card-sub">Ireland</div>
+    <div class="label">Characteristics</div>
+    <div class="value">
+      • Triple distilled (smoother)<br>
+      • Light, approachable, honey notes<br>
+      • Popular: Jameson, Bushmills, Redbreast
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Japanese Whisky</div>
+    <div class="card-sub">Japan</div>
+    <div class="label">Style</div>
+    <div class="value">
+      • Inspired by Scotch, refined Japanese precision<br>
+      • Delicate, balanced, subtle<br>
+      • Popular: Yamazaki, Hibiki, Nikka
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Indian Single Malts</div>
+    <div class="card-sub">India</div>
+    <div class="label">Notable Brands</div>
+    <div class="value">
+      <strong>Amrut:</strong> Bangalore-based, internationally acclaimed<br>
+      <strong>Paul John:</strong> Goa, tropical maturation<br>
+      <strong>Rampur:</strong> Moradabad, Himalayan influence
+    </div>
+  </div>
+</div>
+
+<!-- Brand Rankings Section -->
+<div id="rankings" class="section">
+  <h2 class="section-title">Brand Rankings</h2>
+  <p class="section-intro">Quality tiers of spirits — understanding premium positioning.</p>
+
+  <div class="card">
+    <div class="card-title">Vodka</div>
+    <div class="value">
+      <strong>Premium:</strong> Belvedere, Grey Goose, Ketel One<br>
+      <strong>Mid:</strong> Absolut, Smirnoff, Finlandia<br>
+      <strong>Standard:</strong> Smirnoff Red, Romanov
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Gin</div>
+    <div class="value">
+      <strong>Premium:</strong> Hendrick's, Bombay Sapphire, Tanqueray No. 10<br>
+      <strong>Mid:</strong> Gordon's, Beefeater<br>
+      <strong>Craft:</strong> Monkey 47, The Botanist, Jaisalmer
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Rum</div>
+    <div class="value">
+      <strong>Premium:</strong> Havana Club 7, Zacapa 23, Mount Gay XO<br>
+      <strong>Mid:</strong> Bacardi, Captain Morgan, Old Monk
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Whisky</div>
+    <div class="value">
+      <strong>Premium Scotch:</strong> Macallan 12, Lagavulin 16, Highland Park<br>
+      <strong>Entry Scotch:</strong> Glenfiddich 12, Glenlivet 12, Johnnie Walker Black<br>
+      <strong>Standard:</strong> Johnnie Walker Red, Chivas Regal, Ballantine's
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Tequila</div>
+    <div class="value">
+      <strong>Premium:</strong> Patrón, Don Julio, Clase Azul<br>
+      <strong>Mid:</strong> Jose Cuervo Tradicional, Olmeca<br>
+      <strong>Standard:</strong> Jose Cuervo Especial
+    </div>
+  </div>
+</div>
+
+<!-- IMFL vs FMFL Section -->
+<div id="imfl" class="section">
+  <h2 class="section-title">IMFL vs FMFL</h2>
+  <p class="section-intro">Understanding Indian alcohol categories and pricing.</p>
+
+  <div class="card">
+    <div class="card-title">IMFL — Indian Made Foreign Liquor</div>
+    <div class="value">
+      Spirits made in India but branded as foreign-style drinks (whisky, vodka, rum, gin).<br><br>
+      <strong>Examples:</strong><br>
+      • Officer's Choice, Royal Stag, Imperial Blue (whisky)<br>
+      • Romanov, Magic Moments (vodka)<br>
+      • Old Monk, Contessa (rum)<br><br>
+      <strong>Price:</strong> More affordable<br>
+      <strong>Tax:</strong> Lower duty, lower shelf prices
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">FMFL — Foreign Made Foreign Liquor</div>
+    <div class="value">
+      Spirits imported from abroad.<br><br>
+      <strong>Examples:</strong><br>
+      • Johnnie Walker, Chivas, Glenfiddich (Scotch)<br>
+      • Jack Daniel's, Jim Beam (American whiskey)<br>
+      • Absolut, Smirnoff, Grey Goose (vodka)<br>
+      • Bacardi, Havana Club (rum)<br><br>
+      <strong>Price:</strong> Premium<br>
+      <strong>Tax:</strong> Higher import duty, higher shelf prices
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>Why it matters:</strong> IMFL brands dominate the Indian market due to price. FMFL is positioned as premium. At SOAK, we balance both — accessible pricing with curated imports.</p>
+  </div>
+</div>
+
+<!-- Serving Sizes Section -->
+<div id="serving" class="section">
+  <h2 class="section-title">Serving Sizes & Measures</h2>
+  <p class="section-intro">Standard pours for spirits, wine, and beer — consistency matters.</p>
+
+  <div class="card">
+    <div class="card-title">Spirits</div>
+    <div class="value">
+      <strong>Standard Pour:</strong> 30ml (1 oz)<br>
+      <strong>Large Pour:</strong> 60ml (2 oz)<br>
+      <strong>Cocktail Measure:</strong> Varies per recipe — typically 45-60ml base spirit
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Wine</div>
+    <div class="value">
+      <strong>Glass:</strong> 150ml (5 oz)<br>
+      <strong>Bottle:</strong> 750ml — yields 5 glasses
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Beer</div>
+    <div class="value">
+      <strong>Bottle/Can:</strong> 330ml or 500ml<br>
+      <strong>Draft Pint:</strong> 500ml<br>
+      <strong>Pitcher:</strong> 1.5L — roughly 3 pints
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Shots</div>
+    <div class="value">
+      <strong>Standard Shot:</strong> 30ml<br>
+      Used for liqueurs, shooters, and strong pours
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>Pro Tip:</strong> Always use a jigger to measure. Free pouring looks cool but leads to over-pouring, waste, and inconsistent drinks.</p>
+  </div>
+</div>
+
+<!-- Bar Phrases Section -->
+<div id="phrases" class="section">
+  <h2 class="section-title">Bar Phrases & Lingo</h2>
+  <p class="section-intro">Common terms you'll hear behind the bar.</p>
+
+  <div class="card">
+    <div class="card-title">On the Rocks</div>
+    <div class="value">Served over ice</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Neat</div>
+    <div class="value">Straight spirit, no ice, no mixers</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Straight Up / Up</div>
+    <div class="value">Chilled and strained, no ice in the glass</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Dirty</div>
+    <div class="value">With olive brine (usually for martinis)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Dry</div>
+    <div class="value">Less vermouth (for martinis/Manhattans)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Wet</div>
+    <div class="value">More vermouth</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Virgin / Mocktail</div>
+    <div class="value">Non-alcoholic version of a cocktail</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Back</div>
+    <div class="value">A chaser served alongside (e.g., whisky with a water back)</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Twist</div>
+    <div class="value">Citrus peel garnish, oils expressed over the drink</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Bruised</div>
+    <div class="value">Over-shaken, cloudy appearance</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Call Drink</div>
+    <div class="value">Guest specifies the brand (e.g., "Tanqueray & tonic")</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Well Drink</div>
+    <div class="value">Made with house/default spirits</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Muddle</div>
+    <div class="value">Crushing ingredients (herbs, fruit) to release flavors</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Float</div>
+    <div class="value">Pouring a liquid gently on top so it doesn't mix</div>
+  </div>
+</div>
+
+<!-- Beer Section -->
+<div id="beer" class="section">
+  <h2 class="section-title">Beer Basics</h2>
+  <p class="section-intro">Lagers, ales, and craft beer essentials.</p>
+
+  <div class="card">
+    <div class="card-title">Lagers</div>
+    <div class="card-sub">Cold-fermented, crisp, clean</div>
+    <div class="value">
+      <strong>Examples:</strong> Kingfisher, Budweiser, Heineken, Corona<br>
+      <strong>Serve:</strong> Ice cold (4-7°C)<br>
+      <strong>Style:</strong> Light, refreshing, easy drinking
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Ales</div>
+    <div class="card-sub">Warm-fermented, fuller flavor</div>
+    <div class="value">
+      <strong>Types:</strong> Pale Ale, IPA, Stout, Porter<br>
+      <strong>Examples:</strong> Bira 91, White Owl, Simba Wit<br>
+      <strong>Serve:</strong> Cool, not ice cold (7-13°C)
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Wheat Beer</div>
+    <div class="value">
+      Light, cloudy, citrusy<br>
+      <strong>Example:</strong> Hoegaarden, Simba Wit
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Stout / Porter</div>
+    <div class="value">
+      Dark, rich, roasted flavors (coffee, chocolate)<br>
+      <strong>Example:</strong> Guinness
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">IPA — India Pale Ale</div>
+    <div class="value">
+      Hoppy, bitter, aromatic<br>
+      <strong>Example:</strong> Bira Boom, White Owl Spark
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>Pouring Beer:</strong> Hold glass at 45°, pour slowly down the side. Straighten glass halfway to build a ~1-inch head. A proper head releases aroma and improves flavor.</p>
+  </div>
+</div>
+
+<!-- Pitchers Section -->
+<div id="pitchers" class="section">
+  <h2 class="section-title">Pitchers & Sharing</h2>
+  <p class="section-intro">Large-format drinks for groups.</p>
+
+  <div class="card">
+    <div class="card-title">Beer Pitchers</div>
+    <div class="value">
+      <strong>Size:</strong> 1.5L (roughly 3 pints)<br>
+      <strong>Serve:</strong> With 3-4 glasses, ice cold<br>
+      <strong>Popular:</strong> Kingfisher, Bira, Budweiser
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Cocktail Pitchers</div>
+    <div class="value">
+      Batched cocktails for sharing<br>
+      <strong>Examples:</strong><br>
+      • Sangria (wine, brandy, fruit, soda)<br>
+      • Margarita (tequila, lime, triple sec)<br>
+      • Mojito (rum, mint, lime, soda)<br>
+      <strong>Size:</strong> 1L-1.5L, serves 4-6
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>Batching Tip:</strong> Pre-mix spirits, citrus, and sweeteners. Add ice and soda/tonic just before serving to keep it fresh and fizzy.</p>
+  </div>
+</div>
+
+<!-- Aperitifs & Digestifs Section -->
+<div id="aperitifs" class="section">
+  <h2 class="section-title">Aperitifs & Digestifs</h2>
+  <p class="section-intro">Before-dinner and after-dinner drinks.</p>
+
+  <div class="card">
+    <div class="card-title">Aperitifs</div>
+    <div class="card-sub">Before the meal — stimulate appetite</div>
+    <div class="value">
+      Light, dry, sometimes bitter<br><br>
+      <strong>Examples:</strong><br>
+      • Campari, Aperol (Italian bitters)<br>
+      • Vermouth (Martini Rosso, Cinzano)<br>
+      • Prosecco, Champagne<br>
+      • Gin & Tonic<br><br>
+      <strong>Serve:</strong> Chilled, with ice, light garnishes
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Digestifs</div>
+    <div class="card-sub">After the meal — aid digestion</div>
+    <div class="value">
+      Rich, strong, warming<br><br>
+      <strong>Examples:</strong><br>
+      • Cognac, Armagnac (French brandy)<br>
+      • Whisky, Bourbon<br>
+      • Grappa, Amaro (Italian)<br>
+      • Port, Sherry<br>
+      • Liqueurs: Grand Marnier, Baileys, Kahlúa<br><br>
+      <strong>Serve:</strong> Neat or on the rocks, room temp or slightly chilled
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>When to suggest:</strong> Aperitifs when guests arrive or before ordering food. Digestifs after dessert or with coffee.</p>
+  </div>
+</div>
+
+<!-- Responsible Service Section -->
+<div id="responsible" class="section">
+  <h2 class="section-title">Responsible Service</h2>
+  <p class="section-intro">Serving alcohol safely and legally.</p>
+
+  <div class="card">
+    <div class="card-title">Legal Drinking Age</div>
+    <div class="value">
+      <strong>India:</strong> Varies by state (18-25 years)<br>
+      <strong>Our Policy:</strong> Always check ID if in doubt. No exceptions.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Signs of Intoxication</div>
+    <div class="value">
+      • Slurred speech<br>
+      • Loss of coordination<br>
+      • Loud or aggressive behavior<br>
+      • Inability to focus<br>
+      • Falling asleep at the table
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">When to Refuse Service</div>
+    <div class="value">
+      • Guest is visibly intoxicated<br>
+      • Guest is underage or has no ID<br>
+      • Guest is aggressive or disruptive<br>
+      • Guest is trying to buy for a minor
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">How to Refuse Service</div>
+    <div class="value">
+      • Stay calm and polite<br>
+      • Inform your manager immediately<br>
+      • Offer water, food, or non-alcoholic drinks<br>
+      • Suggest calling a cab/ride service<br>
+      • Never argue or escalate
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Responsible Suggestions</div>
+    <div class="value">
+      • Offer food with drinks<br>
+      • Suggest lower-ABV options if guest is drinking fast<br>
+      • Provide water throughout the night<br>
+      • Pace service — don't rush refills
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>Remember:</strong> Your job is to create a fun, safe environment. If in doubt, ask a manager. Refusing service protects the guest, the business, and you.</p>
+  </div>
+</div>
+
+<!-- Scenarios Section -->
+<div id="scenarios" class="section">
+  <h2 class="section-title">Real-World Scenarios</h2>
+  <p class="section-intro">Practice handling common bar situations.</p>
+
+  <div class="card">
+    <div class="card-title">Scenario 1: Guest asks for a "strong" drink</div>
+    <div class="value">
+      <strong>Response:</strong> "Would you like a double pour, or something with a higher-proof spirit like an Old Fashioned or Negroni?"<br>
+      <strong>Avoid:</strong> Free-pouring extra alcohol without charging
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Scenario 2: Guest doesn't like their cocktail</div>
+    <div class="value">
+      <strong>Response:</strong> "I'm sorry it's not to your taste. Let me make you something else — what flavors do you usually enjoy?"<br>
+      <strong>Avoid:</strong> Getting defensive or blaming the guest
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Scenario 3: Guest asks what's in a drink</div>
+    <div class="value">
+      <strong>Response:</strong> Know your menu. List the base spirit, key ingredients, and flavor profile. Example: "The Margarita has tequila, lime juice, and triple sec — it's citrusy and refreshing."
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Scenario 4: Guest is indecisive</div>
+    <div class="value">
+      <strong>Response:</strong> Ask guiding questions: "Do you prefer something light and fruity, or strong and spirit-forward?" Then suggest 2-3 options.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Scenario 5: Guest seems intoxicated</div>
+    <div class="value">
+      <strong>Response:</strong> Inform your manager immediately. Offer water, food, or mocktails. Do not serve more alcohol. Stay calm and respectful.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Scenario 6: Busy bar, multiple orders</div>
+    <div class="value">
+      <strong>Strategy:</strong> Acknowledge everyone ("I'll be right with you!"), serve in order, batch similar drinks, communicate wait times honestly.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Scenario 7: Guest asks for a recommendation</div>
+    <div class="value">
+      <strong>Response:</strong> Ask about preferences first, then confidently suggest a drink you know well. Share why you like it. Example: "If you like gin, the Basil Smash is fantastic — fresh, herbal, really balanced."
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <p><strong>Final Tip:</strong> Confidence comes from practice. Role-play these scenarios with your team until responses feel natural.</p>
+  </div>
 </div>
 
 </body>
