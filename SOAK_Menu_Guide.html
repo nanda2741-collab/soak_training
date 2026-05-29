@@ -121,9 +121,22 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
 </div>
 
 <script>
+function toThumbUrl(src) {
+  if (!src) return '';
+  if (src.indexOf('thumbnail?id=') > -1) return src;
+  var match = src.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (match) return 'https://drive.google.com/thumbnail?id=' + match[1] + '&sz=s4000';
+  return src;
+}
+
 function buildItemImg(src) {
-  if (!src) return "<div class='item-img-placeholder'>&#x1F37D;</div>";
-  return "<img class='item-img' src='" + src + "' onclick='openLightbox(this.src)'>";
+  var url = toThumbUrl(src);
+  if (!url) return "<div class='item-img-placeholder'>&#x1F37D;</div>";
+  return "<img class='item-img' src='" + url + "' onclick='openLightbox(this.src)'>";
+}
+
+function openLightboxUrl(src) {
+  openLightbox(toThumbUrl(src));
 }
 
 function attachImgErrors() {
