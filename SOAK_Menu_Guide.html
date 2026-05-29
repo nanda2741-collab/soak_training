@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SOAK — Menu Training Reference</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #F7F4EF; color: #2C2416; font-size: 15px; line-height: 1.6; }
+.header { background: #2C2416; padding: 1.5rem 1.25rem 1.25rem; text-align: center; position: sticky; top: 0; z-index: 100; }
+.header h1 { font-size: 28px; font-weight: 600; letter-spacing: 6px; color: #C4A882; margin-bottom: 4px; }
+.header p { font-size: 12px; color: #9E8A72; letter-spacing: 2px; text-transform: uppercase; }
+.nav { display: flex; overflow-x: auto; background: #3a3226; padding: 0 0.5rem; gap: 0; scrollbar-width: none; position: sticky; top: 82px; z-index: 99; }
+.nav::-webkit-scrollbar { display: none; }
+.nav-btn { flex-shrink: 0; padding: 12px 16px; background: none; border: none; color: #9E8A72; font-size: 13px; cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: all 0.15s; font-family: inherit; }
+.nav-btn.active { color: #C4A882; border-bottom-color: #C4A882; }
+.section { display: none; padding: 1.25rem; max-width: 800px; margin: 0 auto; }
+.section.active { display: block; }
+.section-title { font-size: 22px; font-weight: 600; color: #8B6B4A; margin-bottom: 6px; }
+.section-intro { font-size: 14px; color: #6B5840; line-height: 1.7; margin-bottom: 1.25rem; padding-bottom: 1rem; border-bottom: 1px solid #E0D5C5; }
+.toolbar { display: flex; gap: 8px; margin-bottom: 1rem; flex-wrap: wrap; }
+.search-input { flex: 1; min-width: 160px; padding: 8px 14px; border: 1px solid #E0D5C5; border-radius: 8px; font-size: 13px; font-family: inherit; background: #fff; }
+.filter-select { padding: 8px 12px; border: 1px solid #E0D5C5; border-radius: 8px; font-size: 13px; font-family: inherit; background: #fff; color: #2C2416; }
+.item-card { background: #fff; border-radius: 12px; margin-bottom: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.06); overflow: hidden; }
+.item-img { width: 100%; height: 220px; object-fit: cover; display: block; cursor: pointer; background: #F0EDE8; }
+.item-img-placeholder { width: 100%; height: 160px; background: #F0EDE8; display: flex; align-items: center; justify-content: center; font-size: 48px; color: #C4A882; }
+.item-body { padding: 1.25rem; }
+.item-name { font-size: 18px; font-weight: 600; color: #2C2416; margin-bottom: 4px; }
+.item-meta { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 1rem; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+.badge-veg { background: #DFF2EC; color: #0A5C44; }
+.badge-nonveg { background: #FDEAEA; color: #7A0A0A; }
+.badge-cat { background: #E0EEFA; color: #0A3D6B; }
+.badge-sub { background: #F0EDE8; color: #5A5040; }
+.badge-fav { background: #FDF0DC; color: #7A4F0A; }
+.label { font-size: 11px; font-weight: 600; color: #8B6B4A; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 12px; margin-bottom: 4px; }
+.value { font-size: 14px; color: #3a3226; line-height: 1.65; }
+.divider { border: none; border-top: 1px solid #EDE8DF; margin: 0.875rem 0; }
+.tip-box { background: #FDF8F2; border-left: 3px solid #C4A882; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 1rem 0; }
+.tip-box p { font-size: 13px; color: #6B5840; line-height: 1.65; }
+.warning-box { background: #FFF4F4; border-left: 3px solid #C0392B; border-radius: 0 8px 8px 0; padding: 1rem 1.25rem; margin: 0 0 1rem; }
+.warning-box p { font-size: 13px; color: #7A0A0A; line-height: 1.65; font-weight: 500; }
+.pairing-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+.pairing-table th { background: #C4A882; color: #fff; padding: 10px 14px; text-align: left; font-size: 13px; font-weight: 600; }
+.pairing-table td { padding: 10px 14px; border-bottom: 1px solid #EDE8DF; font-size: 13px; color: #3a3226; }
+.pairing-table tr:last-child td { border-bottom: none; }
+.pairing-table tr:nth-child(even) td { background: #F7F4EF; }
+.empty { text-align: center; padding: 3rem 1rem; color: #9E8A72; font-size: 14px; }
+.loading { text-align: center; padding: 2rem; color: #9E8A72; font-size: 14px; }
+.lightbox-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.92); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; padding: 1rem; }
+.lightbox-overlay.open { display: flex; }
+.lightbox-overlay img { max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px; }
+.lightbox-close { position: absolute; top: 16px; right: 20px; color: #fff; font-size: 32px; cursor: pointer; background: none; border: none; padding: 0; line-height: 1; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>SOAK</h1>
+  <p>Menu Training Reference</p>
+</div>
+
+<div class="nav" id="nav-bar">
+  <button class="nav-btn active" onclick="showSection('intro', this)">Introduction</button>
+  <button class="nav-btn" onclick="showSection('food', this)">Food Menu</button>
+  <button class="nav-btn" onclick="showSection('bar', this)">Bar Menu</button>
+  <button class="nav-btn" onclick="showSection('pairings', this)">Pairings</button>
+</div>
+
+<!-- INTRO -->
+<div id="intro" class="section active">
+  <p class="section-title">Menu Training Reference</p>
+  <p class="section-intro">This is your menu reference. Return to it before every shift, especially when the menu changes. You are not expected to memorise everything — but you should know every dish well enough to describe it confidently in 2 to 3 lines and make a genuine recommendation when a guest asks.</p>
+  <div class="warning-box"><p>VEG / NON-VEG RULE: Non-vegetarian items are marked with a red flag on the menu. This is a guide, not a guarantee. If there is any doubt at the pickup counter or at the table, take the dish back to the kitchen and confirm with the counter chef. No guessing. No exceptions.</p></div>
+  <div class="warning-box"><p>ALLERGEN NOTE: The allergen information in this document is compiled in good faith. SOAK does not currently operate a fully certified allergen tracking system. If a guest has a serious allergy, flag it on the POS ticket and inform the kitchen and the MOD. Never give a guest false certainty about allergen safety.</p></div>
+  <div class="tip-box"><p>Use the tabs above to browse the Food Menu and Bar Menu. You can filter by category or search by name. Tap any dish card to see full details. Tap any image to open it full size.</p></div>
+</div>
+
+<!-- FOOD MENU -->
+<div id="food" class="section">
+  <p class="section-title">Food Menu</p>
+  <p class="section-intro">Work through each category carefully. Know every dish. Know what makes each one worth ordering.</p>
+  <div class="toolbar">
+    <input type="text" class="search-input" id="food-search" placeholder="Search dishes..." oninput="renderFood()">
+    <select class="filter-select" id="food-cat-filter" onchange="renderFood()">
+      <option value="">All Categories</option>
+    </select>
+    <select class="filter-select" id="food-veg-filter" onchange="renderFood()">
+      <option value="">Veg / Non-Veg</option>
+      <option value="VEGETARIAN">Vegetarian</option>
+      <option value="NON-VEGETARIAN">Non-Vegetarian</option>
+    </select>
+  </div>
+  <div id="food-list"><div class="loading">Loading food menu...</div></div>
+</div>
+
+<!-- BAR MENU -->
+<div id="bar" class="section">
+  <p class="section-title">Bar Menu</p>
+  <p class="section-intro">Know every drink. Know what it tastes like, who it suits, and when to recommend it.</p>
+  <div class="toolbar">
+    <input type="text" class="search-input" id="bar-search" placeholder="Search drinks..." oninput="renderBar()">
+    <select class="filter-select" id="bar-cat-filter" onchange="renderBar()">
+      <option value="">All Categories</option>
+    </select>
+  </div>
+  <div id="bar-list"><div class="loading">Loading bar menu...</div></div>
+</div>
+
+<!-- PAIRINGS -->
+<div id="pairings" class="section">
+  <p class="section-title">Pairing Guide</p>
+  <p class="section-intro">Use this guide when a guest asks what to drink with their food, or what to eat with their drink. These are recommendations — not rules. Always read the guest and adjust based on their preferences.</p>
+  <div id="pairings-content"><div class="loading">Loading pairings...</div></div>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">&#215;</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+function buildItemImg(src) {
+  if (!src) return "<div class='item-img-placeholder'>&#x1F37D;</div>";
+  return "<img class='item-img' src='" + src + "' onclick='openLightbox(this.src)'>";
+}
+
+function attachImgErrors() {
+  document.querySelectorAll('img.item-img').forEach(function(img) {
+    img.onerror = function() { this.outerHTML = "<div class='item-img-placeholder'>&#x1F37D;</div>"; };
+  });
+}
+
+var API_KEY = "AIzaSyBhM20dLgLA10WWCctBDbUQ-PXHYWwDI5E";
+var SHEET_ID = "1Iw8IwyLRTcQTgNjQdJ-XhvxC2Pc8kM4LScxsWkEHPtw";
+var BASE = "https://sheets.googleapis.com/v4/spreadsheets/";
+
+var allItems = [];
+var pairings = [];
+var foodCats = [];
+var barCats = [];
+
+function api(path) {
+  var url = BASE + SHEET_ID + path + (path.indexOf("?") > -1 ? "&" : "?") + "key=" + API_KEY;
+  return fetch(url).then(function(r) { return r.json(); });
+}
+
+function rowToItem(row, idx) {
+  return {
+    rowIndex: idx,
+    id: row[0] || "",
+    category: row[1] || "",
+    subcategory: row[2] || "",
+    type: row[3] || "",
+    name: row[4] || "",
+    description: row[5] || "",
+    ingredients: row[6] || "",
+    method: row[7] || "",
+    cooktime: row[8] || "",
+    taste: row[9] || "",
+    plating: row[10] || "",
+    condiments: row[11] || "",
+    vegnonveg: row[12] || "",
+    allergens: row[13] || "",
+    dietary: row[14] || "",
+    pairs: row[15] || "",
+    favourite: row[16] || "",
+    staffnotes: row[17] || "",
+    image: row[18] || "",
+    active: row[19] || "Yes"
+  };
+}
+
+function loadAll() {
+  Promise.all([
+    api("/values/Menu!A2:T1000"),
+    api("/values/Pairings!A2:C1000"),
+    api("/values/Config!A2:C100")
+  ]).then(function(results) {
+    var menuData = results[0].values || [];
+    allItems = menuData.map(function(row, i) { return rowToItem(row, i + 2); }).filter(function(item) { return item.name && item.active !== "No"; });
+
+    pairings = (results[1].values || []).filter(function(r) { return r[0] || r[1] || r[2]; });
+
+    var cats = results[2].values || [];
+    foodCats = cats.filter(function(c) { return c[1] === "Food"; }).map(function(c) { return c[0]; });
+    barCats = cats.filter(function(c) { return c[1] === "Bar"; }).map(function(c) { return c[0]; });
+
+    populateFilters();
+    renderFood();
+    renderBar();
+    renderPairings();
+  });
+}
+
+function populateFilters() {
+  var foodFilter = document.getElementById("food-cat-filter");
+  foodFilter.innerHTML = "<option value=''>All Categories</option>" +
+    foodCats.map(function(c) { return "<option value='" + c + "'>" + c + "</option>"; }).join("");
+
+  var barFilter = document.getElementById("bar-cat-filter");
+  barFilter.innerHTML = "<option value=''>All Categories</option>" +
+    barCats.map(function(c) { return "<option value='" + c + "'>" + c + "</option>"; }).join("");
+}
+
+function renderItemCard(item) {
+  var imgHtml = item.image
+    var imgHtml = buildItemImg(item.image);
+
+  var vegBadge = item.vegnonveg === "VEGETARIAN" ? "<span class='badge badge-veg'>VEG</span>" : item.vegnonveg === "NON-VEGETARIAN" ? "<span class='badge badge-nonveg'>NON-VEG</span>" : "";
+  var favBadge = item.favourite === "Yes" ? "<span class='badge badge-fav'>★ Crowd Favourite</span>" : item.favourite === "Seasonal Favourite" ? "<span class='badge badge-fav'>★ Seasonal Favourite</span>" : "";
+
+  var fields = [
+    ["Description", item.description],
+    ["Key Ingredients", item.ingredients],
+    ["Preparation Method", item.method + (item.cooktime ? " · " + item.cooktime : "")],
+    ["Taste Profile", item.taste],
+    ["Plating and Presentation", item.plating],
+    ["Accompanying Condiments", item.condiments],
+    ["Common Allergens", item.allergens],
+    ["Dietary Flags", item.dietary],
+    ["Pairs Well With", item.pairs],
+    ["Staff Recommendation Notes", item.staffnotes]
+  ].filter(function(f) { return f[1] && f[1].trim(); });
+
+  return "<div class='item-card'>" +
+    imgHtml +
+    "<div class='item-body'>" +
+      "<p class='item-name'>" + item.name + "</p>" +
+      "<div class='item-meta'>" +
+        "<span class='badge badge-cat'>" + item.category + "</span>" +
+        (item.subcategory ? "<span class='badge badge-sub'>" + item.subcategory + "</span>" : "") +
+        vegBadge + favBadge +
+      "</div>" +
+      fields.map(function(f) {
+        return "<p class='label'>" + f[0] + "</p><p class='value'>" + f[1] + "</p>";
+      }).join("<hr class='divider'>") +
+    "</div></div>";
+}
+
+function renderFood() {
+  var search = document.getElementById("food-search").value.toLowerCase();
+  var cat = document.getElementById("food-cat-filter").value;
+  var veg = document.getElementById("food-veg-filter").value;
+
+  var items = allItems.filter(function(item) {
+    if (item.type !== "Food") return false;
+    if (search && item.name.toLowerCase().indexOf(search) === -1 && item.description.toLowerCase().indexOf(search) === -1) return false;
+    if (cat && item.category !== cat) return false;
+    if (veg && item.vegnonveg !== veg) return false;
+    return true;
+  });
+
+  var list = document.getElementById("food-list");
+  if (items.length === 0) {
+    list.innerHTML = "<div class='empty'>No food items found. Add items using the Menu Editor.</div>";
+    return;
+  }
+  list.innerHTML = items.map(renderItemCard).join("");
+  setTimeout(attachImgErrors, 50);
+}
+
+function renderBar() {
+  var search = document.getElementById("bar-search").value.toLowerCase();
+  var cat = document.getElementById("bar-cat-filter").value;
+
+  var items = allItems.filter(function(item) {
+    if (item.type !== "Bar") return false;
+    if (search && item.name.toLowerCase().indexOf(search) === -1 && item.description.toLowerCase().indexOf(search) === -1) return false;
+    if (cat && item.category !== cat) return false;
+    return true;
+  });
+
+  var list = document.getElementById("bar-list");
+  if (items.length === 0) {
+    list.innerHTML = "<div class='empty'>No bar items found. Add items using the Menu Editor.</div>";
+    return;
+  }
+  list.innerHTML = items.map(renderItemCard).join("");
+  setTimeout(attachImgErrors, 50);
+}
+
+function renderPairings() {
+  var el = document.getElementById("pairings-content");
+  if (pairings.length === 0) {
+    el.innerHTML = "<div class='empty'>No pairings added yet. Add pairings using the Menu Editor.</div>";
+    return;
+  }
+  el.innerHTML = "<table class='pairing-table'>" +
+    "<thead><tr><th>Food Category</th><th>Dish Name</th><th>Recommended Drink Pairing</th></tr></thead>" +
+    "<tbody>" +
+    pairings.map(function(row) {
+      return "<tr><td>" + (row[0] || "") + "</td><td>" + (row[1] || "") + "</td><td>" + (row[2] || "") + "</td></tr>";
+    }).join("") +
+    "</tbody></table>";
+}
+
+function showSection(id, btn) {
+  document.querySelectorAll(".section").forEach(function(s) { s.classList.remove("active"); });
+  document.querySelectorAll(".nav-btn").forEach(function(b) { b.classList.remove("active"); });
+  document.getElementById(id).classList.add("active");
+  btn.classList.add("active");
+  window.scrollTo(0, 0);
+}
+
+function openLightbox(src) {
+  document.getElementById("lightbox-img").src = src;
+  document.getElementById("lightbox").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeLightbox() {
+  document.getElementById("lightbox").classList.remove("open");
+  document.getElementById("lightbox-img").src = "";
+  document.body.style.overflow = "";
+}
+document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeLightbox(); });
+
+loadAll();
+</script>
+</body>
+</html>
