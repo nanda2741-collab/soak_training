@@ -90,6 +90,9 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-
       <option value="VEGETARIAN">Vegetarian</option>
       <option value="NON-VEGETARIAN">Non-Vegetarian</option>
     </select>
+    <select class="filter-select" id="food-sub-filter" onchange="renderFood()">
+  <option value="">All Subcategories</option>
+</select>
   </div>
   <div id="food-list"><div class="loading">Loading food menu...</div></div>
 </div>
@@ -214,6 +217,10 @@ function populateFilters() {
   var barFilter = document.getElementById("bar-cat-filter");
   barFilter.innerHTML = "<option value=''>All Categories</option>" +
     barCats.map(function(c) { return "<option value='" + c + "'>" + c + "</option>"; }).join("");
+
+  var subFilter = document.getElementById("food-sub-filter");
+  var subs = [...new Set(allItems.filter(function(i) { return i.type === "Food"; }).map(function(i) { return i.subcategory; }).filter(Boolean))];
+  subFilter.innerHTML = "<option value=''>All Subcategories</option>" + subs.map(function(s) { return "<option value='" + s + "'>" + s + "</option>"; }).join("");
 }
 
 function renderItemCard(item) {
@@ -263,6 +270,8 @@ function renderFood() {
     if (search && item.name.toLowerCase().indexOf(search) === -1 && item.description.toLowerCase().indexOf(search) === -1) return false;
     if (cat && item.category !== cat) return false;
     if (veg && item.vegnonveg !== veg) return false;
+    var sub = document.getElementById("food-sub-filter").value;
+if (sub && item.subcategory !== sub) return false;
     return true;
   });
 
