@@ -162,9 +162,8 @@ function api(path) {
 function rowToItem(row, idx) {
   return {
     rowIndex: idx,
-    id: row[0] || "",
-    category: row[1] || "",
-    subcategory: row[2] || "",
+    serial: parseInt(row[0]) || 0,
+    category: row[1] || "",    subcategory: row[2] || "",
     type: row[3] || "",
     name: row[4] || "",
     description: row[5] || "",
@@ -193,7 +192,7 @@ function loadAll() {
   ]).then(function(results) {
     var menuData = results[0].values || [];
     allItems = menuData.map(function(row, i) { return rowToItem(row, i + 2); }).filter(function(item) { return item.name && item.active !== "No"; });
-
+    allItems.sort(function(a, b) { return a.serial - b.serial; });
     pairings = (results[1].values || []).filter(function(r) { return r[0] || r[1] || r[2]; });
 
     var cats = results[2].values || [];
